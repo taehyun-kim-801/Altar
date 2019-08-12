@@ -16,14 +16,9 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    protected Vector3 faceDirection;
+    public Vector3 faceDirection;
 
-    public Vector3 FaceDirection
-    {
-        get { return faceDirection; }
-    }
-
-    protected void Die()
+    protected virtual void Die()
     {
         Destroy(this.gameObject);
     }
@@ -32,7 +27,7 @@ public abstract class Unit : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        gameObject.transform.Translate(moveSpeed * direction);
+        gameObject.transform.Translate(moveSpeed * direction * Time.deltaTime);
     }
 
     
