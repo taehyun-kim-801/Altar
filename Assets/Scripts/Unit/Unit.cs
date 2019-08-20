@@ -5,16 +5,8 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField]
-    private float _health;
-
-    
-    public float health
-    {
-        get { return _health; }
-        set {
-            _health = Mathf.Clamp(value, 0, 100);
-        }
-    }
+    protected int health;
+    public virtual int Health { get { return health; } set { health = value; } }
 
     public Vector3 faceDirection;
 

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Control_UI : MonoBehaviour
 {
+    public GameObject stickBackground;
     public Transform stick;
     public GameObject playerObj;
 
@@ -17,17 +18,11 @@ public class Control_UI : MonoBehaviour
     void Start()
     {
         player = playerObj.GetComponent<Player>();
-        radius = GetComponent<RectTransform>().sizeDelta.y * 0.5f;
+        radius = stickBackground.GetComponent<RectTransform>().sizeDelta.y * 0.5f;
         stickFirstPos = stick.transform.position;
 
-        float canvas = transform.parent.GetComponent<RectTransform>().localScale.x;
+        float canvas = stickBackground.transform.parent.GetComponent<RectTransform>().localScale.x;
         radius *= canvas;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //Joystick

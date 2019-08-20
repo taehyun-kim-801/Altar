@@ -20,30 +20,33 @@ public class Monster : Unit
     // Update is called once per frame
     void Update()
     {
-        if(!foundPlayer && Vector3.SqrMagnitude(transform.position - target.transform.position) <= 25.0f)
+        if (player != null)
         {
-            foundPlayer = true;
-            StopCoroutine(RandomDirection());
-            Interaction();
-        }
-        else if(foundPlayer)
-        {
-            faceDirection = (target.transform.position - transform.position).normalized;
-            if(target.transform.position.x<transform.position.x)
+            if (!foundPlayer && Vector3.SqrMagnitude(transform.position - target.transform.position) <= 25.0f)
             {
-                Vector3 scale = transform.localScale;
-                scale.x = -Mathf.Abs(scale.x);
-                transform.localScale = scale;
+                foundPlayer = true;
+                StopCoroutine(RandomDirection());
+                Interaction();
             }
-            else
+            else if (foundPlayer)
             {
-                Vector3 scale = transform.localScale;
-                scale.x = Mathf.Abs(scale.x);
-                transform.localScale = scale;
+                faceDirection = (target.transform.position - transform.position).normalized;
+                if (target.transform.position.x < transform.position.x)
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x = -Mathf.Abs(scale.x);
+                    transform.localScale = scale;
+                }
+                else
+                {
+                    Vector3 scale = transform.localScale;
+                    scale.x = Mathf.Abs(scale.x);
+                    transform.localScale = scale;
+                }
             }
-        }
 
-        Move(faceDirection);
+            Move(faceDirection);
+        }
     }
     
     public GameObject target;
@@ -68,7 +71,7 @@ public class Monster : Unit
     public override void GetAttack(GameObject enemy)
     {
         Player player = enemy.GetComponent<Player>();
-        health -= player.attackStat;
+        health -= (player.curItem as Weapon).attackStat;
         Debug.Log("Monster health: " + health);
 
         if(health<=0)
@@ -79,7 +82,7 @@ public class Monster : Unit
 
     public IEnumerator Attack()
     {
-        while(true)
+        while(player != null)
         {
             yield return new WaitUntil(() => Vector3.Distance(transform.position, target.transform.position) <= 1.0f);
             player.GetAttack(this.gameObject);
@@ -90,6 +93,10 @@ public class Monster : Unit
     protected override void Die()
     {
         StopCoroutine(Attack());
+        if(Random.Range(0f,1f)<=0.7f)
+        {
+            Debug.Log("Item Drop");
+        }
         base.Die();
     }
 }
