@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Food : Item
 {
-    public readonly int satiety;
+    [SerializeField]
+    private int satiety;
+    public int Satiety => satiety;
 
-    public Food(string name, Sprite sprite, int satiety) : base(name, sprite)
+    public Food(string name, int satiety) : base(name)
     {
         this.satiety = satiety;
     }

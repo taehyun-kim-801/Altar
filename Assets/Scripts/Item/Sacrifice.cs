@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Sacrifice : Item
 {
-    public readonly int satiety;
-    public readonly int damage;
+    [SerializeField]
+    private int satiety;
+    public int Satiety => satiety;
 
-    public Sacrifice(string name, Sprite sprite, int satiety, int hurt) : base(name, sprite)
+    [SerializeField]
+    private int damage;
+    public int Damage => damage;
+
+    public Sacrifice(string name, int satiety, int damage) : base(name)
     {
         this.satiety = satiety;
-        this.damage = hurt;
+        this.damage = damage;
     }
 
     public override void UseItem(GameObject gameObject)
@@ -18,4 +24,5 @@ public class Sacrifice : Item
         gameObject.SendMessage("Eat", satiety);
         gameObject.SendMessage("Hurt", damage);
     }
+    public int GetSatiety() { return satiety; }
 }
