@@ -22,8 +22,6 @@ public abstract class Unit : MonoBehaviour
         gameObject.transform.Translate(moveSpeed * direction * Time.deltaTime);
     }
 
-    
-
     public abstract void Interaction();
 
     public abstract void GetAttack(GameObject enemy);

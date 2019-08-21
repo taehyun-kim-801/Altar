@@ -9,19 +9,26 @@ public partial class Player
     private Item curItem;
     private int invenIdx;
 
+    public Item GetCurrentItem()
+    {
+        return curItem;
+    }
     public void SelectItem(int index)
     {
-        curItem = itemManager.GetItem(inventory[index]);
-        
-        if(!interactionObj.CompareTag("Altar"))
+        if (inventory[index] != null)
         {
-            if(itemManager.GetItem(inventory[invenIdx]) is Food || itemManager.GetItem(inventory[invenIdx]) is Sacrifice)
+            curItem = itemManager.GetItem(inventory[index]);
+
+            if (!interactionObj.CompareTag("Altar"))
             {
-                interactionText.text = "먹기";
-            }
-            else if(itemManager.GetItem(inventory[invenIdx]) is Weapon)
-            {
-                interactionText.text = "공격";
+                if (itemManager.GetItem(inventory[invenIdx]) is Food || itemManager.GetItem(inventory[invenIdx]) is Sacrifice)
+                {
+                    interactionText.text = "먹기";
+                }
+                else if (itemManager.GetItem(inventory[invenIdx]) is Weapon)
+                {
+                    interactionText.text = "공격";
+                }
             }
         }
     }

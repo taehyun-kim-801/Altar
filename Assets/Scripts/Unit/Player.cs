@@ -28,6 +28,7 @@ public partial class Player : Unit
         inventory = new string[5];
         invenQuantity = new int[5];
 
+        Debug.Log(inventory.Length);
         itemManager = gameManager.GetComponent<ItemManager>();
     }
 

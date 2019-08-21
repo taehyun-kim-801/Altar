@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d0d21344918e41a3c0a7c2d420fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 4
   attackStat: 2
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d0d21344918e41a3c0a7c2d420fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 4
   attackStat: 2
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 0
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d0d21344918e41a3c0a7c2d420fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 4
   attackStat: 2
@@ -2127,14 +2127,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3808c9d8f4457f4aba53f6e6616ef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 5
   maxDistance: 5
-  invincibleTime: 5
-  hand: {fileID: 1082029719}
+  invincibleTime: 3
   gameManager: {fileID: 1365945959}
-  attackStat: 5
+  interactionText: {fileID: 0}
+  inventory: []
+  invenQuantity: 
+  invenIdx: 0
 --- !u!212 &1272440134
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2426,10 +2428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d0d21344918e41a3c0a7c2d420fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 4
-  attackStat: 10
+  attackStat: 2
   attackWaitSecond: 3
   target: {fileID: 1272440132}
 --- !u!65 &1347977551
@@ -2814,7 +2816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d0d21344918e41a3c0a7c2d420fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  health: 0
   faceDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 4
   attackStat: 2

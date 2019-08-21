@@ -71,7 +71,7 @@ public class Monster : Unit
     public override void GetAttack(GameObject enemy)
     {
         Player player = enemy.GetComponent<Player>();
-        health -= (player.curItem as Weapon).attackStat;
+        health -= (player.GetCurrentItem() as Weapon).attackStat;
         Debug.Log("Monster health: " + health);
 
         if(health<=0)
