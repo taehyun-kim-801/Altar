@@ -4,16 +4,16 @@ using UnityEngine;
 
 public abstract class Item
 {
-    [SerializeField]
-    protected string name;
-    public string Name => name;
+    public string ItemName => itemName;
+    public Sprite Sprite { get; set; }
 
-    public readonly Sprite sprite;
+    [SerializeField]
+    protected string itemName;
 
     protected Item(string name)
     {
-        this.name = name;
-        sprite = Resources.Load<Sprite>(name);
+        itemName = name;
     }
+
     public abstract void UseItem(GameObject gameObject);
 }

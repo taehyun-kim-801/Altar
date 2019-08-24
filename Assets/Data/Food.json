@@ -1,1 +1,16 @@
-{"items":[{"name":"Bread","satiety":3},{"name":"Apple","satiety":1},{"name":"Steak","satiety":5}]}
+{
+  "items": [
+    {
+      "itemName": "Bread",
+      "satiety": 3
+    },
+    {
+      "itemName": "Apple",
+      "satiety": 1
+    },
+    {
+      "itemName": "Steak",
+      "satiety": 5
+    }
+  ]
+}

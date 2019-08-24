@@ -11,27 +11,19 @@ public class AltarUI : MonoBehaviour
     private GameObject recipeUIPrefab;
     [SerializeField]
     private GameObject recipeLayout;
-    [SerializeField]
-    private GameObject itemInfoPrefab;
 
     private List<Recipe> recipes;
 
     private void Start()
     {
-        // 레시피 정보 받아오기
+        recipes = new List<Recipe>() { RecipeManager.Instance.GetRecipe("Apple"), RecipeManager.Instance.GetRecipe("Steak") };
+        recipes.ForEach((recipe) => { Instantiate(recipeUIPrefab, recipeLayout.transform).SendMessage("SetRecipeUI", recipe); });
+
         exitButton.onClick.AddListener(() => CloseAltarUI());
     }
 
     private void CloseAltarUI()
     {
         Destroy(this);
-    }
-
-    private void MakeRecipeUI()
-    { 
-        foreach(Recipe recipe in recipes)
-        {
-            Instantiate(recipeUIPrefab,recipeLayout.transform).SendMessage("SetRecipeUI", recipe);
-        }
     }
 }

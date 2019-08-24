@@ -5,9 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Food : Item
 {
+    public int Satiety => satiety;
+
     [SerializeField]
     private int satiety;
-    public int Satiety => satiety;
 
     public Food(string name, int satiety) : base(name)
     {

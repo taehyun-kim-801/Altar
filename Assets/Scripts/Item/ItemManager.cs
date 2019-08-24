@@ -9,8 +9,8 @@ public class ItemManager : MonoBehaviour
     public static ItemManager Instance { get; private set; }
 
     [SerializeField]
-    private Image itemInfoUI;
-    private Dictionary<string, Item> itemDictoinary;
+    private ItemInfoUI itemInfoUI;
+    private Dictionary<string, Item> itemDictionary;
     private Sprite droppedItem;
 
     private void Awake()
@@ -24,28 +24,29 @@ public class ItemManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        itemDictionary = new Dictionary<string, Item>();
     }
 
     private void Start()
     {
-        itemDictoinary = new Dictionary<string, Item>();
-
         LoadItemJson();
+        LoadItemSprite();
     }
 
     public void DropItem(string itemName, Vector3 position)
     {
-        droppedItem.name = itemDictoinary[itemName].Name;
-        droppedItem = itemDictoinary[itemName].sprite;
-        Instantiate(droppedItem, position, Quaternion.Euler(0, 0, 0));
+        droppedItem = itemDictionary[itemName].Sprite;
+        Instantiate(droppedItem, position, Quaternion.Euler(0, 0, 0)).name = itemDictionary[itemName].ItemName;
     }
 
-    public Item GetItem(string itemName) => itemDictoinary[itemName];
+    public Item GetItem(string itemName) => itemDictionary[itemName];
 
-    public void OpenItemInfo(string itemName)
+    public void OpenItemInfo(string itemName, Transform transform)
     {
         itemInfoUI.gameObject.SetActive(true);
-        itemInfoUI.SendMessage("OpenItemInfoUI", itemName);
+        itemInfoUI.OpenItemInfoUI(itemDictionary[itemName]);
+        itemInfoUI.transform.position = transform.position;
     }
 
     public void CloseItemInfo()
@@ -53,17 +54,29 @@ public class ItemManager : MonoBehaviour
         itemInfoUI.gameObject.SetActive(false);
     }
 
+    private void LoadItemSprite()
+    {
+        List<Sprite> foodSprite = new List<Sprite>(Resources.LoadAll<Sprite>("Food"));
+        foodSprite.ForEach((sprite) =>
+        {
+            if (itemDictionary.ContainsKey(sprite.name))
+            {
+                itemDictionary[sprite.name].Sprite = sprite;
+            }
+        });
+    }
+
     private void LoadItemJson()
     {
         string json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(Food)}.json");
 
         ItemList<Food> foodList = JsonUtility.FromJson<ItemList<Food>>(json);
-        foodList.items.ForEach((food) => { itemDictoinary.Add(food.Name, food); });
+        foodList.items.ForEach((food) => { itemDictionary.Add(food.ItemName, food); });
 
         json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(Sacrifice)}.json");
 
         ItemList<Sacrifice> sacrificeList = JsonUtility.FromJson<ItemList<Sacrifice>>(json);
-        sacrificeList.items.ForEach((sacrifice) => { itemDictoinary.Add(sacrifice.Name, sacrifice); });
+        sacrificeList.items.ForEach((sacrifice) => { itemDictionary.Add(sacrifice.ItemName, sacrifice); });
     }
 
     private void SaveItemJson()
@@ -79,9 +92,9 @@ public class ItemManager : MonoBehaviour
 
         List<Sacrifice> sacrifices = new List<Sacrifice>();
 
-        sacrifices.Add(new Sacrifice("Rotten Apple", 1, 1));
+        sacrifices.Add(new Sacrifice("RottenApple", 1, 1));
         sacrifices.Add(new Sacrifice("Larva", 2, 2));
-        sacrifices.Add(new Sacrifice("Rotten Heart", 4, 3));
+        sacrifices.Add(new Sacrifice("Boar", 4, 3));
 
         ItemList<Sacrifice> sacrificeList = new ItemList<Sacrifice>(sacrifices);
         File.WriteAllText($"{Application.dataPath}/Data/{nameof(Sacrifice)}.json", JsonUtility.ToJson(sacrificeList));

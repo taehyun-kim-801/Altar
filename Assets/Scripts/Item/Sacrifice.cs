@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class Sacrifice : Item
 {
-    [SerializeField]
-    private int satiety;
     public int Satiety => satiety;
+    public int Damage => damage;
 
     [SerializeField]
+    private int satiety;
+    [SerializeField]
     private int damage;
-    public int Damage => damage;
 
     public Sacrifice(string name, int satiety, int damage) : base(name)
     {
@@ -22,7 +22,8 @@ public class Sacrifice : Item
     public override void UseItem(GameObject gameObject)
     {
         gameObject.SendMessage("Eat", satiety);
-        gameObject.SendMessage("Hurt", damage);
+        gameObject.SendMessage("GetAttack", damage);
     }
+
     public int GetSatiety() { return satiety; }
 }

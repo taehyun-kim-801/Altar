@@ -39,7 +39,7 @@ public partial class Player
 
     public void Attack()
     {
-        if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (itemManager.GetItem(inventory[invenIdx]) as Weapon).coolTime)
+        if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (itemManager.GetItem(inventory[invenIdx]) as Weapon).Delay)
         {
             attackTime = Time.time;
             interactionObj.SendMessage("GetAttack", gameObject);

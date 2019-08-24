@@ -1,0 +1,14 @@
+{
+  "recipes": [
+    {
+      "sacrificeNameList": [ "RottenApple", "Larva" ],
+      "sacrificeCountList": [ 2, 1 ],
+      "result": "Apple"
+    },
+    {
+      "sacrificeNameList": [ "Boar", "Larva" ],
+      "sacrificeCountList": [ 2, 1 ],
+      "result": "Steak"
+    }
+  ]
+}
