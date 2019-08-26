@@ -8,11 +8,15 @@ public class Monster : Unit
     public float attackWaitSecond;
 
     private Player player;
+
+    public string dropItem;
+    private ItemManager manager;
     // Start is called before the first frame update
     void Start()
     {
         player = target.GetComponent<Player>();
         foundPlayer = false;
+        manager = FindObjectOfType<ItemManager>();
         StartCoroutine(RandomDirection());
     }
 
@@ -68,10 +72,9 @@ public class Monster : Unit
         StartCoroutine(Attack());
     }
 
-    public override void GetAttack(GameObject enemy)
+    public override void GetAttack(int damage)
     {
-        Player player = enemy.GetComponent<Player>();
-        health -= (player.GetCurrentItem() as Weapon).attackStat;
+        health -= damage;
         Debug.Log("Monster health: " + health);
 
         if(health<=0)
@@ -85,7 +88,7 @@ public class Monster : Unit
         while(player != null)
         {
             yield return new WaitUntil(() => Vector3.Distance(transform.position, target.transform.position) <= 1.0f);
-            player.GetAttack(this.gameObject);
+            player.GetAttack(attackStat);
             yield return new WaitForSeconds(attackWaitSecond);
         }
     }
@@ -95,7 +98,7 @@ public class Monster : Unit
         StopCoroutine(Attack());
         if(Random.Range(0f,1f)<=0.7f)
         {
-            Debug.Log("Item Drop");
+            manager.DropItem(dropItem, transform.position);
         }
         base.Die();
     }

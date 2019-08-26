@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public partial class Player
 {
@@ -12,6 +13,10 @@ public partial class Player
         if (interactionObj.CompareTag("Altar"))
         {
 
+        }
+        else if(interactionObj.CompareTag("Portal"))
+        {
+            SceneManager.LoadScene(interactionObj.GetComponent<Portal>().nextScene);
         }
         else
         {

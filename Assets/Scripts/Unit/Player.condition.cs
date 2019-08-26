@@ -27,13 +27,11 @@ public partial class Player
         base.Die();
     }
 
-    public override void GetAttack(GameObject enemy)
+    public override void GetAttack(int damage)
     {
         if (!isAttacked)
         {
-            Monster monster = enemy.GetComponent<Monster>();
-
-            Health -= monster.attackStat;
+            Health -= damage;
 
             if (health <= 0)
             {
@@ -42,13 +40,13 @@ public partial class Player
             }
 
             isAttacked = true;
-            StartCoroutine(Invincible(monster));
+            StartCoroutine(Invincible());
 
             Debug.Log("Player Health: " + health + " Hunger: " + hunger);
         }
     }
 
-    public IEnumerator Invincible(Monster monster)
+    public IEnumerator Invincible()
     {
         yield return new WaitForSeconds(invincibleTime);
 

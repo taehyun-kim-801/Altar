@@ -15,6 +15,9 @@ public partial class Player : Unit
 
     public Text interactionText;
 
+    public GameObject hand;
+    private float handDistance;
+
     void Start()
     {
         hunger = 100f;
@@ -30,6 +33,8 @@ public partial class Player : Unit
 
         Debug.Log(inventory.Length);
         itemManager = gameManager.GetComponent<ItemManager>();
+
+        handDistance = Vector3.Distance(hand.transform.position, new Vector3(0, -0.05f));
     }
 
     void FixedUpdate()
@@ -55,6 +60,14 @@ public partial class Player : Unit
             {
                 interactionText.text = "제단";
             }
+            else if(interactionObj.CompareTag("Portal"))
+            {
+                interactionText.text = "이동";
+            }
+            else
+            {
+                interactionText.text = "공격";
+            }
         }
         else
         {
@@ -65,6 +78,8 @@ public partial class Player : Unit
                 scale.x = -Mathf.Abs(scale.x);
 
             transform.localScale = scale;
+
+            interactionText.text = "상호작용";
         }
 
         interactionObj = null;
@@ -74,6 +89,15 @@ public partial class Player : Unit
         foreach (var collider in colliders) {
             if (collider.transform.position != transform.position)
             {
+                if(collider.CompareTag("Portal"))
+                {
+                    if (Vector3.SqrMagnitude(collider.transform.position - transform.position) <= 1.0f)
+                    {
+                        interactionObj = collider.gameObject;
+                        break;
+                    }
+                    else continue;
+                }
                 float tempDistance = Vector3.SqrMagnitude(collider.transform.position - transform.position);
                 if (tempDistance <= minDistance)
                 {
@@ -89,5 +113,8 @@ public partial class Player : Unit
             color.a = 0.5f * Mathf.Cos((Time.time - attackTime) * Mathf.Rad2Deg * 2 * Mathf.PI) + 0.5f;
             GetComponent<SpriteRenderer>().color = color;
         }
+
+        if (faceDirection != Vector3.zero)
+            hand.transform.position = transform.position - new Vector3(0,-0.05f) + faceDirection * handDistance;
     }
 }
