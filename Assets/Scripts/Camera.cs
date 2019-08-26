@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
 
+    private void Start()
+    {
+        player = FindObjectOfType<Player>().gameObject.transform;
+    }
     void Update()
     {
         if (player != null)
