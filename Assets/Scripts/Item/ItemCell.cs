@@ -20,7 +20,7 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         this.itemName = itemName;
         if(itemNumber > 1)
             itemNumberText.text = itemNumber.ToString();
-        itemImage.sprite = ItemManager.Instance.GetItem(itemName).Sprite;
+        itemImage.sprite = ItemManager.Instance.GetItem(itemName).ItemSprite;
     }
 
     public void OnPointerEnter(PointerEventData data)

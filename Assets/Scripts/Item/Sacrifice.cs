@@ -12,6 +12,7 @@ public class Sacrifice : Item
     private int satiety;
     [SerializeField]
     private int damage;
+    private Player player;
 
     public Sacrifice(string name, int satiety, int damage) : base(name)
     {
@@ -19,11 +20,15 @@ public class Sacrifice : Item
         this.damage = damage;
     }
 
-    public override void UseItem(GameObject gameObject)
+    public override void Equip(EquippedItem equipedItem)
     {
-        gameObject.SendMessage("Eat", satiety);
-        gameObject.SendMessage("GetAttack", damage);
+        equipedItem.UseItem = Eat;
+        player = equipedItem.PlayerInstance;
     }
 
-    public int GetSatiety() { return satiety; }
+    private void Eat()
+    {
+        player.Eat(satiety);
+        player.Hurt(damage);
+    }
 }

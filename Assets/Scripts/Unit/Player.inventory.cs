@@ -19,7 +19,7 @@ public partial class Player
             {
                 interactionText.text = "먹기";
             }
-            else if(itemManager.GetItem(inventory[invenIdx]) is Weapon)
+            else if(itemManager.GetItem(inventory[invenIdx]) is MeleeWeapon)
             {
                 interactionText.text = "공격";
             }

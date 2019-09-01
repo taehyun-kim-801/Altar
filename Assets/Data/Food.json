@@ -1,16 +1,1 @@
-{
-  "items": [
-    {
-      "itemName": "Bread",
-      "satiety": 3
-    },
-    {
-      "itemName": "Apple",
-      "satiety": 1
-    },
-    {
-      "itemName": "Steak",
-      "satiety": 5
-    }
-  ]
-}
+{"items":[{"itemName":"Bread","delay":0.5,"satiety":3},{"itemName":"Apple","delay":0.5,"satiety":1},{"itemName":"Steak","delay":0.5,"satiety":5}]}
