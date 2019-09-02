@@ -6,7 +6,7 @@ public partial class Player
 {
     private string[] inventory;
     private int[] invenQuantity;
-    private Item curItem;
+    public Item curItem;
     private int invenIdx;
 
     public Item GetCurrentItem()

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item
+public class Item
 {
-    [SerializeField]
-    protected string name;
-    public string Name => name;
+    public string ItemName => itemName;
+    public Sprite ItemSprite { get; set; }
+    public WaitForSeconds itemDelaySeconds => new WaitForSeconds(delay);
 
-    public readonly Sprite sprite;
+    [SerializeField]
+    private string itemName;
+    [SerializeField]
+    protected float delay = 0.5f;
 
     protected Item(string name)
     {
-        this.name = name;
-        sprite = Resources.Load<Sprite>(name);
+        itemName = name;
     }
-    public abstract void UseItem(GameObject gameObject);
+
+    public virtual void Equip(EquippedItem equipedItem) { }
 }

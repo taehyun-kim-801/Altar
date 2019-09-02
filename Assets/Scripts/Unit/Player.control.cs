@@ -27,7 +27,7 @@ public partial class Player
                     invenQuantity[invenIdx]--;
 
                 }
-                itemManager.GetItem(inventory[invenIdx]).UseItem(gameObject);
+                // itemManager.GetItem(inventory[invenIdx]).UseItem(gameObject);
             }
         }
     }
@@ -44,11 +44,11 @@ public partial class Player
 
     public void Attack()
     {
-        if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (itemManager.GetItem(inventory[invenIdx]) as Weapon).coolTime)
-        {
-            attackTime = Time.time;
-            interactionObj.SendMessage("GetAttack", gameObject);
-        }
+        //if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (itemManager.GetItem(inventory[invenIdx]) as MeleeWeapon).Delay)
+        //{
+        //    attackTime = Time.time;
+        //    interactionObj.SendMessage("GetAttack", gameObject);
+        //}
     }
 
     public void PickUp()

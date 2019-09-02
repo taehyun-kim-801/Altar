@@ -13,38 +13,32 @@ public class RecipeUI : MonoBehaviour
     private Button pinButton;
     [SerializeField]
     private Button tradeButton;
-    
-    private List<Text> sacrificeNumbers;
-    private Recipe recipe;
 
-    private void Start()
-    {
-        sacrificeNumbers = new List<Text>();
-        foreach(var sacrificeImage in sacrificeImages)
-        {
-            sacrificeNumbers.Add(sacrificeImage.GetComponentInChildren<Text>());
-        }
-    }
+    private Recipe recipe;
 
     public void SetRecipeUI(Recipe recipe)
     {
         this.recipe = recipe;
         int i = 0;
-        foreach(var sacrifice in recipe.sacrifice)
+        foreach (var sacrifice in recipe.sacrificeDictionary)
         {
-            sacrificeNumbers[i].text = ItemManager.Instance.GetItem(sacrifice.Key).Name;
-            sacrificeImages[i].gameObject.SetActive(true);
-            sacrificeImages[i++].sprite = ItemManager.Instance.GetItem(sacrifice.Key).sprite;
+            if (i >= sacrificeImages.Count)
+            {
+                Debug.Log("제물을 표현할 공간이 부족합니다.");
+                break;
+            }
+            sacrificeImages[i].GetComponent<ItemCell>().SetItemCell(sacrifice.Key, sacrifice.Value);
+            sacrificeImages[i++].gameObject.SetActive(true);
         }
-        while(i < sacrificeImages.Count)
+        while (i < sacrificeImages.Count)
         {
-            sacrificeImages[i].gameObject.SetActive(false);
+            sacrificeImages[i++].gameObject.SetActive(false);
         }
-        resultImage.sprite = ItemManager.Instance.GetItem(recipe.result).sprite;
+        resultImage.GetComponent<ItemCell>().SetItemCell(recipe.Result, 1);
     }
 
     public void TradeItem()
     {
-        ItemManager.Instance.DropItem(recipe.result, Vector3.zero);
+        ItemManager.Instance.DropItem(recipe.Result, Vector3.zero);
     }
 }

@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class ItemInfoUI : MonoBehaviour
 {
+    [SerializeField]
     private Text nameText;
+    [SerializeField]
     private Text infoText;
 
-    public void OpenItemInfo(Item item)
+    public void OpenItemInfoUI(Item item)
     {
-        nameText.text = "이름 : " + item.Name;
-        if(item is Food)
+        transform.SetAsLastSibling();
+
+        nameText.text = $"이름 : {item.ItemName}";
+
+        switch (item)
         {
-            infoText.text = "포만감 : " + (item as Food).Satiety;
-        }
-        else if(item is Sacrifice)
-        {
-            infoText.text = "포만감 : " + (item as Sacrifice).Satiety
-            + "\n 피해량" + (item as Sacrifice).Damage;
+            case Food food:
+                infoText.text = $"포만감 : {food.Satiety}";
+                break;
+            case Sacrifice sacrifice:
+                infoText.text = $"포만감 : {sacrifice.Satiety}\n 피해량 : {sacrifice.Damage}";
+                break;
         }
     }
 }

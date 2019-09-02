@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 7627764200797340203}
   - component: {fileID: 7627764200797340201}
   - component: {fileID: 7627764200797340200}
+  - component: {fileID: 7694321630647494960}
   m_Layer: 5
   m_Name: ItemInfoUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7627764200797340203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36,9 +37,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 88, y: -149}
+  m_AnchoredPosition: {x: 785, y: 525}
   m_SizeDelta: {x: 300, y: 120}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.2, y: -0.4}
 --- !u!222 &7627764200797340201
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7694321630647494960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627764200797340202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c687cf476b353a4c9008a2d0851d124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 7627764202764421387}
+  infoText: {fileID: 7627764202212360491}
 --- !u!1 &7627764202212360493
 GameObject:
   m_ObjectHideFlags: 0
