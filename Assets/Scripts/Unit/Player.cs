@@ -8,10 +8,7 @@ public partial class Player : Unit
     public float maxDistance;
     public float invincibleTime;
 
-    private Rigidbody rigidbody;
-
     public GameObject gameManager;
-    private ItemManager itemManager;
 
     public Text interactionText;
 
@@ -26,15 +23,16 @@ public partial class Player : Unit
 
         interactionObj = null;
 
-        rigidbody = GetComponent<Rigidbody>();
-
         inventory = new string[5];
         invenQuantity = new int[5];
 
         Debug.Log(inventory.Length);
-        itemManager = gameManager.GetComponent<ItemManager>();
 
         handDistance = Vector3.Distance(hand.transform.position, new Vector3(0, -0.05f));
+
+        canMove = true;
+
+        blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
     }
 
     void FixedUpdate()
@@ -44,7 +42,8 @@ public partial class Player : Unit
         else
             StartCoroutine(DecreaseHealth());
 
-        Move(faceDirection);
+        if(canMove)
+            Move(faceDirection);
 
         if (interactionObj != null)
         {
@@ -84,7 +83,8 @@ public partial class Player : Unit
 
         interactionObj = null;
 
-        var colliders = Physics.OverlapSphere(transform.position, maxDistance);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, maxDistance);
+
         float minDistance = maxDistance * maxDistance;
         foreach (var collider in colliders) {
             if (collider.transform.position != transform.position)
@@ -105,13 +105,6 @@ public partial class Player : Unit
                     interactionObj = collider.gameObject;
                 }
             }
-        }
-
-        if(isAttacked)
-        {
-            Color color = GetComponent<SpriteRenderer>().color;
-            color.a = 0.5f * Mathf.Cos((Time.time - attackTime) * Mathf.Rad2Deg * 2 * Mathf.PI) + 0.5f;
-            GetComponent<SpriteRenderer>().color = color;
         }
 
         if (faceDirection != Vector3.zero)

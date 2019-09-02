@@ -7,7 +7,10 @@ public partial class Player
     private float hunger;
     public float Hunger => hunger;
 
+    private bool canMove;
     private bool isAttacked;
+
+    private static Color[] blinkColor;
 
     public override int Health { get => base.Health; set { health = value; gameManager.SendMessage("HealthUI"); } }
 
@@ -27,23 +30,11 @@ public partial class Player
         base.Die();
     }
 
-    public override void GetAttack(int damage)
+    public IEnumerator Stiff()
     {
-        if (!isAttacked)
-        {
-            Health -= damage;
+        yield return new WaitForSeconds(0.5f);
 
-            if (health <= 0)
-            {
-                Die();
-                return;
-            }
-
-            isAttacked = true;
-            StartCoroutine(Invincible());
-
-            Debug.Log("Player Health: " + health + " Hunger: " + hunger);
-        }
+        canMove = true;
     }
 
     public IEnumerator Invincible()
@@ -54,4 +45,16 @@ public partial class Player
         isAttacked = false;
     }
 
+    public IEnumerator Blink()
+    {
+        int i = 0;
+        while(isAttacked)
+        {
+            yield return new WaitForSeconds(0.125f);
+            GetComponent<SpriteRenderer>().color = blinkColor[i % 2];
+            i++;
+        }
+
+        GetComponent<SpriteRenderer>().color = blinkColor[1];
+    }
 }

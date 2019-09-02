@@ -6,9 +6,4 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     public string nextScene;
-
-    public void LoadScene()
-    {
-        SceneManager.LoadScene(nextScene);
-    }
 }

@@ -22,12 +22,12 @@ public partial class Player
         {
             if (inventory[invenIdx] != null)
             {
-                if (itemManager.GetItem(inventory[invenIdx]) is Food || itemManager.GetItem(inventory[invenIdx]) is Sacrifice)
+                if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Food || ItemManager.Instance.GetItem(inventory[invenIdx]) is Sacrifice)
                 {
                     invenQuantity[invenIdx]--;
 
                 }
-                // itemManager.GetItem(inventory[invenIdx]).UseItem(gameObject);
+                ItemManager.Instance.GetItem(inventory[invenIdx]).UseItem(gameObject);
             }
         }
     }
@@ -37,18 +37,36 @@ public partial class Player
         hunger += satiety;
     }
 
-    public void Hurt(int damage)
+    public override void Hurt(int damage)
     {
-        health -= damage;
+        if (!isAttacked)
+        {
+            Health -= damage;
+
+            if (health <= 0)
+            {
+                Die();
+                return;
+            }
+
+            canMove = false;
+            StartCoroutine(Stiff());
+
+            isAttacked = true;
+            StartCoroutine(Blink());
+            StartCoroutine(Invincible());
+
+            Debug.Log("Player Health: " + health + " Hunger: " + hunger);
+        }
     }
 
     public void Attack()
     {
-        //if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (itemManager.GetItem(inventory[invenIdx]) as MeleeWeapon).Delay)
-        //{
-        //    attackTime = Time.time;
-        //    interactionObj.SendMessage("GetAttack", gameObject);
-        //}
+        if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (ItemManager.Instance.GetItem(inventory[invenIdx]) as Weapon).coolTime)
+        {
+            attackTime = Time.time;
+            interactionObj.SendMessage("Hurt", gameObject);
+        }
     }
 
     public void PickUp()

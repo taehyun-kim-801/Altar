@@ -24,5 +24,5 @@ public abstract class Unit : MonoBehaviour
 
     public abstract void Interaction();
 
-    public abstract void GetAttack(int damage);
+    public abstract void Hurt(int damage);
 }

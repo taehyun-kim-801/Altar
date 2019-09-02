@@ -72,7 +72,7 @@ public class Monster : Unit
         StartCoroutine(Attack());
     }
 
-    public override void GetAttack(int damage)
+    public override void Hurt(int damage)
     {
         health -= damage;
         Debug.Log("Monster health: " + health);
@@ -87,8 +87,8 @@ public class Monster : Unit
     {
         while(player != null)
         {
-            yield return new WaitUntil(() => Vector3.Distance(transform.position, target.transform.position) <= 1.0f);
-            player.GetAttack(attackStat);
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, target.transform.position) <= 0.7f);
+            player.Hurt(attackStat);
             yield return new WaitForSeconds(attackWaitSecond);
         }
     }

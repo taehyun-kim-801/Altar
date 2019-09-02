@@ -6,26 +6,26 @@ public partial class Player
 {
     private string[] inventory;
     private int[] invenQuantity;
-    public Item curItem;
+    private GameObject equipItem;
     private int invenIdx;
 
-    public Item GetCurrentItem()
+    public GameObject GetCurrentItem()
     {
-        return curItem;
+        return equipItem;
     }
     public void SelectItem(int index)
     {
         if (inventory[index] != null)
         {
-            curItem = itemManager.GetItem(inventory[index]);
+            //equipItem = ItemManager.Instance.GetItem(inventory[index]);
 
             if (!interactionObj.CompareTag("Altar"))
             {
-                if (itemManager.GetItem(inventory[invenIdx]) is Food || itemManager.GetItem(inventory[invenIdx]) is Sacrifice)
+                if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Food || ItemManager.Instance.GetItem(inventory[invenIdx]) is Sacrifice)
                 {
                     interactionText.text = "먹기";
                 }
-                else if (itemManager.GetItem(inventory[invenIdx]) is Weapon)
+                else if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Weapon)
                 {
                     interactionText.text = "공격";
                 }
