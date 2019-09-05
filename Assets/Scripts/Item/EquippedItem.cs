@@ -11,19 +11,21 @@ public class EquippedItem : MonoBehaviour
     private Player player;
     private Item selectedItem;
     private bool isSwinging = false;
-    private Sprite itemSprite;
+    private SpriteRenderer itemSpriteRenderer;
     private WaitForSeconds swingWaitSeconds = new WaitForSeconds(0.02f);
 
     private void Awake()
     {
-        itemSprite = GetComponent<Sprite>();
+        itemSpriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    public void Bind(Player player) => this.player = player;
 
     public void Equip(Item item)
     {
         selectedItem = item;
         item.Equip(this);
-        itemSprite = item.ItemSprite;
+        itemSpriteRenderer.sprite = item.ItemSprite;
     }
 
     private IEnumerator Swing()
