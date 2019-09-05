@@ -23,11 +23,10 @@ public partial class Player
             if (inventory[invenIdx] != null)
             {
                 if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Food || ItemManager.Instance.GetItem(inventory[invenIdx]) is Sacrifice)
-                {
-                    invenQuantity[invenIdx]--;
+                    if (--invenQuantity[invenIdx] == 0)
+                        inventory[invenIdx] = null;
 
-                }
-                ItemManager.Instance.GetItem(inventory[invenIdx]).UseItem(gameObject);
+                equippedItem.UseEquippedItem();
             }
         }
     }
@@ -42,11 +41,10 @@ public partial class Player
         if (!isAttacked)
         {
             Health -= damage;
-
-            if (health <= 0)
+            if (Health <= 0)
             {
+                StopAllCoroutines();
                 Die();
-                return;
             }
 
             canMove = false;
@@ -58,15 +56,7 @@ public partial class Player
 
             Debug.Log("Player Health: " + health + " Hunger: " + hunger);
         }
-    }
-
-    public void Attack()
-    {
-        if (interactionObj != null && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) <= 1.0f && Time.time - attackTime >= (ItemManager.Instance.GetItem(inventory[invenIdx]) as Weapon).coolTime)
-        {
-            attackTime = Time.time;
-            interactionObj.SendMessage("Hurt", gameObject);
-        }
+        
     }
 
     public void PickUp()

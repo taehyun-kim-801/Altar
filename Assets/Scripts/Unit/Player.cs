@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public partial class Player : Unit
 {
+    public static Player Instance { get; private set; }
     public float maxDistance;
     public float invincibleTime;
 
@@ -17,6 +18,18 @@ public partial class Player : Unit
 
     void Start()
     {
+        //if(Instance!=null)
+        //{
+        //    DontDestroyOnLoad(this.gameObject);
+        //    Instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(this);
+        //    return;
+        //}
+        Instance = this;
+
         hunger = 100f;
         health = 10;
         isAttacked = false;
@@ -35,7 +48,7 @@ public partial class Player : Unit
         blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (hunger > 0f)
             hunger -= Time.deltaTime / 6;

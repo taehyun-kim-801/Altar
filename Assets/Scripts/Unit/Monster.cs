@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Monster : Unit
 {
-    public int attackStat;
-    public float attackWaitSecond;
-
-    private Player player;
+    public int damage;
+    public float attackWaitSecond = 5f;
 
     public string dropItem;
     private ItemManager manager;
     // Start is called before the first frame update
     void Start()
     {
-        player = target.GetComponent<Player>();
+        moveSpeed = 5f;
         foundPlayer = false;
         manager = FindObjectOfType<ItemManager>();
         StartCoroutine(RandomDirection());
@@ -24,9 +22,9 @@ public class Monster : Unit
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (Player.Instance != null)
         {
-            if (!foundPlayer && Vector3.SqrMagnitude(transform.position - target.transform.position) <= 25.0f)
+            if (!foundPlayer && Vector3.SqrMagnitude(transform.position - Player.Instance.transform.position) <= 25.0f)
             {
                 foundPlayer = true;
                 StopCoroutine(RandomDirection());
@@ -34,8 +32,8 @@ public class Monster : Unit
             }
             else if (foundPlayer)
             {
-                faceDirection = (target.transform.position - transform.position).normalized;
-                if (target.transform.position.x < transform.position.x)
+                faceDirection = (Player.Instance.transform.position - transform.position).normalized;
+                if (Player.Instance.transform.position.x < transform.position.x)
                 {
                     Vector3 scale = transform.localScale;
                     scale.x = -Mathf.Abs(scale.x);
@@ -52,8 +50,7 @@ public class Monster : Unit
             Move(faceDirection);
         }
     }
-    
-    public GameObject target;
+
     public IEnumerator RandomDirection()
     {
         while(true)
@@ -85,10 +82,10 @@ public class Monster : Unit
 
     public IEnumerator Attack()
     {
-        while(player != null)
+        while(Player.Instance != null)
         {
-            yield return new WaitUntil(() => Vector3.Distance(transform.position, target.transform.position) <= 0.7f);
-            player.Hurt(attackStat);
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, Player.Instance.transform.position) <= 0.7f);
+            Player.Instance.Hurt(damage);
             yield return new WaitForSeconds(attackWaitSecond);
         }
     }

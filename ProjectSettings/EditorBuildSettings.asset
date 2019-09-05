@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NewScene.unity
+    path: Assets/Scenes/Grave.unity
     guid: e53aeed23feb61e43982b84b2b9ac381
   - enabled: 1
     path: Assets/Scenes/DevilDungeon.unity

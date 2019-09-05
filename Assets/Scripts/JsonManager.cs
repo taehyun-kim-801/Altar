@@ -17,13 +17,13 @@ public static class JsonManager
 
     public static List<T> LoadJson<T>()
     {
-        string json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(T)}.json");
+        string json = File.ReadAllText($"{Application.dataPath}/Data/{typeof(T).Name}.json");
         return JsonUtility.FromJson<ObjectList<T>>(json).objects;
     }
 
     public static void SaveJson<T>(List<T> objects)
     {
         ObjectList<T> objectList = new ObjectList<T>(objects);
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(T)}.json", JsonUtility.ToJson(objectList));
+        File.WriteAllText($"{Application.dataPath}/Data/{typeof(T).Name}.json", JsonUtility.ToJson(objectList));
     }
 }

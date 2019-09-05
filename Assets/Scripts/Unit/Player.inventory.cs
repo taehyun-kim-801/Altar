@@ -6,18 +6,34 @@ public partial class Player
 {
     private string[] inventory;
     private int[] invenQuantity;
-    private GameObject equipItem;
+    private EquippedItem equippedItem;
     private int invenIdx;
+
+    public string[] Inventory { get; private set; }
+    public int[] InvenQuantity { get; private set; }
+
+    public void UseInventory(string itemName, int itemCount)
+    {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == itemName)
+            {
+                invenQuantity[i] -= itemCount;
+                break;
+            }
+        }
+    }
 
     public GameObject GetCurrentItem()
     {
-        return equipItem;
+        return equippedItem.gameObject;
     }
+
     public void SelectItem(int index)
     {
         if (inventory[index] != null)
         {
-            //equipItem = ItemManager.Instance.GetItem(inventory[index]);
+            equippedItem.Equip(ItemManager.Instance.GetItem(inventory[index]));
 
             if (!interactionObj.CompareTag("Altar"))
             {
@@ -25,11 +41,13 @@ public partial class Player
                 {
                     interactionText.text = "먹기";
                 }
-                else if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Weapon)
+                else if (ItemManager.Instance.GetItem(inventory[invenIdx]) is MeleeWeapon || ItemManager.Instance.GetItem(inventory[invenIdx]) is RangedWeapon)
                 {
                     interactionText.text = "공격";
                 }
             }
         }
     }
+
+
 }
