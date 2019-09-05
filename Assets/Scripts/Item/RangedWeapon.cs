@@ -12,7 +12,7 @@ public class RangedWeapon : Item
     [SerializeField]
     private List<Vector2> thrownObjectDirection;
 
-    private GameObject thrownObject;
+    private Transform equippedItemTransform;
 
     public RangedWeapon(string name, string thrownObjectName, List<Vector2> thrownObjectDirection, float delay) : base(name)
     {
@@ -21,18 +21,11 @@ public class RangedWeapon : Item
         this.thrownObjectDirection = thrownObjectDirection;
     }
 
-    public void LoadThrownObject()
-    {
-
-    }
-
     public override void Equip(EquippedItem equipedItem)
     {
         equipedItem.UseItem = Attack;
+        equippedItemTransform = equipedItem.gameObject.transform;
     }
 
-    public void Attack()
-    { 
-        thrownObjectDirection.ForEach((direction) => { Object.Instantiate(thrownObject).GetComponent<ThrownObject>().StartCoroutine("MoveThrownObject"); });
-    }
+    public void Attack() => thrownObjectDirection.ForEach((direction) => { ProjectileManager.Instance.ActivateProjectile(thrownObjectName, equippedItemTransform.position, direction); });
 }

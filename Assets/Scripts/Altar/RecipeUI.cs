@@ -39,6 +39,7 @@ public class RecipeUI : MonoBehaviour
 
     public void TradeItem()
     {
-        ItemManager.Instance.DropItem(recipe.Result, Vector3.zero);
+
+        // ItemManager.Instance.DropItem(recipe.Result, );
     }
 }
