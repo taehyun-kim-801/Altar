@@ -67,66 +67,48 @@ public class ItemManager : MonoBehaviour
 
     private void LoadItemJson()
     {
-        string json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(Food)}.json");
-        JsonUtility.FromJson<ItemList<Food>>(json).items.ForEach((food) => { itemDictionary.Add(food.ItemName, food); });
+        JsonManager.LoadJson<Food>().ForEach((food) => { itemDictionary.Add(food.ItemName, food); });
 
-        json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(Sacrifice)}.json");
-        JsonUtility.FromJson<ItemList<Sacrifice>>(json).items.ForEach((sacrifice) => { itemDictionary.Add(sacrifice.ItemName, sacrifice); });
+        JsonManager.LoadJson<Sacrifice>().ForEach((sacrifice) => { itemDictionary.Add(sacrifice.ItemName, sacrifice); });
 
-        json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(MeleeWeapon)}.json");
-        JsonUtility.FromJson<ItemList<MeleeWeapon>>(json).items.ForEach((meleeWeapon) => { itemDictionary.Add(meleeWeapon.ItemName, meleeWeapon); });
+        JsonManager.LoadJson<MeleeWeapon>().ForEach((meleeWeapon) => { itemDictionary.Add(meleeWeapon.ItemName, meleeWeapon); });
 
-        json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(RangedWeapon)}.json");
-        JsonUtility.FromJson<ItemList<RangedWeapon>>(json).items.ForEach((rangedWeapon) => { itemDictionary.Add(rangedWeapon.ItemName, rangedWeapon); });
+        JsonManager.LoadJson<RangedWeapon>().ForEach((rangedWeapon) => { itemDictionary.Add(rangedWeapon.ItemName, rangedWeapon); });
     }
 
 
     private void SaveItemJson()
     {
-        List<Food> foods = new List<Food>();
+        List<Food> foodList = new List<Food>();
 
-        foods.Add(new Food("Bread", 3));
-        foods.Add(new Food("Apple", 1));
-        foods.Add(new Food("Steak", 5));
+        foodList.Add(new Food("Bread", 3));
+        foodList.Add(new Food("Apple", 1));
+        foodList.Add(new Food("Steak", 5));
 
-        ItemList<Food> foodList = new ItemList<Food>(foods);
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(Food)}.json", JsonUtility.ToJson(foodList));
+        JsonManager.SaveJson(foodList);
 
-        List<Sacrifice> sacrifices = new List<Sacrifice>();
+        List<Sacrifice> sacrificeList = new List<Sacrifice>();
 
-        sacrifices.Add(new Sacrifice("RottenApple", 1, 1));
-        sacrifices.Add(new Sacrifice("Larva", 2, 2));
-        sacrifices.Add(new Sacrifice("Boar", 4, 3));
+        sacrificeList.Add(new Sacrifice("RottenApple", 1, 1));
+        sacrificeList.Add(new Sacrifice("Larva", 2, 2));
+        sacrificeList.Add(new Sacrifice("Boar", 4, 3));
 
-        ItemList<Sacrifice> sacrificeList = new ItemList<Sacrifice>(sacrifices);
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(Sacrifice)}.json", JsonUtility.ToJson(sacrificeList));
+        JsonManager.SaveJson(sacrificeList);
 
-        List<MeleeWeapon> meleeWeapons = new List<MeleeWeapon>();
+        List<MeleeWeapon> meleeWeaponList = new List<MeleeWeapon>();
 
-        meleeWeapons.Add(new MeleeWeapon("Sword", 3, 0.4f));
-        meleeWeapons.Add(new MeleeWeapon("Axe", 5, 0.6f));
-        meleeWeapons.Add(new MeleeWeapon("Knife", 1, 0.2f));
+        meleeWeaponList.Add(new MeleeWeapon("Sword", 3, 0.4f));
+        meleeWeaponList.Add(new MeleeWeapon("Axe", 5, 0.6f));
+        meleeWeaponList.Add(new MeleeWeapon("Knife", 1, 0.2f));
 
-        ItemList<MeleeWeapon> meleeWeaponList = new ItemList<MeleeWeapon>(meleeWeapons);
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(MeleeWeapon)}.json", JsonUtility.ToJson(meleeWeaponList));
+        JsonManager.SaveJson(meleeWeaponList);
 
-        List<RangedWeapon> rangedWeapons = new List<RangedWeapon>();
+        List<RangedWeapon> rangedWeaponList = new List<RangedWeapon>();
 
-        rangedWeapons.Add(new RangedWeapon("Wand","FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1) }, 0.5f));
-        rangedWeapons.Add(new RangedWeapon("Staff","FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1,1) }, 0.7f));
-        rangedWeapons.Add(new RangedWeapon("Stick","LightningBolt", new List<Vector2>() { new Vector2(1, 1) }, 0.4f));
+        rangedWeaponList.Add(new RangedWeapon("Wand","FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1) }, 0.5f));
+        rangedWeaponList.Add(new RangedWeapon("Staff","FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1,1) }, 0.7f));
+        rangedWeaponList.Add(new RangedWeapon("Stick","LightningBolt", new List<Vector2>() { new Vector2(1, 1) }, 0.4f));
 
-        ItemList<RangedWeapon> rangedWeaponList = new ItemList<RangedWeapon>(rangedWeapons);
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(RangedWeapon)}.json", JsonUtility.ToJson(rangedWeaponList));
-    }
-
-    private class ItemList<T> where T : Item
-    {
-        public List<T> items;
-
-        public ItemList(List<T> ts)
-        {
-            items = ts;
-        }
+        JsonManager.SaveJson(rangedWeaponList);
     }
 }

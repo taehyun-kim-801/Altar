@@ -35,10 +35,7 @@ public class RecipeManager : MonoBehaviour
 
     private void LoadRecipeJson()
     {
-        string json = File.ReadAllText($"{Application.dataPath}/Data/{nameof(Recipe)}.json");
-
-        RecipeList recipeList = JsonUtility.FromJson<RecipeList>(json);
-        recipeList.recipes.ForEach((recipe) =>
+        JsonManager.LoadJson<Recipe>().ForEach((recipe) =>
         {
             recipe.ListToDictionary();
             recipeDictionary.Add(recipe.Result, recipe);
@@ -52,18 +49,6 @@ public class RecipeManager : MonoBehaviour
         recipes.Add(new Recipe(new Dictionary<string, int>() { ["RottenApple"] = 2, ["Larva"] = 1 }, "Apple"));
         recipes.Add(new Recipe(new Dictionary<string, int>() { ["Boar"] = 2, ["Larva"] = 1 }, "Steak"));
 
-        RecipeList recipeList = new RecipeList(recipes);
-
-        File.WriteAllText($"{Application.dataPath}/Data/{nameof(Recipe)}.json", JsonUtility.ToJson(recipeList));
-    }
-
-    private class RecipeList
-    {
-        public List<Recipe> recipes;
-
-        public RecipeList(List<Recipe> recipes)
-        {
-            this.recipes = recipes;
-        }
+        JsonManager.SaveJson(recipes);
     }
 }
