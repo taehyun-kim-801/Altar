@@ -18,17 +18,16 @@ public partial class Player : Unit
 
     void Start()
     {
-        //if(Instance!=null)
-        //{
-        //    DontDestroyOnLoad(this.gameObject);
-        //    Instance = this;
-        //}
-        //else
-        //{
-        //    Destroy(this);
-        //    return;
-        //}
-        Instance = this;
+        if(Instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+            return;
+        }
 
         hunger = 100f;
         health = 10;
@@ -46,6 +45,8 @@ public partial class Player : Unit
         canMove = true;
 
         blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
+
+        pinnedRecipes = new List<string>();
     }
 
     void Update()

@@ -95,7 +95,7 @@ public class Monster : Unit
         StopCoroutine(Attack());
         if(Random.Range(0f,1f)<=0.7f)
         {
-            manager.DropItem(dropItem, transform.position);
+            ItemManager.Instance.DropItem(dropItem, transform.position);
         }
         base.Die();
     }
