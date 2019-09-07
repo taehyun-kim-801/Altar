@@ -12,6 +12,7 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Text itemNumberText;
     private string itemName;
     private float clickTime = 0.5f;
+    private bool isOpenInfoUI = false;
 
     public void SetItemCell(string itemName, int itemNumber)
     {
@@ -35,13 +36,18 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData data)
     {
         StopCoroutine("OpenItemInfoUI");
-        clickFunc();
+        if(isOpenInfoUI)
+        {
+            isOpenInfoUI = false;
+            ItemInfoUI.CloseItemInfoUI();
+        }
     }
 
     public IEnumerator OpenItemInfoUI()
     {
         yield return new WaitForSeconds(clickTime);
         ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], transform);
+        isOpenInfoUI = true;
         yield return null;
     }
 }
