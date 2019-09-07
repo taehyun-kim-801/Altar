@@ -56,9 +56,4 @@ public class Inventory_UI : MonoBehaviour
 
         player.SendMessage("SelectItem", index);
     }
-
-    public void ChangeSprite(int index)
-    {
-        images[index].sprite = itemAtlas.GetSprite(player.GetComponent<Player>().Inventory[index]);
-    }
 }

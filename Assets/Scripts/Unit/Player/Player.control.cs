@@ -63,13 +63,34 @@ public partial class Player
     {
         if(droppedItem!=null)
         {
-            if (droppedItem.GetComponent<DroppedItem>().item is MeleeWeapon || droppedItem.GetComponent<DroppedItem>().item is RangedWeapon) { }
-            if (inventory[invenIdx]!=null)
+            DroppedItem item = droppedItem.GetComponent<DroppedItem>();
+            bool change = false;
+            if (item.item is Food || item.item is Sacrifice)
             {
-                DropItem();
+                for(int i=0;i<inventory.Length;i++)
+                {
+                    if(inventory[i]==item.item.name)
+                    {
+                        invenQuantity[i] += item.count;
+                        change = true;
+                        itemCells[i].SetItemCell(item.item.name, item.count);
+                        break;
+                    }
+                }
             }
 
-            
+            if(change)
+            {
+                if(inventory[invenIdx]!=null)
+                {
+                    DropItem();
+                }
+
+                inventory[invenIdx] = item.item.name;
+                invenQuantity[invenIdx] = item.count;
+                itemCells[invenIdx].SetItemCell(item.item.name, item.count);
+            }
+
             Destroy(droppedItem);
             droppedItem = null;
         }

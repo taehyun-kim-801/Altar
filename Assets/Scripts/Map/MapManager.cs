@@ -84,7 +84,7 @@ public class MapManager : MonoBehaviour
             float randX = Random.Range(-10.0f, 10.0f);
             float randY = Random.Range(-10.0f, 10.0f);
             int spawnIdx = Random.Range(1, monstersByMap[SceneManager.GetActiveScene().name].Count + 1);
-            Debug.Log(monstersByMap[SceneManager.GetActiveScene().name].Count);
+
             GameObject spawnObj = new GameObject(monstersByMap[SceneManager.GetActiveScene().name][spawnIdx - 1]);
             spawnObj.transform.localScale = new Vector2(5f, 5f);
             var monster = spawnObj.AddComponent<Monster>();
