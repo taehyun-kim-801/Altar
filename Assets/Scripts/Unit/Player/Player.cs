@@ -13,7 +13,7 @@ public partial class Player : Unit
 
     public Text interactionText;
 
-    public GameObject hand;
+    public Transform hand;
     private float handDistance;
 
     void Start()
@@ -36,6 +36,7 @@ public partial class Player : Unit
         interactionObj = null;
 
         inventory = new string[5];
+
         invenQuantity = new int[5];
 
         Debug.Log(inventory.Length);
@@ -47,6 +48,8 @@ public partial class Player : Unit
         blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
 
         pinnedRecipes = new List<string>();
+
+        itemCells = GameObject.FindGameObjectWithTag("Inventory").GetComponentsInChildren<ItemCell>();
     }
 
     void Update()
@@ -101,7 +104,7 @@ public partial class Player : Unit
 
         float minDistance = maxDistance * maxDistance;
         foreach (var collider in colliders) {
-            if (collider.transform.position != transform.position)
+            if (!collider.CompareTag("Player"))
             {
                 if(collider.CompareTag("Portal"))
                 {
@@ -113,7 +116,12 @@ public partial class Player : Unit
                     else continue;
                 }
                 float tempDistance = Vector3.SqrMagnitude(collider.transform.position - transform.position);
-                if (tempDistance <= minDistance)
+
+                if(tempDistance<=1.0f && collider.CompareTag("DroppedItem"))
+                {
+                    droppedItem = collider.gameObject;
+                }
+                else if (tempDistance <= minDistance)
                 {
                     minDistance = tempDistance;
                     interactionObj = collider.gameObject;
@@ -122,6 +130,6 @@ public partial class Player : Unit
         }
 
         if (faceDirection != Vector3.zero)
-            hand.transform.position = transform.position - new Vector3(0,-0.05f) + faceDirection * handDistance;
+            hand.position = transform.position - new Vector3(0,-0.05f) + faceDirection * handDistance;
     }
 }

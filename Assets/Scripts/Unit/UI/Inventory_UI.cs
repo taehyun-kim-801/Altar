@@ -1,25 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class Inventory_UI : MonoBehaviour
 {
     public GameObject player;
     public GameObject inventory;
+    private SpriteAtlas itemAtlas;
     private float inventoryWidth;
 
     public GameObject selectedImage;
     private bool selectedCreate;
     private GameObject selected;
 
+    private Image[] images;
+
     public void Start()
     {
-        Debug.Log(inventory.transform.position);
+        itemAtlas = Resources.Load<SpriteAtlas>("Item.spriteatlas");
         inventoryWidth = inventory.GetComponent<RectTransform>().rect.width;
 
         float canvas = inventory.transform.parent.GetComponent<RectTransform>().localScale.x;
         inventoryWidth *= canvas;
 
         selectedCreate = false;
+
+        images = inventory.GetComponentsInChildren<Image>();
     }
 
     public void InventoryUI(BaseEventData _data)
@@ -45,8 +52,13 @@ public class Inventory_UI : MonoBehaviour
         else
         {
             selected.transform.position = new Vector3(inventoryWidth / 5 * index + inventory.transform.position.x + inventoryWidth / 10, inventoryWidth / 10);
-        }    
+        }
 
         player.SendMessage("SelectItem", index);
+    }
+
+    public void ChangeSprite(int index)
+    {
+        images[index].sprite = itemAtlas.GetSprite(player.GetComponent<Player>().Inventory[index]);
     }
 }

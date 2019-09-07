@@ -38,10 +38,26 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 474321681813c194c9a3e105833e40b6, type: 3}
     - {fileID: 2800000, guid: 337619ff5ea1e6643898a6bc31488d67, type: 3}
     - {fileID: 2800000, guid: 787405749806ff149942d5160b28e55a, type: 3}
-    totalSpriteSurfaceArea: 0
+    totalSpriteSurfaceArea: 2048
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a672c1c23357a8d43897aea5ed8e7087, type: 3}
+  - {fileID: 21300000, guid: d23556a3d59e16a4bb0d3951ec5cebce, type: 3}
+  - {fileID: 21300000, guid: 787405749806ff149942d5160b28e55a, type: 3}
+  - {fileID: 21300000, guid: 0fa5ee0593e2ec649837872ef74724dd, type: 3}
+  - {fileID: 21300000, guid: 474321681813c194c9a3e105833e40b6, type: 3}
+  - {fileID: 21300000, guid: 345c5989a0f00e4479fe4db78922d582, type: 3}
+  - {fileID: 21300000, guid: d05ba5bfecc2d0240842e18ee18575a8, type: 3}
+  - {fileID: 21300000, guid: 337619ff5ea1e6643898a6bc31488d67, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - GemStaff
+  - DoubleAxe
+  - WoodenStaff
+  - Hatchet
+  - LargeSpear
+  - GiantSword
+  - Knife
+  - MiniSpear
   m_Tag: Item
   m_IsVariant: 0

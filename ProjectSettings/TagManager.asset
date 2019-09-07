@@ -7,6 +7,9 @@ TagManager:
   - Monster
   - Altar
   - Portal
+  - Canvas
+  - DroppedItem
+  - Inventory
   layers:
   - Default
   - TransparentFX

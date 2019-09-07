@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,5 +15,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void GameExit()
+    {
+        List<PlayerInfo> playerInfo = new List<PlayerInfo>();
+        playerInfo.Add(new PlayerInfo(Player.Instance));
+
+        JsonManager.SaveJson<PlayerInfo>(playerInfo);
     }
 }

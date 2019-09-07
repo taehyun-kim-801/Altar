@@ -9,8 +9,14 @@ public partial class Player
     private EquippedItem equippedItem;
     private int invenIdx;
 
-    public string[] Inventory { get; private set; }
-    public int[] InvenQuantity { get; private set; }
+    private GameObject droppedItem;
+
+    public string[] Inventory => inventory;
+    public int[] InvenQuantity => invenQuantity;
+    public EquippedItem EquippedItem => equippedItem;
+    public int InvenIdx => invenIdx;
+
+    private ItemCell[] itemCells;
 
     public int CheckQuantity(string item)
     {
@@ -48,15 +54,15 @@ public partial class Player
     {
         if (inventory[index] != null)
         {
-            equippedItem.Equip(ItemManager.Instance.GetItem(inventory[index]));
+            equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
 
             if (!interactionObj.CompareTag("Altar"))
             {
-                if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Food || ItemManager.Instance.GetItem(inventory[invenIdx]) is Sacrifice)
+                if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                 {
                     interactionText.text = "먹기";
                 }
-                else if (ItemManager.Instance.GetItem(inventory[invenIdx]) is MeleeWeapon || ItemManager.Instance.GetItem(inventory[invenIdx]) is RangedWeapon)
+                else if (Item.itemDictionary[inventory[invenIdx]] is MeleeWeapon || Item.itemDictionary[inventory[invenIdx]] is RangedWeapon)
                 {
                     interactionText.text = "공격";
                 }

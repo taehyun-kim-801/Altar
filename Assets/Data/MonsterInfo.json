@@ -1,1 +1,1 @@
-{"objects":[{"name":"Skeleton","health":10,"damage":1,"dropItem":"Bone"},{"name":"Slime","health":20,"damage":2,"dropItem":"Jelly"},{"name":"Stone Golem","health":30,"damage":3,"dropItem":"Stone"}]}
+{"objects":[{"name":"Skeleton","health":10,"damage":1,"dropItem":"Bone"},{"name":"Slime","health":20,"damage":2,"dropItem":"Jelly"},{"name":"StoneGolem","health":30,"damage":3,"dropItem":"Stone"}]}

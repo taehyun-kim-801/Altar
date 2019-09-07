@@ -12,7 +12,7 @@ public partial class Player
     {
         if (interactionObj.CompareTag("Altar"))
         {
-
+            
         }
         else if(interactionObj.CompareTag("Portal"))
         {
@@ -22,7 +22,7 @@ public partial class Player
         {
             if (inventory[invenIdx] != null)
             {
-                if (ItemManager.Instance.GetItem(inventory[invenIdx]) is Food || ItemManager.Instance.GetItem(inventory[invenIdx]) is Sacrifice)
+                if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                     if (--invenQuantity[invenIdx] == 0)
                         inventory[invenIdx] = null;
 
@@ -61,6 +61,30 @@ public partial class Player
 
     public void PickUp()
     {
-        Debug.Log("Pick Up");
+        if(droppedItem!=null)
+        {
+            if (droppedItem.GetComponent<DroppedItem>().item is MeleeWeapon || droppedItem.GetComponent<DroppedItem>().item is RangedWeapon) { }
+            if (inventory[invenIdx]!=null)
+            {
+                DropItem();
+            }
+
+            
+            Destroy(droppedItem);
+            droppedItem = null;
+        }
+    }
+
+    public void DropItem()
+    {
+        GameObject dropItem = new GameObject(inventory[invenIdx]);
+        SpriteRenderer renderer = dropItem.AddComponent<SpriteRenderer>();
+        renderer.sprite = DataContainer.itemAtlas.GetSprite(inventory[invenIdx]);
+
+        DroppedItem item = dropItem.AddComponent<DroppedItem>();
+        item.DropItem(Item.itemDictionary[inventory[invenIdx]], invenQuantity[invenIdx], transform.position);
+
+        inventory[invenIdx] = null;
+        invenQuantity[invenIdx] = 0;
     }
 }

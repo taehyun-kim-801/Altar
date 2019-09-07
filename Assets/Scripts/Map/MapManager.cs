@@ -14,6 +14,7 @@ public class MapManager : MonoBehaviour
 
     private Transform player;
 
+    private SpriteAtlas atlas;
     private void Awake()
     {
         if(Instance == null)
@@ -46,6 +47,8 @@ public class MapManager : MonoBehaviour
             fs.Close();
             JsonManager.SaveJson(SaveLists());
         }
+
+        atlas = Resources.Load<SpriteAtlas>("Units");
     }
 
     // Start is called before the first frame update
@@ -80,7 +83,8 @@ public class MapManager : MonoBehaviour
 
             float randX = Random.Range(-10.0f, 10.0f);
             float randY = Random.Range(-10.0f, 10.0f);
-            int spawnIdx = Random.Range(1, monstersByMap[SceneManager.GetActiveScene().name].Count);
+            int spawnIdx = Random.Range(1, monstersByMap[SceneManager.GetActiveScene().name].Count + 1);
+            Debug.Log(monstersByMap[SceneManager.GetActiveScene().name].Count);
             GameObject spawnObj = new GameObject(monstersByMap[SceneManager.GetActiveScene().name][spawnIdx - 1]);
             spawnObj.transform.localScale = new Vector2(5f, 5f);
             var monster = spawnObj.AddComponent<Monster>();
@@ -92,8 +96,6 @@ public class MapManager : MonoBehaviour
             monsterRB.gravityScale = 0f;
             SpriteRenderer render = spawnObj.AddComponent<SpriteRenderer>();
 
-            SpriteAtlas atlas = Resources.Load<SpriteAtlas>("Units");
-            Debug.Log(atlas.spriteCount);
             render.sprite = atlas.GetSprite($"{monstersByMap[SceneManager.GetActiveScene().name][spawnIdx - 1]}_1");
 
             MonsterInfo spawnInfo = monsters[monstersByMap[SceneManager.GetActiveScene().name][spawnIdx - 1]];
@@ -130,7 +132,7 @@ public class MapManager : MonoBehaviour
 
         result.Add(new MonsterInfo("Skeleton", 10, 1, "Bone"));
         result.Add(new MonsterInfo("Slime", 20, 2, "Jelly"));
-        result.Add(new MonsterInfo("Stone Golem", 30, 3, "Stone"));
+        result.Add(new MonsterInfo("StoneGolem", 30, 3, "Stone"));
 
         return result;
     }
@@ -139,7 +141,7 @@ public class MapManager : MonoBehaviour
     {
         List<MonsterList> result = new List<MonsterList>();
 
-        result.Add(new MonsterList("Grave",new List<string> { "Skeleton","Slime","Stone Golem" }));
+        result.Add(new MonsterList("Grave",new List<string> { "Skeleton","Slime","StoneGolem" }));
         return result;
     }
 }
