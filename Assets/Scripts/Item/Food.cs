@@ -19,7 +19,7 @@ public class Food : Item
     public override void Equip(EquippedItem equipedItem)
     {
         equipedItem.UseItem = Eat;
-        player = equipedItem.PlayerInstance;
+        player = equipedItem.player;
     }
 
     private void Eat() => player.Eat(satiety);

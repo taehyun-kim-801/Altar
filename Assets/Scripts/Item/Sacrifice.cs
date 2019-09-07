@@ -23,7 +23,7 @@ public class Sacrifice : Item
     public override void Equip(EquippedItem equipedItem)
     {
         equipedItem.UseItem = Eat;
-        player = equipedItem.PlayerInstance;
+        player = equipedItem.player;
     }
 
     private void Eat()

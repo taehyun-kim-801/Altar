@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class MeleeWeapon : Item
 {
+    public int Damage => damage;
+
     [SerializeField]
     private int damage;
 

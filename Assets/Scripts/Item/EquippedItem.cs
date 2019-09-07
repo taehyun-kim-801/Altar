@@ -6,13 +6,13 @@ public class EquippedItem : MonoBehaviour
 {
     public System.Action<Collider2D> triggerFunc;
     public System.Action UseItem;
-    public Player PlayerInstance => player;
+    public Player player { get; private set; }
+    public Item selectedItem { get; private set; }
 
-    private Player player;
-    private Item selectedItem;
     private bool isSwinging = false;
     private SpriteRenderer itemSpriteRenderer;
     private WaitForSeconds swingWaitSeconds = new WaitForSeconds(0.02f);
+    private WaitForSeconds itemDelaySeconds;
 
     private void Awake()
     {
@@ -25,7 +25,8 @@ public class EquippedItem : MonoBehaviour
     {
         selectedItem = item;
         item.Equip(this);
-        itemSpriteRenderer.sprite = item.ItemSprite;
+        itemSpriteRenderer.sprite = item.sprite;
+        itemDelaySeconds = new WaitForSeconds(item.Delay);
     }
 
     private IEnumerator Swing()
@@ -39,7 +40,7 @@ public class EquippedItem : MonoBehaviour
 
         transform.Rotate(-120, 0, 0);
 
-        yield return selectedItem.itemDelaySeconds;
+        yield return itemDelaySeconds;
         isSwinging = false;
 
         yield return null;

@@ -5,20 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public class RangedWeapon : Item
 {
-    public string ThrownObjectName => thrownObjectName;
+    public string ProjectileName => projectileName;
 
     [SerializeField]
-    private string thrownObjectName;
+    private string projectileName;
     [SerializeField]
-    private List<Vector2> thrownObjectDirection;
+    private List<Vector2> projectileDirection;
 
     private Transform equippedItemTransform;
 
-    public RangedWeapon(string name, string thrownObjectName, List<Vector2> thrownObjectDirection, float delay) : base(name)
+    public RangedWeapon(string name, string projectileName, List<Vector2> projectileDirection, float delay) : base(name)
     {
         this.delay = delay;
-        this.thrownObjectName = thrownObjectName;
-        this.thrownObjectDirection = thrownObjectDirection;
+        this.projectileName = projectileName;
+        this.projectileDirection = projectileDirection;
     }
 
     public override void Equip(EquippedItem equipedItem)
@@ -27,5 +27,5 @@ public class RangedWeapon : Item
         equippedItemTransform = equipedItem.gameObject.transform;
     }
 
-    public void Attack() => thrownObjectDirection.ForEach((direction) => { ProjectileManager.Instance.ActivateProjectile(thrownObjectName, equippedItemTransform.position, direction); });
+    public void Attack() => projectileDirection.ForEach((direction) => { ProjectileManager.Instance.ActivateProjectile(projectileName, equippedItemTransform.position, direction); });
 }

@@ -13,7 +13,7 @@ public class ProjectileManager : MonoBehaviour
     private SpriteAtlas projectileSpriteAtlas;
     private List<GameObject> projectileObjectList;
     private Dictionary<string, ProjectileInfo> projectileDictionary;
-    private int projectileNumber = 10;
+    private int projectileNumber = 20;
     private int activatedProjectileNumber = 0;
 
     private void Awake()
@@ -27,7 +27,6 @@ public class ProjectileManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void Start()
@@ -55,6 +54,11 @@ public class ProjectileManager : MonoBehaviour
         GameObject projectile = projectileObjectList[index];
         projectileObjectList[index] = projectileObjectList[activatedProjectileNumber];
         projectileObjectList[activatedProjectileNumber] = projectile;
+    }
+
+    public float GetProjectileDamage(string projectileName)
+    {
+        return projectileDictionary[projectileName].damage;
     }
 
     [System.Serializable]
