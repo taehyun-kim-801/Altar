@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DroppedItem : MonoBehaviour
 {
-    private Item item;
-    private int count;
+    public Item item { get; private set; }
+    public int count { get; private set; }
     private SpriteRenderer spriteRenderer;
 
     private void Start()

@@ -56,17 +56,17 @@ public class Item
 
         List<MeleeWeapon> meleeWeaponList = new List<MeleeWeapon>();
 
-        meleeWeaponList.Add(new MeleeWeapon("Sword", 3, 0.4f));
-        meleeWeaponList.Add(new MeleeWeapon("Axe", 5, 0.6f));
+        meleeWeaponList.Add(new MeleeWeapon("GiantSword", 3, 0.4f));
         meleeWeaponList.Add(new MeleeWeapon("Knife", 1, 0.2f));
+        meleeWeaponList.Add(new MeleeWeapon("BattleAxe", 5, 0.6f));
+        meleeWeaponList.Add(new MeleeWeapon("Hatchet", 5, 0.6f));
 
         JsonManager.SaveJson(meleeWeaponList);
 
         List<RangedWeapon> rangedWeaponList = new List<RangedWeapon>();
 
-        rangedWeaponList.Add(new RangedWeapon("Wand", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1) }, 0.5f));
-        rangedWeaponList.Add(new RangedWeapon("Staff", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1) }, 0.7f));
-        rangedWeaponList.Add(new RangedWeapon("Stick", "LightningBolt", new List<Vector2>() { new Vector2(1, 1) }, 0.4f));
+        rangedWeaponList.Add(new RangedWeapon("Staff", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1) }, 0.5f));
+        rangedWeaponList.Add(new RangedWeapon("Wand", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1) }, 0.7f));
 
         JsonManager.SaveJson(rangedWeaponList);
     }
