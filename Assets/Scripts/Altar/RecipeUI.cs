@@ -28,6 +28,7 @@ public class RecipeUI : MonoBehaviour
                 break;
             }
             sacrificeImages[i].GetComponent<ItemCell>().SetItemCell(sacrifice.Key, sacrifice.Value);
+
             sacrificeImages[i++].gameObject.SetActive(true);
         }
         while (i < sacrificeImages.Count)
@@ -39,7 +40,20 @@ public class RecipeUI : MonoBehaviour
 
     public void TradeItem()
     {
-
-        // ItemManager.Instance.DropItem(recipe.Result, );
+        bool canTrade = true;
+        foreach (var sacrifice in recipe.sacrificeDictionary)
+        {
+            if (Player.Instance.CheckQuantity(sacrifice.Key) < sacrifice.Value)
+            {
+                canTrade = false;
+                break;
+            }
+        }
+        if (canTrade)
+        {
+            foreach (var sacrifice in recipe.sacrificeDictionary)
+                Player.Instance.UseInventory(sacrifice.Key, sacrifice.Value);
+            Item.DropItem(recipe.Result, 1, Player.Instance.gameObject.transform.position);
+        }
     }
 }

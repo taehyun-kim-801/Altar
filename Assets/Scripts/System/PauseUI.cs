@@ -4,17 +4,33 @@ using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject OptionUI;
+    [SerializeField]
+    private GameObject GuideBookUI;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void OpenOptionUI()
     {
-        
+        OptionUI.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenGuideBookUI()
     {
-        
+        GuideBookUI.SetActive(true);
+    }
+
+    public void ClosePauseUI()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void CloseGuideBookUI()
+    {
+        GuideBookUI.SetActive(false);
+    }
+
+    public void CloseOptionUI()
+    {
+        OptionUI.SetActive(false);
     }
 }
