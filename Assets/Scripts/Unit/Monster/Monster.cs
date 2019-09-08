@@ -14,7 +14,6 @@ public class Monster : Unit
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = health;
         moveSpeed = 5f;
         foundPlayer = false;
         StartCoroutine(RandomDirection());
@@ -53,6 +52,10 @@ public class Monster : Unit
         }
     }
 
+    public void SetMaxHealth()
+    {
+        maxHealth = health;
+    }
     public IEnumerator RandomDirection()
     {
         while(true)
@@ -74,9 +77,7 @@ public class Monster : Unit
     public override void Hurt(int damage)
     {
         health -= damage;
-        Debug.Log("Monster health: " + health);
-
-        MonsterCondition_UI.Instance.SetMonsterCondition(name, health / maxHealth);
+        MonsterCondition_UI.Instance.SetMonsterCondition(name, (float)health / maxHealth);
         if(health<=0)
         {
             Die();

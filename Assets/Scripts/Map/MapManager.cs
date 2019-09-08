@@ -52,6 +52,8 @@ public class MapManager : MonoBehaviour
                 monsterInfo.dropItem = spawnInfo.DropItem;
                 monsterInfo.attackWaitSecond = 5f;
 
+                monsterInfo.SetMaxHealth();
+
                 var monsterRB = spawnObj.AddComponent<Rigidbody2D>();
                 monsterRB.constraints = RigidbodyConstraints2D.FreezeRotation;
                 monsterRB.gravityScale = 0f;

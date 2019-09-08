@@ -70,6 +70,4 @@ public partial class Player
             }
         }
     }
-
-
 }
