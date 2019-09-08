@@ -8,6 +8,8 @@ public class ItemInfoUI : MonoBehaviour
     private static ItemInfoUI instance;
 
     [SerializeField]
+    private Image backgroundImage;
+    [SerializeField]
     private Text nameText;
     [SerializeField]
     private Text infoText;
@@ -27,15 +29,15 @@ public class ItemInfoUI : MonoBehaviour
 
     public static void OpenItemInfoUI(Item item, Transform parentTransform)
     {
-        instance.gameObject.SetActive(true);
+        instance.backgroundImage.gameObject.SetActive(true);
         instance.OpenItemInfo(item, parentTransform);
     }
 
-    public static void CloseItemInfoUI() => instance.gameObject.SetActive(false);
+    public static void CloseItemInfoUI() => instance.backgroundImage.gameObject.SetActive(false);
 
     public void OpenItemInfo(Item item, Transform parentTransform)
     {
-        gameObject.transform.position = parentTransform.position;
+        backgroundImage.transform.position = parentTransform.position;
 
         nameText.text = $"이름 : {item.name}";
 
@@ -45,13 +47,13 @@ public class ItemInfoUI : MonoBehaviour
                 infoText.text = $"포만감 : {food.Satiety}";
                 break;
             case Sacrifice sacrifice:
-                infoText.text = $"포만감 : {sacrifice.Satiety}\n 피해량 : {sacrifice.Damage}";
+                infoText.text = $"포만감 : {sacrifice.Satiety}\n피해량 : {sacrifice.Damage}";
                 break;
             case MeleeWeapon meleeWeapon:
-                infoText.text = $"공격력 : {meleeWeapon.Damage}\n 속도 : {meleeWeapon.Delay}";
+                infoText.text = $"공격력 : {meleeWeapon.Damage}\n속도 : {meleeWeapon.Delay}";
                 break;
             case RangedWeapon rangedWeapon:
-                infoText.text = $"공격력 : {ProjectileManager.Instance.GetProjectileDamage(rangedWeapon.ProjectileName)}\n 속도 : {rangedWeapon.Delay}";
+                infoText.text = $"공격력 : {ProjectileManager.Instance.GetProjectileDamage(rangedWeapon.ProjectileName)}\n속도 : {rangedWeapon.Delay}";
                 break;
         }
     }
