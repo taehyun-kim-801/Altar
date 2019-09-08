@@ -23,9 +23,6 @@ public class EquippedItem : MonoBehaviour
 
     public void Equip(Item item = null)
     {
-        if (isSwinging)
-            return;
-
         triggerFunc = null;
         UseItem = null;
         selectedItem = null;
@@ -40,30 +37,7 @@ public class EquippedItem : MonoBehaviour
         itemDelaySeconds = new WaitForSeconds(item.Delay);
     }
 
-    private IEnumerator Swing()
-    {
-        Quaternion rotation = transform.rotation;
-        while (rotation.z < transform.rotation.z + 120)
-        {
-            transform.Rotate(0, 0, 20);
-            yield return swingWaitSeconds;
-        }
-
-        transform.Rotate(-120, 0, 0);
-
-        yield return itemDelaySeconds;
-        isSwinging = false;
-
-        yield return null;
-    }
-
-    public void UseEquippedItem()
-    {
-        if (isSwinging)
-            return;
-        StartCoroutine("Swing");
-        UseItem?.Invoke();
-    }
+    public void UseEquippedItem() => UseItem?.Invoke();
 
     private void OnTriggerEnter2D(Collider2D collision) => triggerFunc?.Invoke(collision);
 }
