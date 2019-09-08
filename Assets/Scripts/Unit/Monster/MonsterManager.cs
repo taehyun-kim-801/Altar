@@ -34,17 +34,7 @@ public static class MonsterManager
     {
         JsonManager.LoadJson<MonsterInfo>().ForEach((monster) => { monsters.Add(monster.Name, monster); });
 
-        foreach (var monster in monsters)
-        {
-            Debug.Log(monster.Key + " " + monster.Value);
-        }
-
         JsonManager.LoadJson<MonsterList>().ForEach((list) => { monstersByMap.Add(list.name, list.monsters); });
-
-        foreach (var list in monstersByMap)
-        {
-            Debug.Log(list.Key + " " + list.Value);
-        }
     }
 
     [System.Serializable]

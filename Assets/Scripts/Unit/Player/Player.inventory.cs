@@ -23,7 +23,7 @@ public partial class Player
         int result = -1;
         for (int i = 0; i < inventory.Length; i++)
         {
-            if(inventory[i]==item)
+            if (inventory[i] == item)
             {
                 result = invenQuantity[i];
                 break;
@@ -54,9 +54,10 @@ public partial class Player
     {
         if (inventory[index] != null)
         {
-            equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
+            if (inventory[invenIdx] == null)    equippedItem.Equip();
+            else                                equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
 
-            if (!interactionObj.CompareTag("Altar"))
+            if (interactionObj == null || !interactionObj.CompareTag("Altar"))
             {
                 if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                 {

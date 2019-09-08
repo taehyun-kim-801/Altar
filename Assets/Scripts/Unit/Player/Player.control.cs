@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public partial class Player
 {
@@ -10,23 +11,39 @@ public partial class Player
     private float attackTime;
     public override void Interaction()
     {
-        if (interactionObj.CompareTag("Altar"))
+        if (interactionObj != null)
         {
-            
-        }
-        else if(interactionObj.CompareTag("Portal"))
-        {
-            SceneManager.LoadScene(interactionObj.GetComponent<Portal>().nextScene);
+            if (interactionObj.CompareTag("Altar"))
+            {
+
+            }
+            else if (interactionObj.CompareTag("Portal"))
+            {
+                SceneManager.LoadScene(interactionObj.GetComponent<Portal>().nextScene);
+            }
+            else
+            {
+                if (inventory[invenIdx] != null)
+                {
+                    if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
+                        if (--invenQuantity[invenIdx] == 0)
+                            inventory[invenIdx] = null;
+
+                    equippedItem.UseEquippedItem();
+                    itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);
+                }
+            }
         }
         else
         {
-            if (inventory[invenIdx] != null)
+            if(inventory[invenIdx]!=null)
             {
                 if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                     if (--invenQuantity[invenIdx] == 0)
                         inventory[invenIdx] = null;
 
                 equippedItem.UseEquippedItem();
+                itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);
             }
         }
     }
@@ -53,8 +70,6 @@ public partial class Player
             isAttacked = true;
             StartCoroutine(Blink());
             StartCoroutine(Invincible());
-
-            Debug.Log("Player Health: " + health + " Hunger: " + hunger);
         }
         
     }
@@ -84,6 +99,10 @@ public partial class Player
                 if(inventory[invenIdx]!=null)
                 {
                     DropItem();
+                }
+                else
+                {
+                    itemCells[invenIdx].GetComponent<Image>().color = Color.white;
                 }
 
                 inventory[invenIdx] = item.item.name;

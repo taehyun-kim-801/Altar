@@ -16,6 +16,7 @@ public partial class Player : Unit
     public Transform hand;
     private float handDistance;
 
+    public GameObject inventoryUI;
     void Start()
     {
         if(Instance == null)
@@ -39,8 +40,6 @@ public partial class Player : Unit
 
         invenQuantity = new int[5];
 
-        Debug.Log(inventory.Length);
-
         handDistance = Vector3.Distance(hand.transform.position, new Vector3(0, -0.05f));
 
         canMove = true;
@@ -49,7 +48,18 @@ public partial class Player : Unit
 
         pinnedRecipes = new List<string>();
 
-        itemCells = GameObject.FindGameObjectWithTag("Inventory").GetComponentsInChildren<ItemCell>();
+        equippedItem = hand.GetComponent<EquippedItem>();
+        equippedItem.Bind(Instance);
+
+        itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
+
+        inventory[0] = "Knife";
+        invenQuantity[0] = 1;
+
+        itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
+        itemCells[0].GetComponent<Image>().color = Color.white;
+
+        SelectItem(0);
     }
 
     void Update()
@@ -79,10 +89,6 @@ public partial class Player : Unit
             else if(interactionObj.CompareTag("Portal"))
             {
                 interactionText.text = "이동";
-            }
-            else
-            {
-                interactionText.text = "공격";
             }
         }
         else
@@ -130,6 +136,11 @@ public partial class Player : Unit
         }
 
         if (faceDirection != Vector3.zero)
-            hand.position = transform.position - new Vector3(0,-0.05f) + faceDirection * handDistance;
+        {
+            hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
+
+            hand.GetComponent<SpriteRenderer>().flipX = faceDirection.x >= 0 ? false : true;
+            hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 45f);
+        }
     }
 }
