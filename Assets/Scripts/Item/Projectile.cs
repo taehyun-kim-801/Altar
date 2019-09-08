@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
         {
             Monster monster = collision.gameObject.GetComponent<Monster>();
 
-            // monster.GetAttack(damage);
+            monster.Hurt((int)damage);
             gameObject.SetActive(false);
             ProjectileManager.Instance.DeactivateProjectile(index);
         }

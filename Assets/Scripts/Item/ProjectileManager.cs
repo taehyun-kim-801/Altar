@@ -27,6 +27,7 @@ public class ProjectileManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SaveProjectileJson();
     }
 
     private void Start()
@@ -64,9 +65,33 @@ public class ProjectileManager : MonoBehaviour
     [System.Serializable]
     private struct ProjectileInfo
     {
+        public ProjectileInfo(string name, float speed, float damage, float distance)
+        {
+            this.name = name;
+            this.speed = speed;
+            this.damage = damage;
+            this.distance = distance;
+        }
+
         public string name;
         public float speed;
         public float damage;
         public float distance;
+    }
+
+    private void SaveProjectileJson()
+    {
+        List<ProjectileInfo> projectileInfoList = new List<ProjectileInfo>();
+        projectileInfoList.Add(new ProjectileInfo("FireBall", 2f, 3, 10));
+        projectileInfoList.Add(new ProjectileInfo("MiniSpear", 4f, 3, 7));
+        projectileInfoList.Add(new ProjectileInfo("LargeSpear", 2f, 5, 7));
+
+        JsonManager.SaveJson(projectileInfoList);
+    }
+
+    private void LoadProjectileJson()
+    {
+        projectileDictionary = new Dictionary<string, ProjectileInfo>();
+        JsonManager.LoadJson<ProjectileInfo>().ForEach((projectileInfo) => { projectileDictionary.Add(projectileInfo.name, projectileInfo); });
     }
 }
