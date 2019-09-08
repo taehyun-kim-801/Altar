@@ -14,14 +14,20 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void SetItemCell(string itemName, int itemNumber)
     {
+        if (itemNumber == 0)
+            itemImage.sprite = null;
+            
         if (itemImage == null)
             itemImage = GetComponent<Image>();
         if (itemNumberText == null)
             itemNumberText = GetComponentInChildren<Text>();
 
         this.itemName = itemName;
-        if(itemNumber > 1)
+        if (itemNumber > 1)
             itemNumberText.text = itemNumber.ToString();
+        else
+            itemNumberText.text = null;
+
         itemImage.sprite = Item.itemDictionary[itemName].sprite;
     }
 
