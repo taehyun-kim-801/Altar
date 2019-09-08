@@ -10,10 +10,7 @@ public abstract class Unit : MonoBehaviour
 
     public Vector3 faceDirection;
 
-    protected virtual void Die()
-    {
-        Destroy(this.gameObject);
-    }
+    protected abstract void Die();
 
     public float moveSpeed;
 

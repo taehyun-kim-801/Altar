@@ -9,6 +9,8 @@ public class Monster : Unit
 
     public string dropItem;
     private int maxHealth;
+
+    public MapManager mapManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +100,7 @@ public class Monster : Unit
         {
             Item.DropItem(dropItem, 1, transform.position);
         }
-        base.Die();
+        gameObject.SetActive(false);
+        mapManager.DecreaseCount(name);
     }
 }
