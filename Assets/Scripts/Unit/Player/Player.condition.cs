@@ -27,7 +27,7 @@ public partial class Player
     {
         Time.timeScale = 0f;
         StopAllCoroutines();
-        base.Die();
+        Destroy(gameObject);
     }
 
     public IEnumerator Stiff()
