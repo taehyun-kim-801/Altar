@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class EquippedItem : MonoBehaviour
 {
+    public enum State
+    {
+        Swing,
+        Use,
+        None
+    }
+
     public System.Action<Collider2D> triggerFunc;
     public System.Action UseItem;
-    public Player player { get; private set; }
     public Item selectedItem { get; private set; }
+    public State state { get; private set; }
 
-    private bool isSwinging = false;
     private SpriteRenderer itemSpriteRenderer;
     private WaitForSeconds swingWaitSeconds = new WaitForSeconds(0.02f);
     private WaitForSeconds itemDelaySeconds;
@@ -17,12 +23,14 @@ public class EquippedItem : MonoBehaviour
     private void Awake()
     {
         itemSpriteRenderer = GetComponent<SpriteRenderer>();
+        state = State.None;
     }
-
-    public void Bind(Player player) => this.player = player;
 
     public void Equip(Item item = null)
     {
+        if (state !=State.None)
+            return;
+
         triggerFunc = null;
         UseItem = null;
         selectedItem = null;
@@ -37,7 +45,39 @@ public class EquippedItem : MonoBehaviour
         itemDelaySeconds = new WaitForSeconds(item.Delay);
     }
 
-    public void UseEquippedItem() => UseItem?.Invoke();
+    private IEnumerator Swing()
+    {
+        state = State.Swing;
 
+        gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+
+        for(int i = 0; i<6; i++)
+        {
+            transform.RotateAround(Player.Instance.transform.position, Vector2.down, 20);
+            yield return swingWaitSeconds;
+        }
+
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+
+        for (int i = 0; i < 6; i++)
+        {
+            transform.RotateAround(Player.Instance.transform.position, Vector2.up, 20);
+            yield return swingWaitSeconds;
+        }
+
+        state = State.Use;
+        yield return itemDelaySeconds;
+        state = State.None;
+
+        yield return null;
+    }
+
+    public void UseEquippedItem()
+    {
+        if (state != State.None)
+            return;
+        UseItem?.Invoke();
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision) => triggerFunc?.Invoke(collision);
 }

@@ -18,6 +18,8 @@ public class DroppedItem : MonoBehaviour
         this.item = item;
         this.count = count;
         spriteRenderer.sprite = item.sprite;
+        gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
+        gameObject.tag = "DroppedItem";
         gameObject.transform.position = position;
     }
 }

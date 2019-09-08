@@ -16,7 +16,6 @@ public class AltarUI : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(Item.itemDictionary.Count);
         System.Action SetTradeButtonAction = null;
         List<RecipeUI> recipeUIList = new List<RecipeUI>();
         recipes = new List<Recipe>() { Recipe.recipeDictionary["Apple"], Recipe.recipeDictionary["Steak"] };
