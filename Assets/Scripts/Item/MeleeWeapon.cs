@@ -9,6 +9,7 @@ public class MeleeWeapon : Item
 
     [SerializeField]
     private int damage;
+    private EquippedItem equippedItem;
 
     public MeleeWeapon(string name, int damage, float delay) : base(name)
     {
@@ -29,7 +30,7 @@ public class MeleeWeapon : Item
     public void Attack(Collider2D collider2D)
     {
         if (collider2D.CompareTag("Monster"))
-        {
+        { 
             collider2D.gameObject.GetComponent<Monster>().Hurt(damage);
         }
     }
