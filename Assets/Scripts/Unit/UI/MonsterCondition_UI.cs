@@ -7,8 +7,8 @@ public class MonsterCondition_UI : MonoBehaviour
 {
     public static MonsterCondition_UI Instance { get; private set; }
 
-    private Image healthBar;
-    private Image monsterImage;
+    public Image healthBar;
+    public Image monsterImage;
 
     private bool settingActive = false;
     // Start is called before the first frame update
@@ -21,8 +21,6 @@ public class MonsterCondition_UI : MonoBehaviour
             return;
         }
 
-        healthBar = GetComponentsInChildren<Image>()[1];
-        monsterImage = GetComponentInChildren<Image>().gameObject.GetComponentInChildren<Image>();
         gameObject.SetActive(false);
     }
 
@@ -34,6 +32,7 @@ public class MonsterCondition_UI : MonoBehaviour
             gameObject.SetActive(true);
 
         monsterImage.sprite = DataContainer.monsterAtlas.GetSprite($"{name}_1");
+        monsterImage.preserveAspect = true;
         healthBar.fillAmount = healthPercent;
 
         if(healthPercent<=0f)
