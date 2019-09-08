@@ -30,7 +30,7 @@ public class MeleeWeapon : Item
     {
         if (collider2D.CompareTag("Monster"))
         {
-            // collider2D.gameObject.GetComponent<Monster>().GetAttack(damage);
+            collider2D.gameObject.GetComponent<Monster>().Hurt(damage);
         }
     }
 }
