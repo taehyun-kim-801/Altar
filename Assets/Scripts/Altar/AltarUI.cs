@@ -16,8 +16,23 @@ public class AltarUI : MonoBehaviour
 
     private void Start()
     {
-        recipes = new List<Recipe>() { RecipeManager.Instance.GetRecipe("Apple"), RecipeManager.Instance.GetRecipe("Steak") };
-        recipes.ForEach((recipe) => { Instantiate(recipeUIPrefab, recipeLayout.transform).SendMessage("SetRecipeUI", recipe); });
+        Debug.Log(Item.itemDictionary.Count);
+        System.Action SetTradeButtonAction = null;
+        List<RecipeUI> recipeUIList = new List<RecipeUI>();
+        recipes = new List<Recipe>() { Recipe.recipeDictionary["Apple"], Recipe.recipeDictionary["Steak"] };
+
+        recipes.ForEach((recipe) =>
+        {
+            GameObject recipeUI = Instantiate(recipeUIPrefab, recipeLayout.transform);
+            recipeUI.SendMessage("SetRecipeUI", recipe);
+            SetTradeButtonAction += recipeUI.GetComponent<RecipeUI>().SetTradeButton;
+            recipeUIList.Add(recipeUI.GetComponent<RecipeUI>());
+        });
+
+        recipeUIList.ForEach((recipeUI) =>
+        {
+            recipeUI.setTradeButtonAction += SetTradeButtonAction;
+        });
 
         exitButton.onClick.AddListener(() => CloseAltarUI());
     }

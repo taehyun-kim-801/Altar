@@ -545,7 +545,7 @@ MonoBehaviour:
   - {fileID: 3931707946187819385}
   resultImage: {fileID: 2347282536959447251}
   pinButton: {fileID: 6799337245202309064}
-  tradeButton: {fileID: 0}
+  tradeButton: {fileID: 1122089988961291226}
 --- !u!1 &4021473058287182132
 GameObject:
   m_ObjectHideFlags: 0
