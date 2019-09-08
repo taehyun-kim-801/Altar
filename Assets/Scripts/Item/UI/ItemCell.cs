@@ -6,9 +6,13 @@ using UnityEngine.EventSystems;
 
 public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public System.Action clickFunc;
+
     private Image itemImage;
     private Text itemNumberText;
     private string itemName;
+    private float clickTime = 0.5f;
+    private bool isOpenInfoUI = false;
 
     public void SetItemCell(string itemName, int itemNumber)
     {
@@ -25,11 +29,25 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData data)
     {
-        ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], transform);
+        StartCoroutine("OpenItemInfoUI");
+        clickFunc();
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        ItemInfoUI.CloseItemInfoUI();
+        StopCoroutine("OpenItemInfoUI");
+        if(isOpenInfoUI)
+        {
+            isOpenInfoUI = false;
+            ItemInfoUI.CloseItemInfoUI();
+        }
+    }
+
+    public IEnumerator OpenItemInfoUI()
+    {
+        yield return new WaitForSeconds(clickTime);
+        ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], transform);
+        isOpenInfoUI = true;
+        yield return null;
     }
 }
