@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public System.Action clickFunc;
-
     private Image itemImage;
     private Text itemNumberText;
     private string itemName;
@@ -30,7 +28,6 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData data)
     {
         StartCoroutine("OpenItemInfoUI");
-        clickFunc();
     }
 
     public void OnPointerExit(PointerEventData data)

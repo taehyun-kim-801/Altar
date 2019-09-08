@@ -28,9 +28,9 @@ public class Item
         JsonManager.LoadJson<MeleeWeapon>().ForEach((meleeWeapon) => { itemDictionary.Add(meleeWeapon.name, meleeWeapon); });
         JsonManager.LoadJson<RangedWeapon>().ForEach((rangedWeapon) => { itemDictionary.Add(rangedWeapon.name, rangedWeapon); });
 
-        SpriteAtlas spriteAtlas = Resources.Load<SpriteAtlas>("itemAtlas");
-        
-        foreach(var item in itemDictionary.Values)
+        SpriteAtlas spriteAtlas = Resources.Load<SpriteAtlas>("Item");
+
+        foreach (var item in itemDictionary.Values)
         {
             item.sprite = spriteAtlas.GetSprite(item.name);
         }
@@ -58,13 +58,15 @@ public class Item
 
         meleeWeaponList.Add(new MeleeWeapon("GiantSword", 3, 0.4f));
         meleeWeaponList.Add(new MeleeWeapon("Knife", 1, 0.2f));
-        meleeWeaponList.Add(new MeleeWeapon("BattleAxe", 5, 0.6f));
+        meleeWeaponList.Add(new MeleeWeapon("DoubleAxe", 5, 0.6f));
         meleeWeaponList.Add(new MeleeWeapon("Hatchet", 5, 0.6f));
 
         JsonManager.SaveJson(meleeWeaponList);
 
         List<RangedWeapon> rangedWeaponList = new List<RangedWeapon>();
 
+        rangedWeaponList.Add(new RangedWeapon("MiniSpear", "MiniSpear", new List<Vector2>() { new Vector2(1, 0) }, 0.3f));
+        rangedWeaponList.Add(new RangedWeapon("LargeSpear", "LargeSpear", new List<Vector2>() { new Vector2(1, 0) }, 0.6f));
         rangedWeaponList.Add(new RangedWeapon("Staff", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1) }, 0.5f));
         rangedWeaponList.Add(new RangedWeapon("Wand", "FireBolt", new List<Vector2>() { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1) }, 0.7f));
 
