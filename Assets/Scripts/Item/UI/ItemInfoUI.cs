@@ -35,7 +35,6 @@ public class ItemInfoUI : MonoBehaviour
 
     public void OpenItemInfo(Item item, Transform parentTransform)
     {
-        transform.SetAsLastSibling();
         gameObject.transform.position = parentTransform.position;
 
         nameText.text = $"이름 : {item.name}";
