@@ -12658,6 +12658,7 @@ MonoBehaviour:
   canvas: {fileID: 625090504}
   player: {fileID: 1272440132}
   eventSystem: {fileID: 510158370}
+  mute: 0
 --- !u!114 &1365945965
 MonoBehaviour:
   m_ObjectHideFlags: 0

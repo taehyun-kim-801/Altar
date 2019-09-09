@@ -76,7 +76,6 @@ public class Item
     public static void DropItem(string itemName, int count, Vector3 position)
     {
         GameObject gameObject = new GameObject("DroppedItem");
-        gameObject = Object.Instantiate(gameObject);
         gameObject.AddComponent<DroppedItem>();
         gameObject.GetComponent<DroppedItem>().DropItem(itemDictionary[itemName], count, position);
         gameObject.tag = "DroppedItem";

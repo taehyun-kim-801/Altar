@@ -57,12 +57,9 @@ public class EquippedItem : MonoBehaviour
 
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
 
-//        Vector3 direction = Player.Instance.faceDirection.x >= 0 ? Vector3.back : Vector3.forward;
-        Vector3 direction = Vector3.back;
-
         for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, direction, 20);
+            transform.RotateAround(Player.Instance.transform.position, Vector3.back, 20);
             yield return swingWaitSeconds;
         }
 
@@ -70,7 +67,7 @@ public class EquippedItem : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, -direction, 20);
+            transform.RotateAround(Player.Instance.transform.position, Vector3.forward, 20);
             yield return swingWaitSeconds;
         }
 

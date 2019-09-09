@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class OptionUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject muteButton;
+    [SerializeField]
+    private GameObject unMuteButton;
+
+    private void Start()
     {
-        
+        if (GameManager.Instance.Mute)
+            Mute();
+        else
+            UnMute();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Mute()
     {
-        
+        muteButton.SetActive(false);
+        unMuteButton.SetActive(true);
+        SoundManager.Instance.SetVolumeSFX(0);
     }
 
-    void Mute()
+    public void UnMute()
     {
+        unMuteButton.SetActive(false);
+        muteButton.SetActive(true);
+        SoundManager.Instance.SetVolumeSFX(1);
+    }
 
+    public void CloseOptionUI()
+    {
+        gameObject.SetActive(false);
     }
 }
