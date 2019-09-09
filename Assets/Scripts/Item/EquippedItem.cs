@@ -43,6 +43,11 @@ public class EquippedItem : MonoBehaviour
         item.Equip(this);
         itemSpriteRenderer.sprite = item.sprite;
         itemDelaySeconds = new WaitForSeconds(item.Delay);
+
+
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+            DestroyImmediate(gameObject.GetComponent<PolygonCollider2D>());
+        gameObject.gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
     }
 
     private IEnumerator Swing()
