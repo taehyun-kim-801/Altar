@@ -17,7 +17,7 @@ public class EquippedItem : MonoBehaviour
     public State state { get; private set; }
 
     private SpriteRenderer itemSpriteRenderer;
-    private WaitForSeconds swingWaitSeconds = new WaitForSeconds(0.02f);
+    private WaitForSeconds swingWaitSeconds = new WaitForSeconds(0.01f);
     private WaitForSeconds itemDelaySeconds;
 
     private void Awake()
@@ -57,9 +57,11 @@ public class EquippedItem : MonoBehaviour
 
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
 
+        Vector3 direction = Player.Instance.transform.localScale.x > 0 ? Vector3.back : Vector3.forward;
+
         for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, Vector3.back, 20);
+            transform.RotateAround(Player.Instance.transform.position, direction, 20);
             yield return swingWaitSeconds;
         }
 
@@ -67,7 +69,7 @@ public class EquippedItem : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, Vector3.forward, 20);
+            transform.RotateAround(Player.Instance.transform.position, -direction, 20);
             yield return swingWaitSeconds;
         }
 
