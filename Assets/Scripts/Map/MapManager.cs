@@ -60,6 +60,8 @@ public class MapManager : MonoBehaviour
 
                 var renderer = spawnObj.AddComponent<SpriteRenderer>();
                 renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
+                renderer.sortingOrder = 1;
+
                 spawnObj.AddComponent<BoxCollider2D>();
 
                 spawnObj.tag = "Monster";
@@ -74,7 +76,7 @@ public class MapManager : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitUntil(() => monsterCountSum <= 10);
+            yield return new WaitUntil(() => monsterCountSum < 10);
             
             float randX = Random.Range(-10.0f, 10.0f);
             float randY = Random.Range(-10.0f, 10.0f);
