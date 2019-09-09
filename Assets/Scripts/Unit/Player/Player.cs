@@ -13,7 +13,7 @@ public partial class Player : Unit
 
     public Text interactionText;
 
-    public Transform hand;
+    public Transform equippedItemTransform;
     private float handDistance;
 
     public GameObject inventoryUI;
@@ -40,13 +40,13 @@ public partial class Player : Unit
 
         invenQuantity = new int[5];
 
-        handDistance = Vector3.Distance(hand.transform.position, new Vector3(0, -0.05f));
+        handDistance = Vector3.Distance(equippedItemTransform.transform.position, new Vector3(0, -0.05f));
 
         blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
 
         pinnedRecipes = new List<string>();
 
-        equippedItem = hand.GetComponent<EquippedItem>();
+        equippedItem = equippedItemTransform.GetComponent<EquippedItem>();
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
@@ -92,15 +92,6 @@ public partial class Player : Unit
             else
             {
                 SetEquippedItemTransform(faceDirection);
-
-                if (interactionObj.CompareTag("Altar"))
-                {
-                    interactionText.text = "제단";
-                }
-                else if (interactionObj.CompareTag("Portal"))
-                {
-                    interactionText.text = "이동";
-                }
             }
         }
         else
@@ -147,5 +138,26 @@ public partial class Player : Unit
         }
 
         gameManager.GetComponent<MapManager>().CheckPositionInTilemap(gameObject);
+
+        if(interactionObj.CompareTag("Altar"))
+        {
+            interactionText.text = "제단";
+        }
+        else if(interactionObj.CompareTag("Portal"))
+        {
+            interactionText.text = "이동";
+        }
+        else if(Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
+        {
+            interactionText.text = "먹기";
+        }
+        else if(Item.itemDictionary[inventory[invenIdx]] is MeleeWeapon || Item.itemDictionary[inventory[invenIdx]] is RangedWeapon)
+        {
+            interactionText.text = "공격";
+        }
+        else
+        {
+            interactionText.text = "상호작용";
+        }
     }
 }

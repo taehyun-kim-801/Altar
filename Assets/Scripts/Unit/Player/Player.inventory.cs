@@ -57,18 +57,6 @@ public partial class Player
         {
             Debug.Log("SelectItem");
             equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
-
-            if (interactionObj == null || !interactionObj.CompareTag("Altar"))
-            {
-                if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
-                {
-                    interactionText.text = "먹기";
-                }
-                else if (Item.itemDictionary[inventory[invenIdx]] is MeleeWeapon || Item.itemDictionary[inventory[invenIdx]] is RangedWeapon)
-                {
-                    interactionText.text = "공격";
-                }
-            }
         }
         else equippedItem.Equip();
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class Player
 {
     private float hunger;
-    public float Hunger { get => hunger; set { hunger = value; gameManager.SendMessage("HungerUI"); } }
+    public float Hunger { get => hunger; set { hunger = Mathf.Clamp(value, 0f, 100f); gameManager.SendMessage("HungerUI"); } }
 
     private bool canMove;
     private bool isAttacked;
@@ -57,13 +57,12 @@ public partial class Player
     {
         if(direction!=null)
         {
-            hand.position = transform.position - new Vector3(0, -0.05f) + direction.normalized * handDistance;
-            if (direction.x >= 0) hand.transform.localScale = new Vector3(Mathf.Abs(hand.transform.localScale.x), Mathf.Abs(hand.transform.localScale.y));
+            equippedItemTransform.position = transform.position - new Vector3(0, -0.05f) + direction.normalized * handDistance;
+            if (direction.x >= 0) equippedItemTransform.transform.localScale = new Vector3(Mathf.Abs(equippedItemTransform.transform.localScale.x), Mathf.Abs(equippedItemTransform.transform.localScale.y));
             else
-                hand.transform.localScale = new Vector3(-Mathf.Abs(hand.transform.localScale.x), -Mathf.Abs(hand.transform.localScale.y));
+                equippedItemTransform.transform.localScale = new Vector3(-Mathf.Abs(equippedItemTransform.transform.localScale.x), -Mathf.Abs(equippedItemTransform.transform.localScale.y));
         }
-        hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
 
-        hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        equippedItemTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
     }
 }
