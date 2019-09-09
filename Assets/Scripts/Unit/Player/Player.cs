@@ -136,7 +136,7 @@ public partial class Player : Unit
             hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
 
             hand.GetComponent<SpriteRenderer>().flipX = faceDirection.x >= 0 ? false : true;
-            hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 45f);
+            hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg);
         }
 
         gameManager.GetComponent<MapManager>().CheckPositionInTilemap(gameObject);

@@ -28,7 +28,7 @@ public class EquippedItem : MonoBehaviour
 
     public void Equip(Item item = null)
     {
-        if (state !=State.None)
+        if (state != State.None)
             return;
 
         triggerFunc = null;
@@ -47,7 +47,8 @@ public class EquippedItem : MonoBehaviour
 
         if (gameObject.GetComponent<PolygonCollider2D>() != null)
             DestroyImmediate(gameObject.GetComponent<PolygonCollider2D>());
-        gameObject.gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
+        gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     private IEnumerator Swing()
@@ -56,9 +57,12 @@ public class EquippedItem : MonoBehaviour
 
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
 
-        for(int i = 0; i<6; i++)
+//        Vector3 direction = Player.Instance.faceDirection.x >= 0 ? Vector3.back : Vector3.forward;
+        Vector3 direction = Vector3.back;
+
+        for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, Vector2.down, 20);
+            transform.RotateAround(Player.Instance.transform.position, direction, 20);
             yield return swingWaitSeconds;
         }
 
@@ -66,7 +70,7 @@ public class EquippedItem : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            transform.RotateAround(Player.Instance.transform.position, Vector2.up, 20);
+            transform.RotateAround(Player.Instance.transform.position, -direction, 20);
             yield return swingWaitSeconds;
         }
 
@@ -74,15 +78,17 @@ public class EquippedItem : MonoBehaviour
         yield return itemDelaySeconds;
         state = State.None;
 
-        yield return null;
+        yield break;
     }
 
     public void UseEquippedItem()
     {
         if (state != State.None)
             return;
+
+        StartCoroutine("Swing");
         UseItem?.Invoke();
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision) => triggerFunc?.Invoke(collision);
 }

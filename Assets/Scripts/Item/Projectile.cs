@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
             transform.Translate(direction * speed * 0.1f);
             yield return moveSeconds;
         }
-        yield return null;
+        yield break;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

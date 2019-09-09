@@ -51,6 +51,6 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         yield return new WaitForSeconds(clickTime);
         ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], transform);
         isOpenInfoUI = true;
-        yield return null;
+        yield break;
     }
 }
