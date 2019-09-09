@@ -7,25 +7,25 @@ TextureImporter:
     second: Slime_1
   - first:
       213: 3351222111366616785
-    second: unitAtlas_1
+    second: HellFloor_2
   - first:
       213: 603707975878132821
-    second: unitAtlas_2
+    second: HellFloor_3
   - first:
       213: -188607548231591754
-    second: unitAtlas_3
+    second: HellFloor_4
   - first:
       213: 155338972290310379
-    second: unitAtlas_4
+    second: HellFloor_5
   - first:
       213: 1403734985580502171
-    second: unitAtlas_5
+    second: HellFloor_6
   - first:
       213: -192240471518974737
-    second: unitAtlas_6
+    second: HellFloor_7
   - first:
       213: 1089450629353836832
-    second: unitAtlas_7
+    second: HellFloor_8
   - first:
       213: -941525563180451744
     second: unitAtlas_8
@@ -647,6 +647,9 @@ TextureImporter:
   - first:
       213: 5878617869278115149
     second: Satan_8
+  - first:
+      213: -2588461498278639749
+    second: HellFloor_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -2397,6 +2400,174 @@ TextureImporter:
       bones: []
       spriteID: 3116ca7ff00ba784086bf3d5d87b36a2
       internalID: -6268740640830196837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9129c7ec3b41af24c8bae2eaeae78f16
+      internalID: -2588461498278639749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f339f607875b3ef4dadcc7839585c5b9
+      internalID: 3351222111366616785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6835a5de52f23264da29efa43208db0d
+      internalID: 603707975878132821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 862bff601a9a4f340b5b38718d708386
+      internalID: -188607548231591754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464d9dae33ba1e845bfe14ea6d1012a3
+      internalID: 155338972290310379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_6
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 581424ac60cd1434ab5763b4afec7b0a
+      internalID: 1403734985580502171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 400
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0ef16cb49fe2284d9b95fd44708bb36
+      internalID: -192240471518974737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HellFloor_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 400
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b379218cbaeb154a804b3860d065cd6
+      internalID: 1089450629353836832
       vertices: []
       indices: 
       edges: []

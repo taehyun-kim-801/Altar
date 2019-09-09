@@ -26,13 +26,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
         DataContainer.SetDataContainer();
     }
+
     void Start()
     {
         DontDestroyOnLoad(canvas);

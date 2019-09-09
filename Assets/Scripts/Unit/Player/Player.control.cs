@@ -19,22 +19,25 @@ public partial class Player
             }
             else if (interactionObj.CompareTag("Portal"))
             {
-                SceneManager.LoadScene(interactionObj.GetComponent<Portal>().nextScene);
+                gameManager.GetComponent<MapManager>().ChangeScene(interactionObj.GetComponent<Portal>().nextScene);
             }
             else
             {
                 if (inventory[invenIdx] != null)
                 {
-                    if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
-                        if (--invenQuantity[invenIdx] == 0)
-                        {
-                            inventory[invenIdx] = null;
-                            itemCells[invenIdx].GetComponent<Image>().color = new Color(0, 0, 0, 0);
-                            equippedItem.Equip();
-                        }
+                    if (equippedItem.state != EquippedItem.State.Swing)
+                    {
+                        if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
+                            if (--invenQuantity[invenIdx] == 0)
+                            {
+                                inventory[invenIdx] = null;
+                                itemCells[invenIdx].GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                                equippedItem.Equip();
+                            }
 
-                    equippedItem.UseEquippedItem();
-                    itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);
+                        equippedItem.UseEquippedItem();
+                        itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);
+                    }
                 }
             }
         }

@@ -151,12 +151,12 @@ RectTransform:
   m_Children:
   - {fileID: 772219839}
   m_Father: {fileID: 625090508}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 137.6, y: -74.1}
-  m_SizeDelta: {x: 250.7, y: 20}
+  m_AnchoredPosition: {x: 135.35, y: -85.00003}
+  m_SizeDelta: {x: 250.7, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &19798836
 MonoBehaviour:
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 366792022}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Tilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10705,6 +10705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492066668}
   - component: {fileID: 492066667}
+  - component: {fileID: 492066669}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -10739,6 +10740,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &492066669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492066666}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a76d790c6991fe4caa6611edbe9a7da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1272440135}
 --- !u!1 &510158370
 GameObject:
   m_ObjectHideFlags: 0
@@ -11014,6 +11028,7 @@ RectTransform:
   - {fileID: 37586087}
   - {fileID: 573169903}
   - {fileID: 428148346}
+  - {fileID: 2018266807}
   - {fileID: 19798835}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -11434,7 +11449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -11443,10 +11458,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 06de9efc65d9243418c780d565817e1a, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -12684,7 +12699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1272440135}
-  tilemap: {fileID: 366792021}
 --- !u!1 &1450595462
 GameObject:
   m_ObjectHideFlags: 0
@@ -13355,6 +13369,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956379827}
   m_CullTransparentMesh: 0
+--- !u!1 &2018266806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018266807}
+  - component: {fileID: 2018266809}
+  - component: {fileID: 2018266808}
+  m_Layer: 5
+  m_Name: Hunger Bar_Blank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2018266807
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018266806}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 625090508}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 135.35, y: -85.00003}
+  m_SizeDelta: {x: 250.7, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2018266808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018266806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: e711c8c6f4e33ec46b8c4adc004cf0ea, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2018266809
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018266806}
+  m_CullTransparentMesh: 0
 --- !u!1 &2079703779
 GameObject:
   m_ObjectHideFlags: 0
@@ -13671,7 +13760,7 @@ PrefabInstance:
     - target: {fileID: 3383994942328848177, guid: 69a05c6d9790d574b8b192685b16fe8c,
         type: 3}
       propertyPath: nextScene
-      value: DevilDungeon
+      value: Hell
       objectReference: {fileID: 0}
     - target: {fileID: 298360953365605168, guid: 69a05c6d9790d574b8b192685b16fe8c,
         type: 3}
