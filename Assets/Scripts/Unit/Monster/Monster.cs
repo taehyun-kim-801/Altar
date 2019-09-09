@@ -96,12 +96,18 @@ public class Monster : Unit
 
     protected override void Die()
     {
+        gameObject.SetActive(false);
+
         StopCoroutine(Attack());
         if(Random.Range(0f,1f)<=0.7f)
         {
             Item.DropItem(dropItem, 1, transform.position);
         }
         mapManager.DecreaseCount(name);
-        gameObject.SetActive(false);
+    }
+
+    public void MonsterReset()
+    {
+        health = maxHealth;
     }
 }

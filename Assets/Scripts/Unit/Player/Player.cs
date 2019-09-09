@@ -57,6 +57,12 @@ public partial class Player : Unit
         itemCells[0].GetComponent<Image>().color = Color.white;
 
         SelectItem(0);
+
+        inventory[1] = "Apple";
+        invenQuantity[1] = 5;
+
+        itemCells[1].SetItemCell(inventory[1], invenQuantity[1]);
+        itemCells[1].GetComponent<Image>().color = Color.white;
     }
 
     void Update()
@@ -78,13 +84,23 @@ public partial class Player : Unit
 
             transform.localScale = scale;
 
-            if (interactionObj.CompareTag("Altar"))
+            if(interactionObj.CompareTag("Monster"))
             {
-                interactionText.text = "제단";
+                Debug.Log(interactionObj);
+                SetEquippedItemTransform(interactionObj.transform.position - transform.position);
             }
-            else if(interactionObj.CompareTag("Portal"))
+            else
             {
-                interactionText.text = "이동";
+                SetEquippedItemTransform(faceDirection);
+
+                if (interactionObj.CompareTag("Altar"))
+                {
+                    interactionText.text = "제단";
+                }
+                else if (interactionObj.CompareTag("Portal"))
+                {
+                    interactionText.text = "이동";
+                }
             }
         }
         else
@@ -96,8 +112,7 @@ public partial class Player : Unit
                 scale.x = -Mathf.Abs(scale.x);
 
             transform.localScale = scale;
-
-            interactionText.text = "상호작용";
+            SetEquippedItemTransform(faceDirection);
         }
 
         interactionObj = null;
@@ -129,22 +144,6 @@ public partial class Player : Unit
                     interactionObj = collider.gameObject;
                 }
             }
-        }
-
-        if (faceDirection != Vector3.zero)
-        {
-            hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
-
-            if (faceDirection.x >= 0 && hand.transform.localScale.x < 0)
-            {
-                hand.transform.localScale = new Vector3(Mathf.Abs(hand.transform.localScale.x), hand.transform.localScale.y);
-            }
-            else if (faceDirection.x < 0 && hand.transform.localScale.x > 0)
-            {
-                hand.transform.localScale = new Vector3(-Mathf.Abs(hand.transform.localScale.x), hand.transform.localScale.y);
-            }
-
-            hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 45f);
         }
 
         gameManager.GetComponent<MapManager>().CheckPositionInTilemap(gameObject);

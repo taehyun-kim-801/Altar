@@ -7,18 +7,14 @@ public class Inventory_UI : MonoBehaviour
 {
     public GameObject player;
     public GameObject inventory;
-    private SpriteAtlas itemAtlas;
     private float inventoryWidth;
 
     public GameObject selectedImage;
     private bool selectedCreate;
     private GameObject selected;
 
-    private Image[] images;
-
     public void Start()
     {
-        itemAtlas = Resources.Load<SpriteAtlas>("Item.spriteatlas");
         inventoryWidth = inventory.GetComponent<RectTransform>().rect.width;
 
         float canvas = inventory.transform.parent.GetComponent<RectTransform>().localScale.x;
@@ -26,7 +22,7 @@ public class Inventory_UI : MonoBehaviour
 
         selectedCreate = false;
 
-        images = inventory.GetComponentsInChildren<Image>();
+        SetSelectedSprite(0);
     }
 
     public void InventoryUI(BaseEventData _data)
@@ -44,16 +40,21 @@ public class Inventory_UI : MonoBehaviour
 
         Debug.Log(index);
 
+        SetSelectedSprite(index);
+
+        player.SendMessage("SelectItem", index);
+    }
+
+    public void SetSelectedSprite(int index)
+    {
         if(!selectedCreate)
         {
-            selected = Instantiate(selectedImage, new Vector3(inventoryWidth / 5 * index + inventory.transform.position.x + inventoryWidth / 10, inventoryWidth / 10), new Quaternion(0, 0, 0, 0), inventory.transform.parent); ;
+            selected = Instantiate(selectedImage, new Vector3(inventoryWidth / 5 * index + inventory.transform.position.x + inventoryWidth / 10, inventoryWidth / 10), new Quaternion(0, 0, 0, 0), inventory.transform.parent);
             selectedCreate = true;
         }
         else
         {
             selected.transform.position = new Vector3(inventoryWidth / 5 * index + inventory.transform.position.x + inventoryWidth / 10, inventoryWidth / 10);
         }
-
-        player.SendMessage("SelectItem", index);
     }
 }

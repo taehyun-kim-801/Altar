@@ -52,10 +52,11 @@ public partial class Player
 
     public void SelectItem(int index)
     {
+        invenIdx = index;
         if (inventory[index] != null)
         {
-            if (inventory[invenIdx] == null)    equippedItem.Equip();
-            else                                equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
+            Debug.Log("SelectItem");
+            equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
 
             if (interactionObj == null || !interactionObj.CompareTag("Altar"))
             {
@@ -69,6 +70,7 @@ public partial class Player
                 }
             }
         }
+        else equippedItem.Equip();
     }
 
 

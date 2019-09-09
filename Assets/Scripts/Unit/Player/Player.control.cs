@@ -27,7 +27,11 @@ public partial class Player
                 {
                     if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                         if (--invenQuantity[invenIdx] == 0)
+                        {
                             inventory[invenIdx] = null;
+                            itemCells[invenIdx].GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                            equippedItem.Equip();
+                        }
 
                     equippedItem.UseEquippedItem();
                     itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);

@@ -52,4 +52,18 @@ public partial class Player
 
         GetComponent<SpriteRenderer>().color = blinkColor[1];
     }
+
+    public void SetEquippedItemTransform(Vector3 direction)
+    {
+        if(direction!=null)
+        {
+            hand.position = transform.position - new Vector3(0, -0.05f) + direction.normalized * handDistance;
+            if (direction.x >= 0) hand.transform.localScale = new Vector3(Mathf.Abs(hand.transform.localScale.x), Mathf.Abs(hand.transform.localScale.y));
+            else
+                hand.transform.localScale = new Vector3(-Mathf.Abs(hand.transform.localScale.x), -Mathf.Abs(hand.transform.localScale.y));
+        }
+        hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
+
+        hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+    }
 }
