@@ -53,12 +53,14 @@ public class MapManager : MonoBehaviour
                 monsterInfo.attackWaitSecond = 5f;
 
                 monsterInfo.SetMaxHealth();
+                monsterInfo.mapManager = this;
 
                 var monsterRB = spawnObj.AddComponent<Rigidbody2D>();
                 monsterRB.constraints = RigidbodyConstraints2D.FreezeRotation;
                 monsterRB.gravityScale = 0f;
 
                 var renderer = spawnObj.AddComponent<SpriteRenderer>();
+                Debug.Log(monster);
                 renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
                 renderer.sortingOrder = 1;
 

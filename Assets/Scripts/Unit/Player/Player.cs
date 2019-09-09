@@ -76,22 +76,27 @@ public partial class Player : Unit
 
         if (interactionObj != null)
         {
-            Vector3 scale = transform.localScale;
-            if (interactionObj.transform.position.x > transform.position.x)
-                scale.x = Mathf.Abs(scale.x);
-            else
-                scale.x = -Mathf.Abs(scale.x);
-
-            transform.localScale = scale;
-
-            if(interactionObj.CompareTag("Monster"))
+            if (Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) >= 0.25f)
             {
-                Debug.Log(interactionObj);
-                SetEquippedItemTransform(interactionObj.transform.position - transform.position);
-            }
-            else
-            {
-                SetEquippedItemTransform(faceDirection);
+                Vector3 scale = transform.localScale;
+                if (interactionObj.transform.position.x > transform.position.x)
+                    scale.x = Mathf.Abs(scale.x);
+                else
+                    scale.x = -Mathf.Abs(scale.x);
+
+                transform.localScale = scale;
+
+                if (equippedItem.state != EquippedItem.State.Swing)
+                {
+                    if (interactionObj.CompareTag("Monster"))
+                    {
+                        SetEquippedItemTransform(interactionObj.transform.position - transform.position);
+                    }
+                    else
+                    {
+                        SetEquippedItemTransform(faceDirection);
+                    }
+                }
             }
         }
         else
@@ -139,11 +144,11 @@ public partial class Player : Unit
 
         gameManager.GetComponent<MapManager>().CheckPositionInTilemap(gameObject);
 
-        if(interactionObj.CompareTag("Altar"))
+        if(interactionObj!=null && interactionObj.CompareTag("Altar"))
         {
             interactionText.text = "제단";
         }
-        else if(interactionObj.CompareTag("Portal"))
+        else if(interactionObj != null && interactionObj.CompareTag("Portal"))
         {
             interactionText.text = "이동";
         }

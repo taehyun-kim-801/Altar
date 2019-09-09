@@ -33,18 +33,21 @@ public class Monster : Unit
             }
             else if (foundPlayer)
             {
-                faceDirection = (Player.Instance.transform.position - transform.position).normalized;
-                if (Player.Instance.transform.position.x < transform.position.x)
+                if (Vector3.SqrMagnitude(transform.position - Player.Instance.transform.position) >= 0.25f)
                 {
-                    Vector3 scale = transform.localScale;
-                    scale.x = -Mathf.Abs(scale.x);
-                    transform.localScale = scale;
-                }
-                else
-                {
-                    Vector3 scale = transform.localScale;
-                    scale.x = Mathf.Abs(scale.x);
-                    transform.localScale = scale;
+                    faceDirection = (Player.Instance.transform.position - transform.position).normalized;
+                    if (Player.Instance.transform.position.x < transform.position.x)
+                    {
+                        Vector3 scale = transform.localScale;
+                        scale.x = -Mathf.Abs(scale.x);
+                        transform.localScale = scale;
+                    }
+                    else
+                    {
+                        Vector3 scale = transform.localScale;
+                        scale.x = Mathf.Abs(scale.x);
+                        transform.localScale = scale;
+                    }
                 }
             }
 
