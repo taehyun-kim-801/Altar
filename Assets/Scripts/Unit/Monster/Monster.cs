@@ -101,7 +101,7 @@ public class Monster : Unit
         {
             Item.DropItem(dropItem, 1, transform.position);
         }
-        gameObject.SetActive(false);
         mapManager.DecreaseCount(name);
+        gameObject.SetActive(false);
     }
 }

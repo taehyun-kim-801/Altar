@@ -64,9 +64,6 @@ public partial class Player
                 Die();
             }
 
-            canMove = false;
-            StartCoroutine(Stiff());
-
             isAttacked = true;
             StartCoroutine(Blink());
             StartCoroutine(Invincible());

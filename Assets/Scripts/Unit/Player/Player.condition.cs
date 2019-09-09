@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class Player
 {
     private float hunger;
-    public float Hunger => hunger;
+    public float Hunger { get => hunger; set { hunger = value; gameManager.SendMessage("HungerUI"); } }
 
     private bool canMove;
     private bool isAttacked;
@@ -30,17 +30,12 @@ public partial class Player
         Destroy(gameObject);
     }
 
-    public IEnumerator Stiff()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        canMove = true;
-    }
-
     public IEnumerator Invincible()
     {
+        GetComponent<BoxCollider2D>().isTrigger = true;
         yield return new WaitForSeconds(invincibleTime);
 
+        GetComponent<BoxCollider2D>().isTrigger = false;
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         isAttacked = false;
     }

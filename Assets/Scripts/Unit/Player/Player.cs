@@ -42,14 +42,11 @@ public partial class Player : Unit
 
         handDistance = Vector3.Distance(hand.transform.position, new Vector3(0, -0.05f));
 
-        canMove = true;
-
         blinkColor = new Color[2] { new Color(0, 0, 0, 0), GetComponent<SpriteRenderer>().color };
 
         pinnedRecipes = new List<string>();
 
         equippedItem = hand.GetComponent<EquippedItem>();
-        equippedItem.Bind(Instance);
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
@@ -64,13 +61,12 @@ public partial class Player : Unit
 
     void Update()
     {
-        if (hunger > 0f)
-            hunger -= Time.deltaTime / 6;
+        if (Hunger > 0f)
+            Hunger -= Time.deltaTime / 6;
         else
             StartCoroutine(DecreaseHealth());
 
-        if(canMove)
-            Move(faceDirection);
+        Move(faceDirection);
 
         if (interactionObj != null)
         {
@@ -142,5 +138,7 @@ public partial class Player : Unit
             hand.GetComponent<SpriteRenderer>().flipX = faceDirection.x >= 0 ? false : true;
             hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 45f);
         }
+
+        gameManager.GetComponent<MapManager>().CheckPositionInTilemap(gameObject);
     }
 }

@@ -95,4 +95,9 @@ public class MapManager : MonoBehaviour
         monsterCountSum--;
         monstersCount[MonsterManager.monstersByMap[SceneManager.GetActiveScene().name].FindIndex(temp => temp == name)]--;
     }
+
+    public void CheckPositionInTilemap(GameObject unit)
+    {
+        unit.transform.position = new Vector3(Mathf.Clamp(unit.transform.position.x, minTilemap.x, maxTilemap.x), Mathf.Clamp(unit.transform.position.y, minTilemap.y, maxTilemap.y));
+    }
 }
