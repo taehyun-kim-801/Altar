@@ -135,7 +135,15 @@ public partial class Player : Unit
         {
             hand.position = transform.position - new Vector3(0, -0.05f) + faceDirection * handDistance;
 
-            hand.GetComponent<SpriteRenderer>().flipX = faceDirection.x >= 0 ? false : true;
+            if (faceDirection.x >= 0 && hand.transform.localScale.x < 0)
+            {
+                hand.transform.localScale = new Vector3(Mathf.Abs(hand.transform.localScale.x), hand.transform.localScale.y);
+            }
+            else if (faceDirection.x < 0 && hand.transform.localScale.x > 0)
+            {
+                hand.transform.localScale = new Vector3(-Mathf.Abs(hand.transform.localScale.x), hand.transform.localScale.y);
+            }
+
             hand.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 45f);
         }
 
