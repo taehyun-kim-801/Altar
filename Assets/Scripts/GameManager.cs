@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject eventSystem;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         DataContainer.SetDataContainer();
-
+    }
+    void Start()
+    {
         DontDestroyOnLoad(canvas);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(eventSystem);
