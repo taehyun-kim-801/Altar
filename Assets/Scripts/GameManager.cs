@@ -5,10 +5,29 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+    public bool Mute => mute;
+
     public GameObject canvas;
     public GameObject player;
     public GameObject eventSystem;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private bool mute;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         DataContainer.SetDataContainer();

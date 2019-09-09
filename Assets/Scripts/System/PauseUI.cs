@@ -5,32 +5,28 @@ using UnityEngine;
 public class PauseUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject OptionUI;
+    private GameObject optionUI;
     [SerializeField]
-    private GameObject GuideBookUI;
+    private GameObject guideBookUI;
+
+    private void Awake()
+    {
+        Time.timeScale = 0;
+    }
 
     public void OpenOptionUI()
     {
-        OptionUI.SetActive(true);
+        optionUI.SetActive(true);
     }
 
     public void OpenGuideBookUI()
     {
-        GuideBookUI.SetActive(true);
+        guideBookUI.SetActive(true);
     }
 
     public void ClosePauseUI()
     {
-        gameObject.SetActive(false);
-    }
-
-    public void CloseGuideBookUI()
-    {
-        GuideBookUI.SetActive(false);
-    }
-
-    public void CloseOptionUI()
-    {
-        OptionUI.SetActive(false);
+        Time.timeScale = 1;
+        Destroy(gameObject);
     }
 }

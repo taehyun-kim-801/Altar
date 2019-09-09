@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public SoundManager Instance { get; private set; }
+    public static SoundManager Instance { get; private set; }
 
     public AudioClip[] audioClip;
     public Dictionary<string, AudioClip> audioClipsDic;
@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
         {
             audioClipsDic.Add(a.name, a);
         }
+        SetVolumeSFX(GameManager.Instance.Mute ? 0 : 1);
     }
 
     public void PlaySound(string a_name, float a_volume = 1f)
