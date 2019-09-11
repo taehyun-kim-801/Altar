@@ -50,7 +50,7 @@ public partial class Player : Unit
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
-        inventory[0] = "Knife";
+        inventory[0] = "Staff";
         invenQuantity[0] = 1;
 
         itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);

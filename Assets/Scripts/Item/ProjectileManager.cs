@@ -7,10 +7,6 @@ public class ProjectileManager : MonoBehaviour
 {
     public static ProjectileManager Instance { get; private set; }
 
-    [SerializeField]
-    GameObject projectileObject;
-    [SerializeField]
-    private SpriteAtlas projectileSpriteAtlas;
     private List<GameObject> projectileObjectList;
     private Dictionary<string, ProjectileInfo> projectileDictionary;
     private int projectileNumber = 20;
@@ -27,7 +23,7 @@ public class ProjectileManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        SaveProjectileJson();
+        LoadProjectileJson();
     }
 
     private void Start()
@@ -35,7 +31,11 @@ public class ProjectileManager : MonoBehaviour
         projectileObjectList = new List<GameObject>();
         for (int i = 0; i < projectileNumber; i++)
         {
-            projectileObjectList.Add(Instantiate(projectileObject));
+            projectileObjectList.Add(new GameObject("Projectile"));
+            projectileObjectList[i].transform.SetParent(gameObject.transform);
+            projectileObjectList[i].AddComponent<Projectile>();
+            projectileObjectList[i].AddComponent<SpriteRenderer>();
+            projectileObjectList[i].transform.localScale += new Vector3(5, 5, 1);
             projectileObjectList[i].SetActive(false);
         }
     }
@@ -44,16 +44,19 @@ public class ProjectileManager : MonoBehaviour
     {
         projectileObjectList[activatedProjectileNumber].SetActive(true);
         ProjectileInfo projectileInfo = projectileDictionary[projectileName];
-        projectileObjectList[activatedProjectileNumber].GetComponent<Projectile>().Set(activatedProjectileNumber++, projectileInfo.speed, projectileInfo.damage, projectileInfo.distance,
-            startPoint, direction, projectileSpriteAtlas.GetSprite(projectileName));
+        projectileObjectList[activatedProjectileNumber].GetComponent<Projectile>().Set(activatedProjectileNumber, projectileInfo.speed,
+            projectileInfo.damage, projectileInfo.distance, startPoint, direction, DataContainer.projectileAtlas.GetSprite(projectileName));
         activatedProjectileNumber++;
     }
 
     public void DeactivateProjectile(int index)
     {
         activatedProjectileNumber--;
+        if (index == activatedProjectileNumber)
+            return;
         GameObject projectile = projectileObjectList[index];
         projectileObjectList[index] = projectileObjectList[activatedProjectileNumber];
+        projectileObjectList[index].GetComponent<Projectile>().index = index;
         projectileObjectList[activatedProjectileNumber] = projectile;
     }
 
