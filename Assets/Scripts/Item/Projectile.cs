@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
         if (gameObject.GetComponent<PolygonCollider2D>() != null)
             DestroyImmediate(gameObject.GetComponent<PolygonCollider2D>());
         gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 45f);
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 30f + Player.Instance.EquippedItem.gameObject.transform.rotation.eulerAngles.z);
 
         StartCoroutine("Move");
     }
