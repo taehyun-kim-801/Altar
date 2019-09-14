@@ -40,12 +40,12 @@ public class ProjectileManager : MonoBehaviour
         }
     }
 
-    public void ActivateProjectile(string projectileName, Vector3 startPoint, Vector3 direction)
+    public void ActivateProjectile(string projectileName, Transform parentTransform, Vector3 direction)
     {
         projectileObjectList[activatedProjectileNumber].SetActive(true);
         ProjectileInfo projectileInfo = projectileDictionary[projectileName];
         projectileObjectList[activatedProjectileNumber].GetComponent<Projectile>().Set(activatedProjectileNumber, projectileInfo.speed,
-            projectileInfo.damage, projectileInfo.distance, startPoint, direction, DataContainer.projectileAtlas.GetSprite(projectileName));
+            projectileInfo.damage, projectileInfo.distance, parentTransform, direction, DataContainer.projectileAtlas.GetSprite(projectileName));
         activatedProjectileNumber++;
     }
 

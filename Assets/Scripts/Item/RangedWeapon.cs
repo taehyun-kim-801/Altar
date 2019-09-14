@@ -27,5 +27,7 @@ public class RangedWeapon : Item
         equippedItemTransform = equipedItem.gameObject.transform;
     }
 
-    public void Attack() => projectileDirection.ForEach((direction) => { ProjectileManager.Instance.ActivateProjectile(projectileName, equippedItemTransform.position, direction); });
+    public void Attack() => projectileDirection.ForEach((direction) => { 
+        ProjectileManager.Instance.ActivateProjectile(projectileName, equippedItemTransform, direction);
+    });
 }
