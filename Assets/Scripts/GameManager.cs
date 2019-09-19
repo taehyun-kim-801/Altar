@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public bool Mute => mute;
 
+    public GameObject pauseUI;
     public GameObject canvas;
     public GameObject player;
     public GameObject eventSystem;
@@ -44,5 +45,10 @@ public class GameManager : MonoBehaviour
         playerInfo.Add(new PlayerInfo(Player.Instance));
 
         JsonManager.SaveJson<PlayerInfo>(playerInfo);
+    }
+
+    public void GamePause()
+    {
+        Instantiate(pauseUI, FindObjectOfType<Canvas>().transform);
     }
 }

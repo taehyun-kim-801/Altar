@@ -28,11 +28,9 @@ public class Item
         JsonManager.LoadJson<MeleeWeapon>().ForEach((meleeWeapon) => { itemDictionary.Add(meleeWeapon.name, meleeWeapon); });
         JsonManager.LoadJson<RangedWeapon>().ForEach((rangedWeapon) => { itemDictionary.Add(rangedWeapon.name, rangedWeapon); });
 
-        SpriteAtlas spriteAtlas = Resources.Load<SpriteAtlas>("Item");
-
         foreach (var item in itemDictionary.Values)
         {
-            item.sprite = spriteAtlas.GetSprite(item.name);
+            item.sprite = DataContainer.itemAtlas.GetSprite(item.name);
         }
     }
 
