@@ -39,11 +39,13 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    public void ChangeScene(string nextScene)
+    public IEnumerator ChangeScene(string nextScene)
     {
         StopCoroutine(Spawn());
 
-        SceneManager.LoadScene(nextScene);
+        AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
+        while (!async.isDone) yield return null;
+
         MonsterCondition_UI.Instance.gameObject.SetActive(false);
 
         sceneName = SceneManager.GetActiveScene().name;

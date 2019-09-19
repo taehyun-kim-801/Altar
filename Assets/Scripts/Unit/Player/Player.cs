@@ -26,7 +26,7 @@ public partial class Player : Unit
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 

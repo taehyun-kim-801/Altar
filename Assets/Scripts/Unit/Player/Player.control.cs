@@ -19,7 +19,7 @@ public partial class Player
             }
             else if (interactionObj.CompareTag("Portal"))
             {
-                gameManager.GetComponent<MapManager>().ChangeScene(interactionObj.GetComponent<Portal>().nextScene);
+                StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene(interactionObj.GetComponent<Portal>().nextScene));
             }
             else
             {
