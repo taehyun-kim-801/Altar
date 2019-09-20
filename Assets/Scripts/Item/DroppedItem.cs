@@ -10,7 +10,7 @@ public class DroppedItem : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
     }
 
     public void DropItem(Item item, int count, Vector3 position)

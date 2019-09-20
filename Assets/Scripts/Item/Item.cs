@@ -29,9 +29,7 @@ public class Item
         JsonManager.LoadJson<RangedWeapon>().ForEach((rangedWeapon) => { itemDictionary.Add(rangedWeapon.name, rangedWeapon); });
 
         foreach (var item in itemDictionary.Values)
-        {
             item.sprite = DataContainer.itemAtlas.GetSprite(item.name);
-        }
     }
 
     public static void SaveItemJson()
