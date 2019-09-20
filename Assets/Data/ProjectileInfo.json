@@ -3,7 +3,7 @@
     {
       "name": "FireBall",
       "speed": 4.0,
-      "damage": 3.0,
+      "damage": 2.0,
       "distance": 10.0
     },
     {

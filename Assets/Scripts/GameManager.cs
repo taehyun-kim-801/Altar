@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
         }
 
         DataContainer.SetDataContainer();
+
+        LoadSetting();
     }
 
     void Start()
@@ -39,12 +41,35 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void LoadSetting()
+    {
+        if(File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
+        {
+            PlayerInfo info = JsonManager.LoadJson<PlayerInfo>()[0];
+            StartCoroutine(GetComponent<MapManager>().ChangeScene(info.activeScene));
+            Player.Instance.transform.position = info.position;
+            Player.Instance.SetInventory(info.inventory);
+            Player.Instance.SetInvenQuantity(info.invenQuantity);
+            foreach(var recipe in info.pinnedRecipe)
+            {
+                Player.Instance.AddRecipe(recipe);
+            }
+            Player.Instance.Health = info.health;
+            Player.Instance.Hunger = info.hunger;
+        }
+        else
+        {
+            StartCoroutine(GetComponent<MapManager>().ChangeScene("Lobby"));
+            Player.Instance.transform.position = Vector3.zero;
+        }
+    }
+
     public void GameExit()
     {
         List<PlayerInfo> playerInfo = new List<PlayerInfo>();
         playerInfo.Add(new PlayerInfo(Player.Instance));
 
-        JsonManager.SaveJson<PlayerInfo>(playerInfo);
+        JsonManager.SaveJson(playerInfo);
     }
 
     public void GamePause()

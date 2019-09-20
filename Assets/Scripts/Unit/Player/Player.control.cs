@@ -83,7 +83,7 @@ public partial class Player
         if(droppedItem!=null)
         {
             DroppedItem item = droppedItem.GetComponent<DroppedItem>();
-            bool change = false;
+            bool change = true;
             if (item.item is Food || item.item is Sacrifice)
             {
                 for(int i=0;i<inventory.Length;i++)
@@ -91,8 +91,8 @@ public partial class Player
                     if(inventory[i]==item.item.name)
                     {
                         invenQuantity[i] += item.count;
-                        change = true;
-                        itemCells[i].SetItemCell(item.item.name, item.count);
+                        change = false;
+                        itemCells[i].SetItemCell(item.item.name, invenQuantity[i]);
                         break;
                     }
                 }
@@ -102,7 +102,7 @@ public partial class Player
             {
                 if(inventory[invenIdx]!=null)
                 {
-                    DropItem();
+                    Item.DropItem(inventory[invenIdx], invenQuantity[invenIdx], transform.position);
                 }
                 else
                 {
@@ -112,23 +112,12 @@ public partial class Player
                 inventory[invenIdx] = item.item.name;
                 invenQuantity[invenIdx] = item.count;
                 itemCells[invenIdx].SetItemCell(item.item.name, item.count);
+
+                equippedItem.GetComponent<SpriteRenderer>().sprite = item.item.sprite;
             }
 
             Destroy(droppedItem);
             droppedItem = null;
         }
-    }
-
-    public void DropItem()
-    {
-        GameObject dropItem = new GameObject(inventory[invenIdx]);
-        SpriteRenderer renderer = dropItem.AddComponent<SpriteRenderer>();
-        renderer.sprite = DataContainer.itemAtlas.GetSprite(inventory[invenIdx]);
-
-        DroppedItem item = dropItem.AddComponent<DroppedItem>();
-        item.DropItem(Item.itemDictionary[inventory[invenIdx]], invenQuantity[invenIdx], transform.position);
-
-        inventory[invenIdx] = null;
-        invenQuantity[invenIdx] = 0;
     }
 }

@@ -19,6 +19,7 @@ public partial class Player : Unit
     public GameObject inventoryUI;
     void Start()
     {
+        Item.DropItem("Apple", 1, transform.position);
         if(Instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
@@ -50,7 +51,7 @@ public partial class Player : Unit
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
-        inventory[0] = "Staff";
+        inventory[0] = "GiantSword";
         invenQuantity[0] = 1;
 
         itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
@@ -76,7 +77,7 @@ public partial class Player : Unit
 
         if (interactionObj != null)
         {
-            if (Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) >= 0.25f)
+            if (!interactionObj.CompareTag("DroppedItem") && Vector3.SqrMagnitude(interactionObj.transform.position - transform.position) >= 0.25f)
             {
                 Vector3 scale = transform.localScale;
                 if (interactionObj.transform.position.x > transform.position.x)
@@ -102,9 +103,9 @@ public partial class Player : Unit
         else
         {
             Vector3 scale = transform.localScale;
-            if (faceDirection.x >= 0)
+            if (faceDirection.x > 0)
                 scale.x = Mathf.Abs(scale.x);
-            else
+            else if (faceDirection.x < 0)
                 scale.x = -Mathf.Abs(scale.x);
 
             transform.localScale = scale;

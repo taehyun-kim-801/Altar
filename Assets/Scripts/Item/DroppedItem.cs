@@ -10,14 +10,14 @@ public class DroppedItem : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
     }
 
     public void DropItem(Item item, int count, Vector3 position)
     {
         this.item = item;
         this.count = count;
-        spriteRenderer.sprite = item.sprite;
+        gameObject.AddComponent<SpriteRenderer>().sprite = item.sprite;
+        gameObject.transform.localScale *= 5;
         gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
         gameObject.tag = "DroppedItem";
         gameObject.transform.position = position;

@@ -7,39 +7,28 @@ using UnityEngine.SceneManagement;
 public class PlayerInfo
 {
     [SerializeField]
-    private Vector3 position;
+    public Vector3 position { get; private set; }
     [SerializeField]
-    private string activeScene;
+    public string activeScene { get; private set; }
     [SerializeField]
-    private string[] inventory;
+    public string[] inventory { get; private set; }
     [SerializeField]
-    private List<string> pinnedRecipe;
+    public int[] invenQuantity { get; private set; }
     [SerializeField]
-    private int health;
+    public List<string> pinnedRecipe { get; private set; }
     [SerializeField]
-    private float hunger;
+    public int health { get; private set; }
     [SerializeField]
-    private Item item;
+    public float hunger { get; private set; }
 
     public PlayerInfo(Player player)
     {
         position = player.transform.position;
         activeScene = SceneManager.GetActiveScene().name;
         inventory = player.Inventory;
+        invenQuantity = player.InvenQuantity;
         pinnedRecipe = player.PinnedRecipes;
         health = player.Health;
         hunger = player.Hunger;
-        //item = player.EquippedItem.selectedItem;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

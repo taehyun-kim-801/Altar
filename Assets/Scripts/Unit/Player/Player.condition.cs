@@ -28,6 +28,7 @@ public partial class Player
         Time.timeScale = 0f;
         StopAllCoroutines();
         Destroy(gameObject);
+        Instance = null;
     }
 
     public IEnumerator Invincible()
@@ -55,14 +56,14 @@ public partial class Player
 
     public void SetEquippedItemTransform(Vector3 direction)
     {
-        if(direction!=null)
+        if(direction!=Vector3.zero)
         {
             equippedItemTransform.position = transform.position - new Vector3(0, -0.05f) + direction.normalized * handDistance;
             if (direction.x >= 0) equippedItemTransform.transform.localScale = new Vector3(Mathf.Abs(equippedItemTransform.transform.localScale.x), Mathf.Abs(equippedItemTransform.transform.localScale.y));
             else
                 equippedItemTransform.transform.localScale = new Vector3(-Mathf.Abs(equippedItemTransform.transform.localScale.x), -Mathf.Abs(equippedItemTransform.transform.localScale.y));
-        }
 
-        equippedItemTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            equippedItemTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        }
     }
 }

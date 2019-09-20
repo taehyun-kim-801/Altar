@@ -18,6 +18,16 @@ public partial class Player
 
     private ItemCell[] itemCells;
 
+    public void SetInventory(string[] inventory)
+    {
+        this.inventory = inventory;
+    }
+
+    public void SetInvenQuantity(int[] invenQuantity)
+    {
+        this.invenQuantity = invenQuantity;
+    }
+
     public int CheckQuantity(string item)
     {
         int result = -1;

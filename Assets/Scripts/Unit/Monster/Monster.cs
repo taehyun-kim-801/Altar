@@ -102,10 +102,8 @@ public class Monster : Unit
         gameObject.SetActive(false);
 
         StopCoroutine(Attack());
-        if(Random.Range(0f,1f)<=0.7f)
-        {
-            Item.DropItem(dropItem, 1, transform.position);
-        }
+        Item.DropItem(dropItem, 1, transform.position);
+
         mapManager.DecreaseCount(name);
     }
 
