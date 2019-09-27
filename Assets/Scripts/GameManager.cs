@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public bool Mute => mute;
 
+    public GameObject startCanvas;
     public GameObject pauseUI;
-    public GameObject canvas;
+    public GameObject mainCanvas;
     public GameObject player;
     public GameObject eventSystem;
 
@@ -31,22 +32,41 @@ public class GameManager : MonoBehaviour
         DataContainer.SetDataContainer();
 
         LoadSetting();
+        Time.timeScale = 0f;
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        DontDestroyOnLoad(canvas);
+        StartCoroutine(GetComponent<MapManager>().ChangeScene());
+        Player.Instance.transform.position = Vector3.zero;
+
+        DontDestroyOnLoad(mainCanvas);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
+
+        while (!GetComponent<MapManager>().isLoaded) yield return null;
+
+        GameObject startUI = Instantiate(startCanvas);
+        mainCanvas.SetActive(false);
+
+        StartCoroutine(MainCanvasSetActive(startUI));
     }
 
+    private IEnumerator MainCanvasSetActive(GameObject startUI)
+    {
+        yield return new WaitUntil(() => Input.GetMouseButton(0));
+        Time.timeScale = 1f;
+        mainCanvas.SetActive(true);
+        Destroy(startUI);
+
+    }
     private void LoadSetting()
     {
         if(File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
         {
             PlayerInfo info = JsonManager.LoadJson<PlayerInfo>()[0];
-            StartCoroutine(GetComponent<MapManager>().ChangeScene(info.activeScene));
+            GetComponent<MapManager>().nextScene = info.activeScene;
             Player.Instance.transform.position = info.position;
             Player.Instance.SetInventory(info.inventory);
             Player.Instance.SetInvenQuantity(info.invenQuantity);
@@ -59,8 +79,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(GetComponent<MapManager>().ChangeScene("Lobby"));
-            Player.Instance.transform.position = Vector3.zero;
+            GetComponent<MapManager>().nextScene = "Grave";
         }
     }
 

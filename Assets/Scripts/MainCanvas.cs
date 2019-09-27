@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Canvas : MonoBehaviour
+public class MainCanvas : MonoBehaviour
 {
-    public static Canvas Instance { get; private set; }
+    public static MainCanvas Instance { get; private set; }
     // Start is called before the first frame update
     void Start()
     {

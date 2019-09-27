@@ -21,6 +21,9 @@ public class MapManager : MonoBehaviour
 
     public int[] monstersCount { get; private set; }
 
+    public string nextScene;
+    public bool isLoaded;
+
     void Start()
     {
         monsterObjectPool = new List<GameObject>();
@@ -39,12 +42,16 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    public IEnumerator ChangeScene(string nextScene)
+    public IEnumerator ChangeScene()
     {
         StopCoroutine(Spawn());
 
+        isLoaded = false;
+
         AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
         while (!async.isDone) yield return null;
+
+        isLoaded = true;
 
         MonsterCondition_UI.Instance.gameObject.SetActive(false);
 

@@ -19,7 +19,8 @@ public partial class Player
             }
             else if (interactionObj.CompareTag("Portal"))
             {
-                StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene(interactionObj.GetComponent<Portal>().nextScene));
+                GameManager.Instance.GetComponent<MapManager>().nextScene = interactionObj.GetComponent<Portal>().nextScene;
+                StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene());
             }
             else
             {
@@ -113,7 +114,7 @@ public partial class Player
                 invenQuantity[invenIdx] = item.count;
                 itemCells[invenIdx].SetItemCell(item.item.name, item.count);
 
-                equippedItem.GetComponent<SpriteRenderer>().sprite = item.item.sprite;
+                equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
             }
 
             Destroy(droppedItem);

@@ -10716,7 +10716,6 @@ GameObject:
   m_Component:
   - component: {fileID: 492066668}
   - component: {fileID: 492066667}
-  - component: {fileID: 492066669}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -10751,19 +10750,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &492066669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492066666}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a76d790c6991fe4caa6611edbe9a7da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1272440135}
 --- !u!1 &510158370
 GameObject:
   m_ObjectHideFlags: 0
@@ -12749,8 +12735,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8563d7b917792c44bd9dae07115bdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startCanvas: {fileID: 4522379319719340024, guid: 5f71df04ba18d734aa6fee1db214bbd2,
+    type: 3}
   pauseUI: {fileID: 1974831537497084276, guid: a5afd4aa8ca8a934f8a3b99d3e6b3122, type: 3}
-  canvas: {fileID: 625090504}
+  mainCanvas: {fileID: 625090504}
   player: {fileID: 1272440132}
   eventSystem: {fileID: 510158370}
   mute: 0
@@ -12767,6 +12755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1272440135}
+  nextScene: 
 --- !u!1 &1450595462
 GameObject:
   m_ObjectHideFlags: 0

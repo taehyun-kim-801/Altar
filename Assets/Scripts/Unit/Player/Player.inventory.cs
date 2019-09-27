@@ -50,6 +50,16 @@ public partial class Player
             if (inventory[i] == itemName)
             {
                 invenQuantity[i] -= itemCount;
+                if(invenQuantity[i]==0)
+                {
+                    inventory[i] = null;
+                    if(i == invenIdx)
+                    {
+                        equippedItem.Equip();
+                    }
+                }
+
+                itemCells[i].SetItemCell(inventory[i], invenQuantity[i]);
                 break;
             }
         }
@@ -65,7 +75,6 @@ public partial class Player
         invenIdx = index;
         if (inventory[index] != null)
         {
-            Debug.Log("SelectItem");
             equippedItem.Equip(Item.itemDictionary[inventory[invenIdx]]);
         }
         else equippedItem.Equip();
