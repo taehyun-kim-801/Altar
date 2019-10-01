@@ -19,7 +19,6 @@ public partial class Player : Unit
     public GameObject inventoryUI;
     void Start()
     {
-        Item.DropItem("Apple", 1, transform.position);
         if(Instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
@@ -51,7 +50,7 @@ public partial class Player : Unit
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
-        inventory[0] = "Staff";
+        inventory[0] = "Knife";
         invenQuantity[0] = 1;
 
         itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);

@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject pauseUI;
     public GameObject mainCanvas;
     public GameObject player;
-    public GameObject eventSystem;
+    public GameObject gameOverCanvas;
+
+    public int caughtMonsterCount { get; private set; }
+    public float startTime { get; private set; }
 
     [SerializeField]
     private bool mute;
@@ -42,15 +45,11 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(mainCanvas);
         DontDestroyOnLoad(player);
-        DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
 
         while (!GetComponent<MapManager>().isLoaded) yield return null;
 
-        GameObject startUI = Instantiate(startCanvas);
-        mainCanvas.SetActive(false);
-
-        StartCoroutine(MainCanvasSetActive(startUI));
+        SetStartUI();
     }
 
     private IEnumerator MainCanvasSetActive(GameObject startUI)
@@ -59,8 +58,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         mainCanvas.SetActive(true);
         Destroy(startUI);
-
+        startTime = Time.time;
     }
+
     private void LoadSetting()
     {
         if(File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
@@ -94,5 +94,23 @@ public class GameManager : MonoBehaviour
     public void GamePause()
     {
         Instantiate(pauseUI, FindObjectOfType<Canvas>().transform);
+    }
+
+    public void CountCaughtMonster()
+    {
+        caughtMonsterCount++;
+    }
+
+    public void GameOver()
+    {
+        Instantiate(gameOverCanvas);
+    }
+
+    public void SetStartUI()
+    {
+        GameObject startUI = Instantiate(startCanvas);
+        mainCanvas.SetActive(false);
+
+        StartCoroutine(MainCanvasSetActive(startUI));
     }
 }

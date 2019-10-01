@@ -115,6 +115,7 @@ public class MapManager : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => monsterCountSum < 10);
+            yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
 
             float randX = Random.Range(-10.0f, 10.0f);
             float randY = Random.Range(-10.0f, 10.0f);
@@ -127,8 +128,6 @@ public class MapManager : MonoBehaviour
                 Mathf.Clamp(player.transform.position.y + randY, minTilemap.y, maxTilemap.y));
             monsterCountSum++;
             monster.SetActive(true);
-
-            yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
         }
     }
 

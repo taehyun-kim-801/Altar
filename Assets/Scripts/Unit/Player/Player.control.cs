@@ -26,7 +26,7 @@ public partial class Player
             {
                 if (inventory[invenIdx] != null)
                 {
-                    if (equippedItem.state != EquippedItem.State.Swing)
+                    if (equippedItem.state == EquippedItem.State.None)
                     {
                         if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                             if (--invenQuantity[invenIdx] == 0)
@@ -44,11 +44,15 @@ public partial class Player
         }
         else
         {
-            if(inventory[invenIdx]!=null)
+            if(inventory[invenIdx]!=null && equippedItem.state == EquippedItem.State.None)
             {
                 if (Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
                     if (--invenQuantity[invenIdx] == 0)
+                    { 
                         inventory[invenIdx] = null;
+                        itemCells[invenIdx].GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                        equippedItem.Equip();
+                    }
 
                 equippedItem.UseEquippedItem();
                 itemCells[invenIdx].SetItemCell(inventory[invenIdx], invenQuantity[invenIdx]);

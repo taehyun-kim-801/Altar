@@ -105,6 +105,7 @@ public class Monster : Unit
         Item.DropItem(dropItem, 1, transform.position);
 
         mapManager.DecreaseCount(name);
+        GameManager.Instance.CountCaughtMonster();
     }
 
     public void MonsterReset()

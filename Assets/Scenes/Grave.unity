@@ -12740,7 +12740,8 @@ MonoBehaviour:
   pauseUI: {fileID: 1974831537497084276, guid: a5afd4aa8ca8a934f8a3b99d3e6b3122, type: 3}
   mainCanvas: {fileID: 625090504}
   player: {fileID: 1272440132}
-  eventSystem: {fileID: 510158370}
+  gameOverCanvas: {fileID: 6539099591739804067, guid: c3fb23077598ce44dbeda068a6815c8f,
+    type: 3}
   mute: 0
 --- !u!114 &1365945965
 MonoBehaviour:
@@ -12756,6 +12757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1272440135}
   nextScene: 
+  isLoaded: 0
 --- !u!1 &1450595462
 GameObject:
   m_ObjectHideFlags: 0
