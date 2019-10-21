@@ -9,6 +9,6 @@ public class Altar : MonoBehaviour
 
     public void OpenAltarUI()
     {
-        Instantiate(altarUI);
+        Instantiate(altarUI, GameObject.FindGameObjectWithTag("Canvas").transform);
     }
 }
