@@ -33,13 +33,13 @@ public class GameManager : MonoBehaviour
         }
 
         DataContainer.SetDataContainer();
-
-        LoadSetting();
         Time.timeScale = 0f;
     }
 
     IEnumerator Start()
     {
+        yield return new WaitUntil(() => Player.Instance.isCreated);
+        LoadSetting();
         StartCoroutine(GetComponent<MapManager>().ChangeScene());
         Player.Instance.transform.position = Vector3.zero;
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator MainCanvasSetActive(GameObject startUI)
     {
-        yield return new WaitUntil(() => Input.GetMouseButton(0));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         Time.timeScale = 1f;
         mainCanvas.SetActive(true);
         Destroy(startUI);
@@ -63,14 +63,15 @@ public class GameManager : MonoBehaviour
 
     private void LoadSetting()
     {
-        if(File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
+        if (File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
         {
             PlayerInfo info = JsonManager.LoadJson<PlayerInfo>()[0];
             GetComponent<MapManager>().nextScene = info.activeScene;
             Player.Instance.transform.position = info.position;
             Player.Instance.SetInventory(info.inventory);
             Player.Instance.SetInvenQuantity(info.invenQuantity);
-            foreach(var recipe in info.pinnedRecipe)
+            Player.Instance.SetItemCells();
+            foreach (var recipe in info.pinnedRecipe)
             {
                 Player.Instance.AddRecipe(recipe);
             }
@@ -80,6 +81,14 @@ public class GameManager : MonoBehaviour
         else
         {
             GetComponent<MapManager>().nextScene = "Grave";
+            Player.Instance.transform.position = Vector3.zero;
+            Player.Instance.SetInventory();
+            Player.Instance.SetInvenQuantity();
+            Player.Instance.FirstSetting();
+            Player.Instance.SetItemCells();
+            Player.Instance.PinnedRecipes.Clear();
+            Player.Instance.Health = 1;
+            Player.Instance.Hunger = 100f;
         }
     }
 
@@ -112,5 +121,22 @@ public class GameManager : MonoBehaviour
         mainCanvas.SetActive(false);
 
         StartCoroutine(MainCanvasSetActive(startUI));
+    }
+
+    public IEnumerator GameReset()
+    {
+        caughtMonsterCount = 0;
+        Time.timeScale = 0f;
+        var droppedItems = GameObject.FindGameObjectsWithTag("DroppedItem");
+        foreach(var item in droppedItems)
+        {
+            Destroy(item);
+        }
+        GetComponent<MapManager>().ResetObjectPool();
+        Player.Instance.gameObject.SetActive(true);
+        LoadSetting();
+        StartCoroutine(GetComponent<MapManager>().ChangeScene());
+        while (!GetComponent<MapManager>().isLoaded) yield return null;
+        SetStartUI();
     }
 }

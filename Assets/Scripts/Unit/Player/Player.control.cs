@@ -74,6 +74,7 @@ public partial class Player
             {
                 StopAllCoroutines();
                 Die();
+                return;
             }
 
             isAttacked = true;

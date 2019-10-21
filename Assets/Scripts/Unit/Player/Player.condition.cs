@@ -28,8 +28,7 @@ public partial class Player
         Time.timeScale = 0f;
         StopAllCoroutines();
         GameManager.Instance.GameOver();
-        Destroy(gameObject);
-        Instance = null;
+        gameObject.SetActive(false);
     }
 
     public IEnumerator Invincible()

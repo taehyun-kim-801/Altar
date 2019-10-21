@@ -17,6 +17,8 @@ public partial class Player : Unit
     private float handDistance;
 
     public GameObject inventoryUI;
+
+    public bool isCreated = false;
     void Start()
     {
         if(Instance == null)
@@ -50,19 +52,21 @@ public partial class Player : Unit
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
-        inventory[0] = "Knife";
-        invenQuantity[0] = 1;
+        //inventory[0] = "Knife";
+        //invenQuantity[0] = 1;
 
-        itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
-        itemCells[0].GetComponent<Image>().color = Color.white;
+        //itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
+        //itemCells[0].GetComponent<Image>().color = Color.white;
 
-        SelectItem(0);
+        //SelectItem(0);
 
-        inventory[1] = "Apple";
-        invenQuantity[1] = 5;
+        //inventory[1] = "Apple";
+        //invenQuantity[1] = 5;
 
-        itemCells[1].SetItemCell(inventory[1], invenQuantity[1]);
-        itemCells[1].GetComponent<Image>().color = Color.white;
+        //itemCells[1].SetItemCell(inventory[1], invenQuantity[1]);
+        //itemCells[1].GetComponent<Image>().color = Color.white;
+
+        isCreated = true;
     }
 
     void Update()
@@ -164,5 +168,15 @@ public partial class Player : Unit
         {
             interactionText.text = "상호작용";
         }
+    }
+
+    public void FirstSetting()
+    {
+        inventory[0] = "Knife";
+        invenQuantity[0] = 1;
+
+        SelectItem(0);
+        itemCells[0].GetComponent<Image>().color = Color.white;
+        itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
     }
 }

@@ -38,8 +38,6 @@ public class Inventory_UI : MonoBehaviour
                 break;
         }
 
-        Debug.Log(index);
-
         SetSelectedSprite(index);
 
         player.SendMessage("SelectItem", index);

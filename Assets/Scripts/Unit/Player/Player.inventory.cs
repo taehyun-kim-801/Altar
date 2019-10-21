@@ -18,14 +18,22 @@ public partial class Player
 
     private ItemCell[] itemCells;
 
-    public void SetInventory(string[] inventory)
+    public void SetInventory(string[] inventory = null)
     {
-        this.inventory = inventory;
+        if(inventory==null)     for (int i = 0; i < 5; i++) this.inventory[i] = null;
+        else                    this.inventory = inventory;
     }
 
-    public void SetInvenQuantity(int[] invenQuantity)
+    public void SetInvenQuantity(int[] invenQuantity = null)
     {
-        this.invenQuantity = invenQuantity;
+        if (invenQuantity == null) for (int i = 0; i < 5; i++) this.invenQuantity[i] = 0;
+        else this.invenQuantity = invenQuantity;
+    }
+
+    public void SetItemCells()
+    {
+        for(int i=0;i<5;i++)
+            itemCells[i].SetItemCell(inventory[i], invenQuantity[i]);
     }
 
     public int CheckQuantity(string item)
@@ -79,6 +87,4 @@ public partial class Player
         }
         else equippedItem.Equip();
     }
-
-
 }

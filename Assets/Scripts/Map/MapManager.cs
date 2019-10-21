@@ -96,7 +96,6 @@ public class MapManager : MonoBehaviour
                 monsterRB.gravityScale = 0f;
 
                 var renderer = spawnObj.AddComponent<SpriteRenderer>();
-                Debug.Log(monster);
                 renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
                 renderer.sortingOrder = 1;
 
@@ -139,5 +138,15 @@ public class MapManager : MonoBehaviour
     public void CheckPositionInTilemap(GameObject unit)
     {
         unit.transform.position = new Vector3(Mathf.Clamp(unit.transform.position.x, minTilemap.x, maxTilemap.x), Mathf.Clamp(unit.transform.position.y, minTilemap.y, maxTilemap.y));
+    }
+
+    public void ResetObjectPool()
+    {
+        foreach(var monster in monsterObjectPool)
+        {
+            monster.SetActive(false);
+            monsterCountSum = 0;
+            for (int i = 0; i < monstersCount.Length; i++) monstersCount[i] = 0;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameOverScene : MonoBehaviour
 {
@@ -46,19 +47,15 @@ public class GameOverScene : MonoBehaviour
 
         touchToContinueText.SetActive(true);
 
-        yield return new WaitUntil(() => Input.GetMouseButton(0));
-        GameManager.Instance.SetStartUI();
+        yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
         Destroy(gameObject);
 
+        File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json");
+        StartCoroutine(GameManager.Instance.GameReset());
     }
 
     private string TimeToString(int time)
     {
         return string.Format("{0:D2}:{1:D2}", time / 60, time % 60);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

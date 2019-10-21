@@ -13,18 +13,25 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool isOpenInfoUI = false;
 
     public void SetItemCell(string itemName, int itemNumber)
-    {
-        if (itemNumber == 0)
-            itemImage.sprite = null;
-            
+    { 
         if (itemImage == null)
             itemImage = GetComponent<Image>();
         if (itemNumberText == null)
             itemNumberText = GetComponentInChildren<Text>();
 
+        if (itemNumber == 0)
+        {
+            itemImage.sprite = null;
+            itemImage.color = new Color(0, 0, 0, 0);
+            return;
+        }
+
         this.itemName = itemName;
         if (itemNumber > 1)
+        {
             itemNumberText.text = itemNumber.ToString();
+            if (itemImage.color != Color.white) itemImage.color = Color.white;
+        }
         else
             itemNumberText.text = null;
 

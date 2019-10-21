@@ -25,7 +25,6 @@ public class Condition_UI : MonoBehaviour
 
     public void HealthUI()
     {
-        Debug.Log(health.Length);
         for (int i = 0; i < health.Length; i++)
         {
             health[i].sprite = heart[Mathf.Clamp(2 - (player.Health - i * 2), 0, 2)];
