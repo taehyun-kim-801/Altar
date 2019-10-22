@@ -381,12 +381,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5567536403080736634, guid: c4b648ffc078d1c4ba535173c1e512a7,
-        type: 3}
-      propertyPath: altarUI
-      value: 
-      objectReference: {fileID: 4784249512134850886, guid: 07b996d52710bc54cbbe37161a47b436,
-        type: 3}
     - target: {fileID: 6944031058563185791, guid: c4b648ffc078d1c4ba535173c1e512a7,
         type: 3}
       propertyPath: m_Name
@@ -395,12 +389,12 @@ PrefabInstance:
     - target: {fileID: 6944031058563185777, guid: c4b648ffc078d1c4ba535173c1e512a7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0055323243
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6944031058563185777, guid: c4b648ffc078d1c4ba535173c1e512a7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7312407
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6944031058563185777, guid: c4b648ffc078d1c4ba535173c1e512a7,
         type: 3}

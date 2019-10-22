@@ -7,8 +7,13 @@ public class Altar : MonoBehaviour
     [SerializeField]
     private GameObject altarUI;
 
+    private bool isOpenUI = false;
+
     public void OpenAltarUI()
     {
-        Instantiate(altarUI, GameObject.FindGameObjectWithTag("Canvas").transform);
+        if(isOpenUI)
+        return;
+        isOpenUI = true;
+        Instantiate(altarUI, GameObject.FindGameObjectWithTag("Canvas").transform).GetComponent<AltarUI>().close += ()=>isOpenUI = false;
     }
 }

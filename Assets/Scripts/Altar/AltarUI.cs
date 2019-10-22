@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AltarUI : MonoBehaviour
 {
+    public event System.Action close;
+
     [SerializeField]
     private Button exitButton;
     [SerializeField]
@@ -38,6 +40,7 @@ public class AltarUI : MonoBehaviour
 
     private void CloseAltarUI()
     {
-        Destroy(this);
+        close();
+        Destroy(gameObject);
     }
 }

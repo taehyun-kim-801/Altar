@@ -28,17 +28,11 @@ public class EquippedItem : MonoBehaviour
 
     public void Equip(Item item = null)
     {
-        if (state != State.None)
+        if (state != State.None || item == null)
             return;
 
         triggerFunc = null;
         UseItem = null;
-        selectedItem = null;
-        itemSpriteRenderer.sprite = null;
-
-        if (item == null)
-            return;
-
         selectedItem = item;
         item.Equip(this);
         itemSpriteRenderer.sprite = item.sprite;
