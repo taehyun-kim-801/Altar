@@ -15,7 +15,7 @@ public partial class Player
         {
             if (interactionObj.CompareTag("Altar"))
             {
-
+                interactionObj.SendMessage("OpenAltarUI");
             }
             else if (interactionObj.CompareTag("Portal"))
             {

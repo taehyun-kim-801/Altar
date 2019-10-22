@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hell.unity
     guid: 8ab909d6ddbd425429426900f7adaf45
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 78a82cce4572e1248a0efcb1d0b486ad
   m_configObjects: {}
