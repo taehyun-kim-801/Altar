@@ -40,21 +40,6 @@ public class ItemInfoUI : MonoBehaviour
         backgroundImage.transform.position = parentTransform.position;
 
         nameText.text = $"이름 : {item.name}";
-
-        switch (item)
-        {
-            case Food food:
-                infoText.text = $"포만감 : {food.Satiety}";
-                break;
-            case Sacrifice sacrifice:
-                infoText.text = $"포만감 : {sacrifice.Satiety}\n피해량 : {sacrifice.Damage}";
-                break;
-            case MeleeWeapon meleeWeapon:
-                infoText.text = $"공격력 : {meleeWeapon.Damage}\n속도 : {meleeWeapon.Delay}";
-                break;
-            case RangedWeapon rangedWeapon:
-                infoText.text = $"공격력 : {ProjectileManager.Instance.GetProjectileDamage(rangedWeapon.ProjectileName)}\n속도 : {rangedWeapon.Delay}";
-                break;
-        }
+        infoText.text = item.GetInfo();
     }
 }

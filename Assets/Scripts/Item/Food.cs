@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Food : Item
 {
-    public int Satiety => satiety;
-
     [SerializeField]
     private int satiety;
 
@@ -16,6 +14,8 @@ public class Food : Item
     }
 
     public override void Equip(EquippedItem equipedItem) => equipedItem.UseItem = Eat;
+
+    public override string GetInfo() => $"포만감 : {satiety}";
 
     private void Eat() => Player.Instance.Eat(satiety);
 }
