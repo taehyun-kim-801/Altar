@@ -88,7 +88,7 @@ public class MapManager : MonoBehaviour
                     monsterInfo.name = spawnInfo.Name;
                     monsterInfo.damage = spawnInfo.Damage;
                     monsterInfo.dropItem = spawnInfo.DropItem;
-                    monsterInfo.attackWaitSecond = 5f;
+                    monsterInfo.attackWaitSecond = 1f;
 
                     monsterInfo.SetMaxHealth();
                     monsterInfo.mapManager = this;
