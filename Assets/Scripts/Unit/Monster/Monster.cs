@@ -5,12 +5,14 @@ using UnityEngine;
 public class Monster : Unit
 {
     public int damage;
-    public float attackWaitSecond = 5f;
+    public float attackWaitSecond = 1f;
 
     public string dropItem;
     private int maxHealth;
 
     public MapManager mapManager;
+
+    private bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,11 @@ public class Monster : Unit
                 }
             }
 
-            Move(faceDirection);
+            if (canMove)
+            {
+                Move(faceDirection);
+            }
+            mapManager.CheckPositionInTilemap(gameObject);
         }
     }
 
@@ -89,11 +95,33 @@ public class Monster : Unit
 
     public IEnumerator Attack()
     {
+        Vector3 atkDirection;
         while(Player.Instance != null)
         {
-            yield return new WaitUntil(() => Vector3.Distance(transform.position, Player.Instance.transform.position) <= 0.7f);
-            Player.Instance.Hurt(damage);
+            StartCoroutine(RandomDirection());
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, Player.Instance.transform.position) <= 2f);
+            StopCoroutine(RandomDirection());
+            canMove = false;
+            atkDirection = (Player.Instance.transform.position - transform.position).normalized;
+
+            yield return new WaitForSeconds(0.5f);
+            float time = Time.time;
+            while(Time.time - time <= 0.2f)
+            {
+                gameObject.transform.Translate(atkDirection * 20 * Time.deltaTime);
+                yield return new WaitForEndOfFrame(); 
+            }
             yield return new WaitForSeconds(attackWaitSecond);
+
+            canMove = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Player.Instance.Hurt(damage);
         }
     }
 

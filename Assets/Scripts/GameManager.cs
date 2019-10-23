@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
             Player.Instance.FirstSetting();
             Player.Instance.SetItemCells();
             Player.Instance.PinnedRecipes.Clear();
-            Player.Instance.Health = 1;
+            Player.Instance.Health = 10;
             Player.Instance.Hunger = 100f;
         }
     }
