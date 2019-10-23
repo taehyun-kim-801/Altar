@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GetComponent<MapManager>().nextScene = "Grave";
+            GetComponent<MapManager>().nextScene = "Lobby";
             Player.Instance.transform.position = Vector3.zero;
             Player.Instance.SetInventory();
             Player.Instance.SetInvenQuantity();
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MainCanvasSetActive(startUI));
     }
 
-    public IEnumerator GameReset()
+    public void GameReset()
     {
         caughtMonsterCount = 0;
         Time.timeScale = 0f;
@@ -136,7 +136,6 @@ public class GameManager : MonoBehaviour
         Player.Instance.gameObject.SetActive(true);
         LoadSetting();
         StartCoroutine(GetComponent<MapManager>().ChangeScene());
-        while (!GetComponent<MapManager>().isLoaded) yield return null;
         SetStartUI();
     }
 }

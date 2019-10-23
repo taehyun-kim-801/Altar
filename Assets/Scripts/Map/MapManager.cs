@@ -72,40 +72,43 @@ public class MapManager : MonoBehaviour
     private void SetObjectPool()
     {
         monsterObjectPool.Clear();
-        foreach (var monster in MonsterManager.monstersByMap[sceneName])
+        if (nextScene != "Lobby")
         {
-            for (int i = 0; i < 10; i++)
+            foreach (var monster in MonsterManager.monstersByMap[sceneName])
             {
-                GameObject spawnObj = new GameObject(monster);
-                spawnObj.transform.localScale = new Vector2(5f, 5f);
+                for (int i = 0; i < 10; i++)
+                {
+                    GameObject spawnObj = new GameObject(monster);
+                    spawnObj.transform.localScale = new Vector2(5f, 5f);
 
-                var monsterInfo = spawnObj.AddComponent<Monster>();
-                MonsterInfo spawnInfo = MonsterManager.monsters[monster];
+                    var monsterInfo = spawnObj.AddComponent<Monster>();
+                    MonsterInfo spawnInfo = MonsterManager.monsters[monster];
 
-                monsterInfo.Health = spawnInfo.Health;
-                monsterInfo.name = spawnInfo.Name;
-                monsterInfo.damage = spawnInfo.Damage;
-                monsterInfo.dropItem = spawnInfo.DropItem;
-                monsterInfo.attackWaitSecond = 5f;
+                    monsterInfo.Health = spawnInfo.Health;
+                    monsterInfo.name = spawnInfo.Name;
+                    monsterInfo.damage = spawnInfo.Damage;
+                    monsterInfo.dropItem = spawnInfo.DropItem;
+                    monsterInfo.attackWaitSecond = 5f;
 
-                monsterInfo.SetMaxHealth();
-                monsterInfo.mapManager = this;
+                    monsterInfo.SetMaxHealth();
+                    monsterInfo.mapManager = this;
 
-                var monsterRB = spawnObj.AddComponent<Rigidbody2D>();
-                monsterRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-                monsterRB.gravityScale = 0f;
+                    var monsterRB = spawnObj.AddComponent<Rigidbody2D>();
+                    monsterRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    monsterRB.gravityScale = 0f;
 
-                var renderer = spawnObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
-                renderer.sortingOrder = 1;
+                    var renderer = spawnObj.AddComponent<SpriteRenderer>();
+                    renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
+                    renderer.sortingOrder = 1;
 
-                spawnObj.AddComponent<BoxCollider2D>();
+                    spawnObj.AddComponent<BoxCollider2D>();
 
-                spawnObj.tag = "Monster";
+                    spawnObj.tag = "Monster";
 
-                spawnObj.SetActive(false);
+                    spawnObj.SetActive(false);
 
-                monsterObjectPool.Add(spawnObj);
+                    monsterObjectPool.Add(spawnObj);
+                }
             }
         }
     }
