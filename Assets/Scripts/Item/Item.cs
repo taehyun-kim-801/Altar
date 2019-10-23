@@ -78,4 +78,6 @@ public class Item
     }
 
     public virtual void Equip(EquippedItem equipedItem) { }
+
+    public virtual string GetInfo() {return null; }
 }

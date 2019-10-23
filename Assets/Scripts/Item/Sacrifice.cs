@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Sacrifice : Item
 {
-    public int Satiety => satiety;
-    public int Damage => damage;
-
     [SerializeField]
     private int satiety;
     [SerializeField]
@@ -20,6 +17,8 @@ public class Sacrifice : Item
     }
 
     public override void Equip(EquippedItem equipedItem) => equipedItem.UseItem = Eat;
+
+    public override string GetInfo() => $"포만감 : {satiety}\n피해량 : {damage}";
 
     private void Eat()
     {

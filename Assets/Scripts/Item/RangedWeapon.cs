@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class RangedWeapon : Item
 {
-    public string ProjectileName => projectileName;
-
     [SerializeField]
     private string projectileName;
     [SerializeField]
@@ -27,6 +25,8 @@ public class RangedWeapon : Item
         equippedItemTransform = equipedItem.gameObject.transform;
     }
 
+    public override string GetInfo() => $"공격력 : {ProjectileManager.Instance.GetProjectileDamage(projectileName)}\n속도 : {delay}";
+    
     public void Attack() => projectileDirection.ForEach((direction) => { 
         ProjectileManager.Instance.ActivateProjectile(projectileName, equippedItemTransform, direction);
     });
