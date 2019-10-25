@@ -39,7 +39,8 @@ public class MapManager : MonoBehaviour
 
         SetObjectPool();
 
-        StartCoroutine(Spawn());
+        if(nextScene!="Lobby")
+            StartCoroutine(Spawn());
     }
 
     public IEnumerator ChangeScene()
@@ -68,6 +69,8 @@ public class MapManager : MonoBehaviour
         }
         SetObjectPool();
         StartCoroutine(Spawn());
+
+        Time.timeScale = 1f;
     }
     private void SetObjectPool()
     {
@@ -88,7 +91,6 @@ public class MapManager : MonoBehaviour
                     monsterInfo.name = spawnInfo.Name;
                     monsterInfo.damage = spawnInfo.Damage;
                     monsterInfo.dropItem = spawnInfo.DropItem;
-                    monsterInfo.attackWaitSecond = 1f;
 
                     monsterInfo.SetMaxHealth();
                     monsterInfo.mapManager = this;
@@ -116,8 +118,8 @@ public class MapManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitUntil(() => monsterCountSum < 10);
             yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
+            yield return new WaitUntil(() => monsterCountSum < 10);
 
             float randX = Random.Range(-10.0f, 10.0f);
             float randY = Random.Range(-10.0f, 10.0f);

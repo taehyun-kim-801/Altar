@@ -5,7 +5,7 @@ using UnityEngine;
 public class Monster : Unit
 {
     public int damage;
-    public float attackWaitSecond = 1f;
+    public float attackWaitSecond = 3f;
 
     public string dropItem;
     private int maxHealth;
@@ -13,6 +13,7 @@ public class Monster : Unit
     public MapManager mapManager;
 
     private bool canMove = true;
+    private bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -104,22 +105,26 @@ public class Monster : Unit
             canMove = false;
             atkDirection = (Player.Instance.transform.position - transform.position).normalized;
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
+
+            isAttacking = true;
             float time = Time.time;
             while(Time.time - time <= 0.2f)
             {
                 gameObject.transform.Translate(atkDirection * 20 * Time.deltaTime);
                 yield return new WaitForEndOfFrame(); 
             }
-            yield return new WaitForSeconds(attackWaitSecond);
 
             canMove = true;
+            isAttacking = false;
+
+            yield return new WaitForSeconds(attackWaitSecond);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(isAttacking && collision.gameObject.CompareTag("Player"))
         {
             Player.Instance.Hurt(damage);
         }
