@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
             Player.Instance.PinnedRecipes.Clear();
             Player.Instance.Health = 10;
             Player.Instance.Hunger = 100f;
+            Player.Instance.isHungerZero = false;
         }
     }
 
@@ -123,7 +124,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MainCanvasSetActive(startUI));
     }
 
-    public void GameReset()
+    public IEnumerator GameReset()
     {
         caughtMonsterCount = 0;
         Time.timeScale = 0f;
@@ -136,6 +137,9 @@ public class GameManager : MonoBehaviour
         Player.Instance.gameObject.SetActive(true);
         LoadSetting();
         StartCoroutine(GetComponent<MapManager>().ChangeScene());
+
+        while (!GetComponent<MapManager>().isLoaded) yield return null;
+        Debug.Log("Clear");
         SetStartUI();
     }
 }

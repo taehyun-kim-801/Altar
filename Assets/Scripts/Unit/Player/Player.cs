@@ -19,6 +19,7 @@ public partial class Player : Unit
     public GameObject inventoryUI;
 
     public bool isCreated = false;
+    public bool isHungerZero = false;
     void Start()
     {
         if(Instance == null)
@@ -52,20 +53,6 @@ public partial class Player : Unit
 
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
-        //inventory[0] = "Knife";
-        //invenQuantity[0] = 1;
-
-        //itemCells[0].SetItemCell(inventory[0], invenQuantity[0]);
-        //itemCells[0].GetComponent<Image>().color = Color.white;
-
-        //SelectItem(0);
-
-        //inventory[1] = "Apple";
-        //invenQuantity[1] = 5;
-
-        //itemCells[1].SetItemCell(inventory[1], invenQuantity[1]);
-        //itemCells[1].GetComponent<Image>().color = Color.white;
-
         isCreated = true;
     }
 
@@ -73,8 +60,11 @@ public partial class Player : Unit
     {
         if (Hunger > 0f)
             Hunger -= Time.deltaTime / 6;
-        else
+        else if(!isHungerZero)
+        {
             StartCoroutine(DecreaseHealth());
+            isHungerZero = true;
+        }
 
         Move(faceDirection);
 

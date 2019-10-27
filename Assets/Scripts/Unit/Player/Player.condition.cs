@@ -16,10 +16,16 @@ public partial class Player
 
     public IEnumerator DecreaseHealth()
     {
-        while(health<=0)
+        while(health>0)
         {
             yield return new WaitForSeconds(2f);
-            health--;
+            Health--;
+
+            if (health <= 0)
+            {
+                Die();
+                yield break;
+            }
         }
     }
 

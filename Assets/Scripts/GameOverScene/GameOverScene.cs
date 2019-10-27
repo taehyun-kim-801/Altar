@@ -51,7 +51,7 @@ public class GameOverScene : MonoBehaviour
         Destroy(gameObject);
 
         File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json");
-        GameManager.Instance.GameReset();
+        StartCoroutine(GameManager.Instance.GameReset());
     }
 
     private string TimeToString(int time)
