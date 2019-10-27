@@ -82,7 +82,7 @@ public partial class Player : Unit
 
                 if (equippedItem.state != EquippedItem.State.Swing)
                 {
-                    if (interactionObj.CompareTag("Monster"))
+                    if (interactionObj != null)
                     {
                         SetEquippedItemTransform(interactionObj.transform.position - transform.position);
                     }
@@ -146,6 +146,10 @@ public partial class Player : Unit
         {
             interactionText.text = "이동";
         }
+        else if(inventory[invenIdx]==null)
+        {
+            interactionText.text = "상호작용";
+        }
         else if(Item.itemDictionary[inventory[invenIdx]] is Food || Item.itemDictionary[inventory[invenIdx]] is Sacrifice)
         {
             interactionText.text = "먹기";
@@ -153,10 +157,6 @@ public partial class Player : Unit
         else if(Item.itemDictionary[inventory[invenIdx]] is MeleeWeapon || Item.itemDictionary[inventory[invenIdx]] is RangedWeapon)
         {
             interactionText.text = "공격";
-        }
-        else
-        {
-            interactionText.text = "상호작용";
         }
     }
 
