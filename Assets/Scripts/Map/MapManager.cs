@@ -142,7 +142,9 @@ public class MapManager : MonoBehaviour
 
     public void CheckPositionInTilemap(GameObject unit)
     {
-        unit.transform.position = new Vector3(Mathf.Clamp(unit.transform.position.x, minTilemap.x, maxTilemap.x), Mathf.Clamp(unit.transform.position.y, minTilemap.y, maxTilemap.y));
+        var size = unit.GetComponent<SpriteRenderer>().sprite.bounds.size;
+
+        unit.transform.position = new Vector3(Mathf.Clamp(unit.transform.position.x, minTilemap.x + size.x, maxTilemap.x - size.x), Mathf.Clamp(unit.transform.position.y, minTilemap.y + size.y, maxTilemap.y - size.y));
     }
 
     public void ResetObjectPool()
