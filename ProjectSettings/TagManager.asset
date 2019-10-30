@@ -10,7 +10,7 @@ TagManager:
   - Canvas
   - DroppedItem
   - Inventory
-  - Tilemap
+  - CellBound
   layers:
   - Default
   - TransparentFX

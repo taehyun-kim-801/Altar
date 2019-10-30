@@ -34,14 +34,15 @@ public class MapManager : MonoBehaviour
         monstersCount = new int[3];
 
         sceneName = SceneManager.GetActiveScene().name;
-        tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>();
 
-        minTilemap = tilemap.CellToWorld(tilemap.cellBounds.min);
-        maxTilemap = tilemap.CellToWorld(tilemap.cellBounds.max);
+        var cellBounds = GameObject.FindGameObjectWithTag("CellBound");
+
+        minTilemap = cellBounds.transform.GetChild(0).position;
+        maxTilemap = cellBounds.transform.GetChild(1).position;
 
         SetObjectPool();
 
-        if(nextScene!="Lobby")
+        if(sceneName != "Lobby")
             StartCoroutine(Spawn());
     }
     
@@ -58,10 +59,10 @@ public class MapManager : MonoBehaviour
         MonsterCondition_UI.Instance.gameObject.SetActive(false);
 
         sceneName = SceneManager.GetActiveScene().name;
-        tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>();
+        var cellBounds = GameObject.FindGameObjectWithTag("CellBound");
 
-        minTilemap = tilemap.CellToWorld(tilemap.cellBounds.min);
-        maxTilemap = tilemap.CellToWorld(tilemap.cellBounds.max);
+        minTilemap = cellBounds.transform.GetChild(0).position;
+        maxTilemap = cellBounds.transform.GetChild(1).position;
 
         monsterCountSum = 0;
         for (int i = 0; i < 3; i++)
