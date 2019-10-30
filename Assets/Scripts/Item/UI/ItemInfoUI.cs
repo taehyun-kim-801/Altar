@@ -27,17 +27,17 @@ public class ItemInfoUI : MonoBehaviour
         }
     }
 
-    public static void OpenItemInfoUI(Item item, Transform parentTransform)
+    public static void OpenItemInfoUI(Item item, Vector3 parentPosition)
     {
-        instance.backgroundImage.gameObject.SetActive(true);
-        instance.OpenItemInfo(item, parentTransform);
+        instance.OpenItemInfo(item, parentPosition);
     }
 
     public static void CloseItemInfoUI() => instance.backgroundImage.gameObject.SetActive(false);
 
-    public void OpenItemInfo(Item item, Transform parentTransform)
+    private void OpenItemInfo(Item item, Vector3 parentPosition)
     {
-        backgroundImage.transform.position = parentTransform.position;
+        backgroundImage.gameObject.SetActive(true);
+        backgroundImage.transform.position = parentPosition;
 
         nameText.text = $"이름 : {item.name}";
         infoText.text = item.GetInfo();

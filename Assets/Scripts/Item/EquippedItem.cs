@@ -13,7 +13,6 @@ public class EquippedItem : MonoBehaviour
 
     public System.Action<Collider2D> triggerFunc;
     public System.Action UseItem;
-    public Item selectedItem { get; private set; }
     public State state { get; private set; }
 
     private SpriteRenderer itemSpriteRenderer;
@@ -39,7 +38,6 @@ public class EquippedItem : MonoBehaviour
 
         triggerFunc = null;
         UseItem = null;
-        selectedItem = item;
         item.Equip(this);
         itemSpriteRenderer.sprite = item.sprite;
         itemDelaySeconds = new WaitForSeconds(item.Delay);
