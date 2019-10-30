@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
+    public delegate void Func();
+
     public Transform player;
 
     private Tilemap tilemap;
@@ -42,15 +44,14 @@ public class MapManager : MonoBehaviour
         if(nextScene!="Lobby")
             StartCoroutine(Spawn());
     }
-
-    public IEnumerator ChangeScene()
+    
+    public IEnumerator ChangeScene(Func func = null)
     {
         StopCoroutine(Spawn());
 
         isLoaded = false;
 
-        AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
-        while (!async.isDone) yield return null;
+        yield return SceneManager.LoadSceneAsync(nextScene);
 
         isLoaded = true;
 
@@ -71,6 +72,8 @@ public class MapManager : MonoBehaviour
         StartCoroutine(Spawn());
 
         Time.timeScale = 1f;
+
+        func?.Invoke();
     }
     private void SetObjectPool()
     {

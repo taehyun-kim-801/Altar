@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MainCanvasSetActive(startUI));
     }
 
-    public IEnumerator GameReset()
+    public void GameReset()
     {
         caughtMonsterCount = 0;
         Time.timeScale = 0f;
@@ -136,10 +136,6 @@ public class GameManager : MonoBehaviour
         GetComponent<MapManager>().ResetObjectPool();
         Player.Instance.gameObject.SetActive(true);
         LoadSetting();
-        StartCoroutine(GetComponent<MapManager>().ChangeScene());
-
-        while (!GetComponent<MapManager>().isLoaded) yield return null;
-        Debug.Log("Clear");
-        SetStartUI();
+        StartCoroutine(GetComponent<MapManager>().ChangeScene(() => SetStartUI()));
     }
 }
