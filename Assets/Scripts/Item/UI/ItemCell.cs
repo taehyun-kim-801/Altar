@@ -9,8 +9,9 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Image itemImage;
     private Text itemNumberText;
     private string itemName;
-    private float clickTime = 0.5f;
+    private WaitForSeconds clickTime = new WaitForSeconds(0.5f);
     private bool isOpenInfoUI = false;
+    private bool isPointerExit = false;
 
     public void SetItemCell(string itemName, int itemNumber)
     { 
@@ -40,12 +41,13 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData data)
     {
-        StartCoroutine("OpenItemInfoUI");
+        isPointerExit = false;
+        StartCoroutine(OpenItemInfoUI());
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        StopCoroutine("OpenItemInfoUI");
+        isPointerExit = true;
         if(isOpenInfoUI)
         {
             isOpenInfoUI = false;
@@ -55,8 +57,11 @@ public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public IEnumerator OpenItemInfoUI()
     {
-        yield return new WaitForSeconds(clickTime);
-        ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], transform);
+        yield return clickTime;
+        if(isPointerExit)
+            yield break;
+            
+        ItemInfoUI.OpenItemInfoUI(Item.itemDictionary[itemName], gameObject.transform.position);
         isOpenInfoUI = true;
         yield break;
     }
