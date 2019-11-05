@@ -20,6 +20,9 @@ public partial class Player : Unit
 
     public bool isCreated = false;
     public bool isHungerZero = false;
+    private bool isMoving = false;
+    private Animator animator;
+
     void Start()
     {
         if(Instance == null)
@@ -54,6 +57,8 @@ public partial class Player : Unit
         itemCells = inventoryUI.GetComponentsInChildren<ItemCell>();
 
         isCreated = true;
+
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -158,6 +163,11 @@ public partial class Player : Unit
         {
             interactionText.text = "공격";
         }
+
+        if (faceDirection != Vector3.zero && !isMoving)
+            animator.SetBool("isMoving", isMoving = true);
+        else if(faceDirection == Vector3.zero && isMoving)
+            animator.SetBool("isMoving", isMoving = false);
     }
 
     public void FirstSetting()
