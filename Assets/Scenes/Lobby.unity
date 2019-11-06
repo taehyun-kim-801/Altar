@@ -540,6 +540,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3383994942328848177, guid: 69a05c6d9790d574b8b192685b16fe8c,
+        type: 3}
+      propertyPath: nextScene
+      value: Forest
+      objectReference: {fileID: 0}
     - target: {fileID: 298360953365605168, guid: 69a05c6d9790d574b8b192685b16fe8c,
         type: 3}
       propertyPath: m_IsTrigger
