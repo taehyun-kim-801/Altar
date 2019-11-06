@@ -83,34 +83,12 @@ public class MapManager : MonoBehaviour
         {
             foreach (var monster in MonsterManager.monstersByMap[sceneName])
             {
+                var monsterObject = Resources.Load("Monsters/"+monster) as GameObject;
+
                 for (int i = 0; i < 10; i++)
                 {
-                    GameObject spawnObj = new GameObject(monster);
-                    spawnObj.transform.localScale = new Vector2(5f, 5f);
-
-                    var monsterInfo = spawnObj.AddComponent<Monster>();
-                    MonsterInfo spawnInfo = MonsterManager.monsters[monster];
-
-                    monsterInfo.Health = spawnInfo.Health;
-                    monsterInfo.name = spawnInfo.Name;
-                    monsterInfo.damage = spawnInfo.Damage;
-                    monsterInfo.dropItem = spawnInfo.DropItem;
-
-                    monsterInfo.SetMaxHealth();
-                    monsterInfo.mapManager = this;
-
-                    var monsterRB = spawnObj.AddComponent<Rigidbody2D>();
-                    monsterRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    monsterRB.gravityScale = 0f;
-
-                    var renderer = spawnObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = DataContainer.monsterAtlas.GetSprite($"{monster}_1");
-                    renderer.sortingOrder = 1;
-
-                    spawnObj.AddComponent<BoxCollider2D>();
-
-                    spawnObj.tag = "Monster";
-
+                    var spawnObj = Instantiate(monsterObject) as GameObject;
+                    spawnObj.name = monster;
                     spawnObj.SetActive(false);
 
                     monsterObjectPool.Add(spawnObj);

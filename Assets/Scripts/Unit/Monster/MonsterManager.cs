@@ -6,12 +6,12 @@ using System.IO;
 public static class MonsterManager
 {
     public static Dictionary<string, List<string>> monstersByMap { get; private set; }
-    public static Dictionary<string, MonsterInfo> monsters { get; private set; }
+    public static Dictionary<string, GameObject> monsterObjects { get; private set; }
 
     static MonsterManager()
     {
         monstersByMap = new Dictionary<string, List<string>>();
-        monsters = new Dictionary<string, MonsterInfo>();
+        monsterObjects = new Dictionary<string, GameObject>();
         
         if(!File.Exists($"{Application.dataPath}/Data/MonsterInfo.json"))
         {
@@ -32,7 +32,10 @@ public static class MonsterManager
 
     private static void LoadMonstersJson()
     {
-        JsonManager.LoadJson<MonsterInfo>().ForEach((monster) => { monsters.Add(monster.Name, monster); });
+        foreach(var monster in GameManager.Instance.monsterObject)
+        {
+            monsterObjects.Add(monster.name, monster);
+        }
 
         JsonManager.LoadJson<MonsterList>().ForEach((list) => { monstersByMap.Add(list.name, list.monsters); });
     }

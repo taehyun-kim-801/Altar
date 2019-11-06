@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int caughtMonsterCount { get; private set; }
     public float startTime { get; private set; }
 
+    public List<GameObject> monsterObject;
+
     [SerializeField]
     private bool mute;
 

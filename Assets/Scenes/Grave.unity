@@ -8210,6 +8210,7 @@ GameObject:
   - component: {fileID: 625090506}
   - component: {fileID: 625090505}
   - component: {fileID: 625090509}
+  - component: {fileID: 625090510}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -8318,6 +8319,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896e05b8ec2afcd479116f5b556ea5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &625090510
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625090504}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a56b214c522f7eb4da3d469b5f1446fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &645939959
 GameObject:
   m_ObjectHideFlags: 0
@@ -10694,7 +10714,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272440132}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c70648746180d274b9dcbd4f0448beff, type: 2}
   m_CullingMode: 0
@@ -11043,6 +11063,7 @@ MonoBehaviour:
   player: {fileID: 1272440132}
   gameOverCanvas: {fileID: 6539099591739804067, guid: c3fb23077598ce44dbeda068a6815c8f,
     type: 3}
+  monsterObject: []
   mute: 0
 --- !u!114 &1365945965
 MonoBehaviour:

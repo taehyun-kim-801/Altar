@@ -17,7 +17,8 @@ public class Monster : Unit
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 5f;
+        maxHealth = health;
+        mapManager = GameManager.Instance.gameObject.GetComponent<MapManager>();
         foundPlayer = false;
         StartCoroutine(RandomDirection());
     }
