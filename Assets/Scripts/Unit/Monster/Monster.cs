@@ -14,12 +14,15 @@ public class Monster : Unit
 
     private bool canMove = true;
     private bool isAttacking = false;
+
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         maxHealth = health;
         mapManager = GameManager.Instance.gameObject.GetComponent<MapManager>();
         foundPlayer = false;
+        animator = gameObject.GetComponent<Animator>();
         StartCoroutine(RandomDirection());
     }
 
@@ -100,9 +103,12 @@ public class Monster : Unit
         Vector3 atkDirection;
         while(Player.Instance != null)
         {
+            animator.SetBool("isAttacking", false);
             StartCoroutine(RandomDirection());
             yield return new WaitUntil(() => Vector3.Distance(transform.position, Player.Instance.transform.position) <= 2f);
             StopCoroutine(RandomDirection());
+
+            animator.SetBool("isAttacking", true);
             canMove = false;
             atkDirection = (Player.Instance.transform.position - transform.position).normalized;
 
