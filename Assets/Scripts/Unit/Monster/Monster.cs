@@ -108,12 +108,12 @@ public class Monster : Unit
             yield return new WaitUntil(() => Vector3.Distance(transform.position, Player.Instance.transform.position) <= 2f);
             StopCoroutine(RandomDirection());
 
-            animator.SetBool("isAttacking", true);
             canMove = false;
             atkDirection = (Player.Instance.transform.position - transform.position).normalized;
 
             yield return new WaitForSeconds(0.7f);
 
+            animator.SetBool("isAttacking", true);
             isAttacking = true;
             float time = Time.time;
             while(Time.time - time <= 0.2f)
@@ -122,10 +122,11 @@ public class Monster : Unit
                 yield return new WaitForEndOfFrame(); 
             }
 
-            canMove = true;
             isAttacking = false;
 
             yield return new WaitForSeconds(attackWaitSecond);
+
+            canMove = true;
         }
     }
 
