@@ -287,9 +287,9 @@ GameObject:
   - component: {fileID: 4784249512134850887}
   - component: {fileID: 4784249512134850881}
   - component: {fileID: 4784249512134850880}
-  - component: {fileID: 3943584969816035485}
+  - component: {fileID: 6656860851681003699}
   m_Layer: 5
-  m_Name: AltarUI
+  m_Name: PinnedRecipeUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3943584969816035485
+--- !u!114 &6656860851681003699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,11 +362,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4784249512134850886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f87713fed5782704b911c0ab03e932a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 54e0fd1df78f3644e9dbd6641483e251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exitButton: {fileID: 8479191501714301380}
-  recipeUIPrefab: {fileID: 4021473058000582015, guid: e1205d9933cf1a8448c95fc2af328c78,
+  recipeUIPrefab: {fileID: 4021473058000582015, guid: 170f818afd8ed1c49a20e5877531bdf3,
     type: 3}
   recipeLayout: {fileID: 5892746545847917946}
 --- !u!1 &5892746545847917946

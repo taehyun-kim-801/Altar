@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool mute;
 
+    [SerializeField]
+    private GameObject pinnedRecipeUI;
+
     private void Awake()
     {
         if (Instance == null)
@@ -139,5 +142,10 @@ public class GameManager : MonoBehaviour
         Player.Instance.gameObject.SetActive(true);
         LoadSetting();
         StartCoroutine(GetComponent<MapManager>().ChangeScene(() => SetStartUI()));
+    }
+
+    public void OpenPinnedRecipeUI()
+    {
+        Instantiate(pinnedRecipeUI, GameObject.FindGameObjectWithTag("Canvas").transform);
     }
 }

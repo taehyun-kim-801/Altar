@@ -23,8 +23,6 @@ public partial class Player
                 MapManager mapManager = GameManager.Instance.GetComponent<MapManager>();
                 var curScene = mapManager.sceneName;
                 GameManager.Instance.GetComponent<MapManager>().nextScene = interactionObj.GetComponent<Portal>().nextScene;
-                var portals = mapManager.portalTransformList;
-                var changePos = from p in mapManager.portalTransformList where curScene == p.GetComponent<Portal>().nextScene select p;
                 StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene(() => transform.position = (from p in mapManager.portalTransformList where curScene == p.GetComponent<Portal>().nextScene select p).First().transform.position));
             }
             else
