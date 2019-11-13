@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,8 +20,12 @@ public partial class Player
             }
             else if (interactionObj.CompareTag("Portal"))
             {
+                MapManager mapManager = GameManager.Instance.GetComponent<MapManager>();
+                var curScene = mapManager.sceneName;
                 GameManager.Instance.GetComponent<MapManager>().nextScene = interactionObj.GetComponent<Portal>().nextScene;
-                StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene());
+                var portals = mapManager.portalTransformList;
+                var changePos = from p in mapManager.portalTransformList where curScene == p.GetComponent<Portal>().nextScene select p;
+                StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene(() => transform.position = (from p in mapManager.portalTransformList where curScene == p.GetComponent<Portal>().nextScene select p).First().transform.position));
             }
             else
             {

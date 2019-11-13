@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -18,13 +17,15 @@ public class MapManager : MonoBehaviour
 
     private List<GameObject> monsterObjectPool;
 
-    private string sceneName;
+    public string sceneName { get; private set; }
     public int monsterCountSum { get; private set; }
 
     public int[] monstersCount { get; private set; }
 
     public string nextScene;
     public bool isLoaded;
+
+    public GameObject[] portalTransformList;
 
     void Start()
     {
@@ -71,6 +72,8 @@ public class MapManager : MonoBehaviour
         }
         SetObjectPool();
         StartCoroutine(Spawn());
+
+        portalTransformList = GameObject.FindGameObjectsWithTag("Portal");
 
         Time.timeScale = 1f;
 
