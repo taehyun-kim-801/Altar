@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerInfo
 {
     [SerializeField]
-    public Vector3 position { get; private set; }
+    public float posX { get; private set; }
+    [SerializeField]
+    public float posY { get; private set; }
     [SerializeField]
     public string activeScene { get; private set; }
     [SerializeField]
@@ -15,7 +17,7 @@ public class PlayerInfo
     [SerializeField]
     public int[] invenQuantity { get; private set; }
     [SerializeField]
-    public List<string> pinnedRecipe { get; private set; }
+    public string[] pinnedRecipe { get; private set; }
     [SerializeField]
     public int health { get; private set; }
     [SerializeField]
@@ -23,11 +25,12 @@ public class PlayerInfo
 
     public PlayerInfo(Player player)
     {
-        position = player.transform.position;
+        posX = player.transform.position.x;
+        posY = player.transform.position.y;
         activeScene = SceneManager.GetActiveScene().name;
         inventory = player.Inventory;
         invenQuantity = player.InvenQuantity;
-        pinnedRecipe = player.PinnedRecipes;
+        pinnedRecipe = player.PinnedRecipes.ToArray();
         health = player.Health;
         hunger = player.Hunger;
     }

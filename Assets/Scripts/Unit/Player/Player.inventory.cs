@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class Player
 {
@@ -32,8 +33,11 @@ public partial class Player
 
     public void SetItemCells()
     {
-        for(int i=0;i<5;i++)
+        for (int i = 0; i < 5; i++)
+        {
+            if (inventory[i] != null) itemCells[i].GetComponent<Image>().color = Color.white;
             itemCells[i].SetItemCell(inventory[i], invenQuantity[i]);
+        }
     }
 
     public int CheckQuantity(string item)

@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54742500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.987, y: -14, z: 0}
+  m_LocalPosition: {x: -9.9, y: -7.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 301600961}
@@ -391,7 +391,27 @@ PrefabInstance:
     - target: {fileID: 6944031058563185776, guid: c4b648ffc078d1c4ba535173c1e512a7,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944031058563185779, guid: c4b648ffc078d1c4ba535173c1e512a7,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0018856823
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944031058563185779, guid: c4b648ffc078d1c4ba535173c1e512a7,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.037909992
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944031058563185779, guid: c4b648ffc078d1c4ba535173c1e512a7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.30711007
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944031058563185779, guid: c4b648ffc078d1c4ba535173c1e512a7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.39801246
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4b648ffc078d1c4ba535173c1e512a7, type: 3}
@@ -406,6 +426,7 @@ GameObject:
   - component: {fileID: 1091204398}
   - component: {fileID: 1091204400}
   - component: {fileID: 1091204399}
+  - component: {fileID: 1091204401}
   m_Layer: 0
   m_Name: Tilemap (1)
   m_TagString: Untagged
@@ -552,6 +573,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1091204401
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091204397}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &1094938097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -896,7 +933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081268483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22, y: 18, z: 0}
+  m_LocalPosition: {x: 10, y: 7.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 301600961}

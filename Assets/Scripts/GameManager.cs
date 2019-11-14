@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject pinnedRecipeUI;
 
+    private bool isLoaded = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,20 +44,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    IEnumerator Start()
+    void Start()
     {
-        yield return new WaitUntil(() => Player.Instance.isCreated);
-        LoadSetting();
-        StartCoroutine(GetComponent<MapManager>().ChangeScene());
+        StartCoroutine(LoadSetting());
+
         Player.Instance.transform.position = Vector3.zero;
 
         DontDestroyOnLoad(mainCanvas);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(gameObject);
-
-        while (!GetComponent<MapManager>().isLoaded) yield return null;
-
-        SetStartUI();
     }
 
     private IEnumerator MainCanvasSetActive(GameObject startUI)
@@ -66,16 +64,25 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
     }
 
-    private void LoadSetting()
+    private IEnumerator LoadSetting()
     {
-        if (File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json"))
+        yield return new WaitUntil(() => Player.Instance.isCreated);
+
+        if (File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat"))
         {
-            PlayerInfo info = JsonManager.LoadJson<PlayerInfo>()[0];
+            var file = new FileStream($"{Application.dataPath}/data/PlayerInfo.dat", FileMode.Open);
+            var deserializer = new BinaryFormatter();
+
+            var info = deserializer.Deserialize(file) as PlayerInfo;
+            file.Close();
             GetComponent<MapManager>().nextScene = info.activeScene;
-            Player.Instance.transform.position = info.position;
+            StartCoroutine(GetComponent<MapManager>().ChangeScene(()=>SetStartUI()));
+            while (!GetComponent<MapManager>().isLoaded) yield return null;
+            Player.Instance.transform.position = new Vector3(info.posX, info.posY);
             Player.Instance.SetInventory(info.inventory);
             Player.Instance.SetInvenQuantity(info.invenQuantity);
             Player.Instance.SetItemCells();
+            Player.Instance.SelectItem(0);
             foreach (var recipe in info.pinnedRecipe)
             {
                 Player.Instance.AddRecipe(recipe);
@@ -86,6 +93,8 @@ public class GameManager : MonoBehaviour
         else
         {
             GetComponent<MapManager>().nextScene = "Lobby";
+            StartCoroutine(GetComponent<MapManager>().ChangeScene(()=>SetStartUI()));
+            while (!GetComponent<MapManager>().isLoaded) yield return null;
             Player.Instance.transform.position = Vector3.zero;
             Player.Instance.SetInventory();
             Player.Instance.SetInvenQuantity();
@@ -96,14 +105,6 @@ public class GameManager : MonoBehaviour
             Player.Instance.Hunger = 100f;
             Player.Instance.isHungerZero = false;
         }
-    }
-
-    public void GameExit()
-    {
-        List<PlayerInfo> playerInfo = new List<PlayerInfo>();
-        playerInfo.Add(new PlayerInfo(Player.Instance));
-
-        JsonManager.SaveJson(playerInfo);
     }
 
     public void GamePause()
@@ -119,10 +120,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Instantiate(gameOverCanvas);
+        File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat");
     }
 
     public void SetStartUI()
     {
+        Time.timeScale = 0f;
         GameObject startUI = Instantiate(startCanvas);
         mainCanvas.SetActive(false);
 
@@ -147,5 +150,21 @@ public class GameManager : MonoBehaviour
     public void OpenPinnedRecipeUI()
     {
         Instantiate(pinnedRecipeUI, GameObject.FindGameObjectWithTag("Canvas").transform);
+    }
+
+    public void GameExit()
+    {
+        var file = new FileStream($"{Application.dataPath}/data/PlayerInfo.dat", FileMode.OpenOrCreate);
+        var serializer = new BinaryFormatter();
+
+        PlayerInfo info = new PlayerInfo(Player.Instance);
+        serializer.Serialize(file, info);
+        file.Close();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

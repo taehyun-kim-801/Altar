@@ -29,4 +29,9 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1;
         Destroy(gameObject);
     }
+
+    public void GameQuit()
+    {
+        GameManager.Instance.GameExit();
+    }
 }
