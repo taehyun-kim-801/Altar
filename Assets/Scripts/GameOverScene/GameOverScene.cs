@@ -50,7 +50,6 @@ public class GameOverScene : MonoBehaviour
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
         Destroy(gameObject);
 
-        File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.json");
         GameManager.Instance.GameReset();
     }
 

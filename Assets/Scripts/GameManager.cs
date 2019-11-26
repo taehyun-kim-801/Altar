@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadSetting()
     {
-        yield return new WaitUntil(() => Player.Instance.isCreated);
+        if(!Player.Instance.isCreated)
+            yield return new WaitUntil(() => Player.Instance.isCreated);
 
         if (File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat"))
         {
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
         {
             GetComponent<MapManager>().nextScene = "Lobby";
             StartCoroutine(GetComponent<MapManager>().ChangeScene(()=>SetStartUI()));
-            while (!GetComponent<MapManager>().isLoaded) yield return null;
+            //while (!GetComponent<MapManager>().isLoaded) yield return null;
             Player.Instance.transform.position = Vector3.zero;
             Player.Instance.SetInventory();
             Player.Instance.SetInvenQuantity();
@@ -119,8 +120,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if(File.Exists($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat"))
+            File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat");
         Instantiate(gameOverCanvas);
-        File.Delete($"{Application.dataPath}/Data/{nameof(PlayerInfo)}.dat");
     }
 
     public void SetStartUI()
@@ -143,8 +145,7 @@ public class GameManager : MonoBehaviour
         }
         GetComponent<MapManager>().ResetObjectPool();
         Player.Instance.gameObject.SetActive(true);
-        LoadSetting();
-        StartCoroutine(GetComponent<MapManager>().ChangeScene(() => SetStartUI()));
+        StartCoroutine(LoadSetting());
     }
 
     public void OpenPinnedRecipeUI()
