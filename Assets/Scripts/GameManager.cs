@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
         Player.Instance.transform.position = Vector3.zero;
 
+        mainCanvas.SetActive(false);
         DontDestroyOnLoad(mainCanvas);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(gameObject);
