@@ -20,7 +20,12 @@ public class AltarUI : MonoBehaviour
     {
         System.Action SetTradeButtonAction = null;
         List<RecipeUI> recipeUIList = new List<RecipeUI>();
-        recipes = new List<Recipe>() { Recipe.recipeDictionary["Apple"], Recipe.recipeDictionary["Steak"] };
+        recipes = new List<Recipe>();
+
+        foreach(string recipe in Recipe.recipeDictionary.Keys)
+        {
+            recipes.Add(Recipe.recipeDictionary[recipe]);
+        }
 
         recipes.ForEach((recipe) =>
         {
