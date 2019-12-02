@@ -1,1 +1,24 @@
-{"objects":[{"itemName":"GiantSword","delay":0.4000000059604645,"damage":3},{"itemName":"Knife","delay":0.20000000298023225,"damage":1},{"itemName":"DoubleAxe","delay":0.6000000238418579,"damage":5},{"itemName":"Hatchet","delay":0.6000000238418579,"damage":5}]}
+{
+  "objects": [
+    {
+      "itemName": "GiantSword",
+      "delay": 0.4000000059604645,
+      "damage": 3
+    },
+    {
+      "itemName": "Knife",
+      "delay": 0.20000000298023225,
+      "damage": 1
+    },
+    {
+      "itemName": "DoubleAxe",
+      "delay": 0.6000000238418579,
+      "damage": 5
+    },
+    {
+      "itemName": "Hatchet",
+      "delay": 0.6000000238418579,
+      "damage": 5
+    }
+  ]
+}

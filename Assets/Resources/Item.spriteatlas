@@ -43,7 +43,13 @@ SpriteAtlas:
     - {fileID: 4820688438788214557, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
     - {fileID: -8048224626093743244, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
     - {fileID: -7937607877750570363, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
-    totalSpriteSurfaceArea: 3328
+    - {fileID: -505602119884229316, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    - {fileID: -1635785707440113004, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    - {fileID: -9022708904772715514, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    - {fileID: -307003493219138920, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    - {fileID: -388672692512260373, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    - {fileID: -125841259962605178, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+    totalSpriteSurfaceArea: 4864
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -51,10 +57,16 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d23556a3d59e16a4bb0d3951ec5cebce, type: 3}
   - {fileID: 21300000, guid: 787405749806ff149942d5160b28e55a, type: 3}
   - {fileID: 21300000, guid: 0fa5ee0593e2ec649837872ef74724dd, type: 3}
+  - {fileID: -1635785707440113004, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+  - {fileID: -9022708904772715514, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: 3983405018662690971, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: 4820688438788214557, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+  - {fileID: -307003493219138920, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: -7937607877750570363, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: 8657172774280688395, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+  - {fileID: -505602119884229316, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+  - {fileID: -125841259962605178, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
+  - {fileID: -388672692512260373, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: -8048224626093743244, guid: d5ca2fb5990d00049859cacd1ab309a0, type: 3}
   - {fileID: 21300000, guid: 474321681813c194c9a3e105833e40b6, type: 3}
   - {fileID: 21300000, guid: 345c5989a0f00e4479fe4db78922d582, type: 3}
@@ -65,10 +77,16 @@ SpriteAtlas:
   - DoubleAxe
   - Staff
   - Hatchet
+  - DragonFruit
+  - ChickenLeg
   - Apple
   - Steak
+  - Bug
   - RottenApple
   - Larva
+  - Avocado
+  - Whiskey
+  - Fish
   - Boar
   - LargeSpear
   - GiantSword

@@ -102,7 +102,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   damage: 3
   attackWaitSecond: 3
-  dropItem: 
+  dropItem: ChickenLeg
   mapManager: {fileID: 0}
 --- !u!95 &4570316594926981869
 Animator:

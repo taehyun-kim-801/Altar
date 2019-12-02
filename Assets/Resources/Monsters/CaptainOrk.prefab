@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2639524810995075549}
   - component: {fileID: 2193067155623291819}
   m_Layer: 0
-  m_Name: CaptainOrk 1
+  m_Name: CaptainOrk
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   damage: 3
   attackWaitSecond: 3
-  dropItem: 
+  dropItem: Whiskey
   mapManager: {fileID: 0}
 --- !u!50 &1586671607353302263
 Rigidbody2D:

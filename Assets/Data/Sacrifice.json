@@ -1,1 +1,58 @@
-{"objects":[{"itemName":"RottenApple","delay":0.5,"satiety":1,"damage":1},{"itemName":"Larva","delay":0.5,"satiety":2,"damage":2},{"itemName":"Boar","delay":0.5,"satiety":4,"damage":3}]}
+{
+  "objects": [
+    {
+      "itemName": "RottenApple",
+      "delay": 0.5,
+      "satiety": 1,
+      "damage": 1
+    },
+    {
+      "itemName": "Larva",
+      "delay": 0.5,
+      "satiety": 2,
+      "damage": 2
+    },
+    {
+      "itemName": "Boar",
+      "delay": 0.5,
+      "satiety": 4,
+      "damage": 3
+    },
+    {
+      "itemName": "Bug",
+      "delay": 0.5,
+      "satiety": 1,
+      "damage": 2
+    },
+    {
+      "itemName": "Fish",
+      "delay": 0.5,
+      "satiety": 2,
+      "damage": 2
+    },
+    {
+      "itemName": "Avocado",
+      "delay": 0.5,
+      "satiety": 2,
+      "damage": 1
+    },
+    {
+      "itemName": "ChickenLeg",
+      "delay": 0.5,
+      "satiety": 2,
+      "damage": 2
+    },
+    {
+      "itemName": "DragonFruit",
+      "delay": 0.5,
+      "satiety": 1,
+      "damage": 1
+    },
+    {
+      "itemName": "Whiskey",
+      "delay": 0.5,
+      "satiety": -10,
+      "damage": 2
+    }
+  ]
+}

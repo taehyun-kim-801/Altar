@@ -101,7 +101,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   damage: 1
   attackWaitSecond: 3
-  dropItem: 
+  dropItem: Avocado
   mapManager: {fileID: 0}
 --- !u!50 &-2704806130254758064
 Rigidbody2D:

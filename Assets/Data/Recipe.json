@@ -1,1 +1,34 @@
-{"objects":[{"sacrificeNameList":["RottenApple","Larva"],"sacrificeCountList":[2,1],"result":"Apple"},{"sacrificeNameList":["Boar","Larva"],"sacrificeCountList":[2,1],"result":"Steak"}]}
+{
+  "objects": [
+    {
+      "sacrificeNameList": [ "RottenApple", "Larva" ],
+      "sacrificeCountList": [ 2, 1 ],
+      "result": "Apple"
+    },
+    {
+      "sacrificeNameList": [ "Boar", "Larva" ],
+      "sacrificeCountList": [ 2, 1 ],
+      "result": "Steak"
+    },
+    {
+      "sacrificeNameList": [ "RottenApple", "Bug" ],
+      "sacrificeCountList": [ 10, 10 ],
+      "result": "Hatchet"
+    },
+    {
+      "sacrificeNameList": [ "DragonFruit", "Whiskey", "ChickenLeg" ],
+      "sacrificeCountList": [ 20, 20, 10 ],
+      "result": "LargeSpear"
+    },
+    {
+      "sacrificeNameList": [ "Fish", "Larva", "ChickenLeg" ],
+      "sacrificeCountList": [ 20, 20, 10 ],
+      "result": "Wand"
+    },
+    {
+      "sacrificeNameList": [ "RottenApple", "Larva", "Boar" ],
+      "sacrificeCountList": [ 30, 20, 10 ],
+      "result": "Staff"
+    }
+  ]
+}

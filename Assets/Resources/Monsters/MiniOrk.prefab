@@ -102,7 +102,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   damage: 1
   attackWaitSecond: 3
-  dropItem: 
+  dropItem: Bug
   mapManager: {fileID: 0}
 --- !u!61 &6327363955778702947
 BoxCollider2D:

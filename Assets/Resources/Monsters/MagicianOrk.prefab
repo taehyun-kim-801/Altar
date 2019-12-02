@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3269200614367542458}
   - component: {fileID: 1195520687712772850}
   m_Layer: 0
-  m_Name: MagicianOrk 1
+  m_Name: MagicianOrk
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   damage: 2
   attackWaitSecond: 3
-  dropItem: 
+  dropItem: DragonFruit
   mapManager: {fileID: 0}
 --- !u!50 &3269200614367542458
 Rigidbody2D:
