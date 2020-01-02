@@ -21,14 +21,14 @@ public class OptionUI : MonoBehaviour
     {
         muteButton.SetActive(false);
         unMuteButton.SetActive(true);
-        SoundManager.Instance.SetVolumeSFX(0);
+        SoundManager.instance.Mute();
     }
 
     public void UnMute()
     {
         unMuteButton.SetActive(false);
         muteButton.SetActive(true);
-        SoundManager.Instance.SetVolumeSFX(1);
+        SoundManager.instance.Unmute();
     }
 
     public void CloseOptionUI()

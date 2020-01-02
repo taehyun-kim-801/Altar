@@ -1,50 +1,68 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
+    public static SoundManager instance = null;
 
-    public AudioClip[] audioClip;
-    public Dictionary<string, AudioClip> audioClipsDic;
+    [SerializeField]
+    private AudioSource efxSource;
+    [SerializeField]
+    private AudioSource musicSource;
 
-    private AudioSource sfxPlayer;
-    private float masterVolumeSFX = 1f;
+    private Dictionary<string, AudioClip> soundDictionary = new Dictionary<string, AudioClip>();
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else
-        {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
             Destroy(gameObject);
-        }
-        sfxPlayer = GetComponent<AudioSource>();
 
-        audioClipsDic = new Dictionary<string, AudioClip>();
-        foreach (AudioClip a in audioClip)
-        {
-            audioClipsDic.Add(a.name, a);
-        }
-        SetVolumeSFX(GameManager.Instance.Mute ? 0 : 1);
+        DontDestroyOnLoad(gameObject);
+
+        LoadSound();
     }
 
-    public void PlaySound(string a_name, float a_volume = 1f)
+    private void LoadSound()
     {
-        if (audioClipsDic.ContainsKey(a_name) == false)
+        Object[] obj= Resources.LoadAll("Sounds");
+        foreach(var audio in obj)
         {
-            Debug.Log(a_name + " is not Contained audioClipsDic");
-            return;
+            if(audio is AudioClip)
+                soundDictionary.Add(audio.name ,(AudioClip)audio);
         }
-        sfxPlayer.PlayOneShot(audioClipsDic[a_name], a_volume * masterVolumeSFX);
     }
 
-    public void SetVolumeSFX(float a_volume)
+    public bool TryPlayingEffect(string audioName)
     {
-        masterVolumeSFX = a_volume;
+        if(!soundDictionary.ContainsKey(audioName))
+            return false;
+        
+        efxSource.clip = soundDictionary[audioName];
+        efxSource.Play();
+        return true;
+    }
+
+    public bool TryPlayingMusic(string audioName)
+    {
+        if(!soundDictionary.ContainsKey(audioName))
+            return false;
+        
+        musicSource.clip = soundDictionary[audioName];
+        musicSource.Play();
+        return true;
+    }
+
+    public void Mute()
+    {
+        efxSource.mute = true;
+        musicSource.mute = true;
+    }
+
+    public void Unmute()
+    {
+        efxSource.mute = false;
+        musicSource.mute = false;
     }
 }
