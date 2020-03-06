@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
         mainCanvas.SetActive(true);
         Destroy(startUI);
         startTime = Time.time;
+
+        SoundManager.instance.TryPlayingMusic($"{GetComponent<MapManager>().sceneName}BGM");
     }
 
     private IEnumerator LoadSetting()

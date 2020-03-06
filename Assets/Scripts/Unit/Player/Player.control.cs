@@ -24,6 +24,8 @@ public partial class Player
                 var curScene = mapManager.sceneName;
                 GameManager.Instance.GetComponent<MapManager>().nextScene = interactionObj.GetComponent<Portal>().nextScene;
                 StartCoroutine(GameManager.Instance.GetComponent<MapManager>().ChangeScene(() => transform.position = (from p in mapManager.portalTransformList where curScene == p.GetComponent<Portal>().nextScene select p).First().transform.position));
+                SoundManager.instance.TryPlayingEffect("PortalSound");
+                SoundManager.instance.TryPlayingMusic($"{mapManager.nextScene}BGM");
             }
             else
             {
@@ -66,6 +68,7 @@ public partial class Player
     public void Eat(int satiety)
     {
         hunger += satiety;
+        SoundManager.instance.TryPlayingEffect("EatingSound");
     }
 
     public override void Hurt(int damage)
@@ -128,5 +131,7 @@ public partial class Player
             Destroy(droppedItem);
             droppedItem = null;
         }
+
+        SoundManager.instance.TryPlayingEffect("PickUpSound");
     }
 }

@@ -90,6 +90,8 @@ public class Monster : Unit
 
     public override void Hurt(int damage)
     {
+        SoundManager.instance.TryPlayingEffect("HitMonsterSound");
+
         health -= damage;
         MonsterCondition_UI.Instance.SetMonsterCondition(name, (float)health / maxHealth);
         if(health<=0)
