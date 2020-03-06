@@ -49,7 +49,7 @@ public class MapManager : MonoBehaviour
     
     public IEnumerator ChangeScene(Func func = null)
     {
-        StopCoroutine(Spawn());
+        StopAllCoroutines();
 
         isLoaded = false;
 
@@ -71,7 +71,8 @@ public class MapManager : MonoBehaviour
             monstersCount[i] = 0;
         }
         SetObjectPool();
-        StartCoroutine(Spawn());
+        if (sceneName != "Lobby")
+            StartCoroutine(Spawn());
 
         portalTransformList = GameObject.FindGameObjectsWithTag("Portal");
 
