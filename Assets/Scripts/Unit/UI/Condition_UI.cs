@@ -15,7 +15,7 @@ public class Condition_UI : MonoBehaviour
     private Image hungerImage;
     private Text hungerText;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         player = playerObj.GetComponent<Player>();
         health = healthBar.GetComponentsInChildren<Image>();
