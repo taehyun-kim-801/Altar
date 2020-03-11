@@ -38,8 +38,11 @@ public class MapManager : MonoBehaviour
 
         var cellBounds = GameObject.FindGameObjectWithTag("CellBound");
 
-        minTilemap = cellBounds.transform.GetChild(0).position;
-        maxTilemap = cellBounds.transform.GetChild(1).position;
+        if (!(cellBounds is null))
+        {
+            minTilemap = cellBounds.transform.GetChild(0).position;
+            maxTilemap = cellBounds.transform.GetChild(1).position;
+        }
 
         SetObjectPool();
 
