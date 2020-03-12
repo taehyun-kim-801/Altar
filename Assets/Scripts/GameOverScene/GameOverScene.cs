@@ -23,27 +23,56 @@ public class GameOverScene : MonoBehaviour
         image = GetComponentInChildren<Image>();
         while(image.color.a<=0.4f)
         {
-            yield return new WaitForEndOfFrame();
+            yield return null;
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + 0.4f * 1 / 60 * fadeInTime);
         }
 
         gameOverText.SetActive(true);
-
-        yield return new WaitForSecondsRealtime(0.7f);
+        float animationStartTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - animationStartTime < 0.7f)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+                break;
+        }
 
         caughtMonsterText.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.7f);
+        animationStartTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - animationStartTime < 0.7f)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+                break;
+        }
 
         caughtMonsterNum.GetComponent<Text>().text = GameManager.Instance.caughtMonsterCount.ToString();
         caughtMonsterNum.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.7f);
+        animationStartTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - animationStartTime < 0.7f)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+                break;
+        }
 
         timeText.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.7f);
+        animationStartTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - animationStartTime < 0.7f)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+                break;
+        }
 
         timeNum.GetComponent<Text>().text = TimeToString((int)(endTime - GameManager.Instance.startTime));
         timeNum.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.7f);
+        animationStartTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - animationStartTime < 0.7f)
+        {
+            yield return null;
+            if (Input.GetMouseButtonDown(0))
+                break;
+        }
 
         touchToContinueText.SetActive(true);
 
