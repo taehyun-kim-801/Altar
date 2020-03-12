@@ -86,7 +86,7 @@ public class MapManager : MonoBehaviour
     private void SetObjectPool()
     {
         monsterObjectPool.Clear();
-        if (nextScene != "Lobby")
+        if (sceneName != "Lobby" && sceneName != "StartScene")
         {
             foreach (var monster in MonsterManager.monstersByMap[sceneName])
             {
