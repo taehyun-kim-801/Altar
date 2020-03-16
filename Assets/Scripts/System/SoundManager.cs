@@ -58,14 +58,14 @@ public class SoundManager : MonoBehaviour
     public void Mute()
     {
         isMute = true;
-        efxSource.mute = true;
-        musicSource.mute = true;
+        efxSource.volume = 0.0f;
+        musicSource.volume = 0.0f;
     }
 
     public void Unmute()
     {
         isMute = false;
-        efxSource.mute = false;
-        musicSource.mute = false;
+        efxSource.volume = 1.0f;
+        musicSource.volume = 1.0f;
     }
 }
