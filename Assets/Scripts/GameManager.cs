@@ -7,7 +7,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public bool Mute => mute;
 
     public GameObject startCanvas;
     public GameObject pauseUI;
@@ -19,9 +18,6 @@ public class GameManager : MonoBehaviour
     public float startTime { get; private set; }
 
     public List<GameObject> monsterObject;
-
-    [SerializeField]
-    private bool mute;
 
     [SerializeField]
     private GameObject pinnedRecipeUI;

@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource musicSource;
 
+    public bool isMute { get; private set; }
     private Dictionary<string, AudioClip> soundDictionary = new Dictionary<string, AudioClip>();
 
     private void Awake()
@@ -56,12 +57,14 @@ public class SoundManager : MonoBehaviour
 
     public void Mute()
     {
+        isMute = true;
         efxSource.mute = true;
         musicSource.mute = true;
     }
 
     public void Unmute()
     {
+        isMute = false;
         efxSource.mute = false;
         musicSource.mute = false;
     }

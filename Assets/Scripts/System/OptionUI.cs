@@ -11,7 +11,7 @@ public class OptionUI : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.Mute)
+        if (SoundManager.instance.isMute)
             Mute();
         else
             UnMute();
