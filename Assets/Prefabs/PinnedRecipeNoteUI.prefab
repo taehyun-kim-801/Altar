@@ -66,8 +66,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 60ee19e7d0a010341a561521b4a88a05, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 4784249512134850880}
   - component: {fileID: 6656860851681003699}
   m_Layer: 5
-  m_Name: PinnedRecipeUI
+  m_Name: PinnedRecipeNoteUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
